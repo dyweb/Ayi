@@ -17,3 +17,13 @@ use the community edition for pycharm or even Andrioid studio
 Follow the instruction to install the go plugin. ( I can't find the plugin without adding the alpha repo)
 
 https://github.com/go-lang-plugin-org/go-lang-idea-plugin
+
+## References
+
+https://www.golang-book.com/books/intro   A detail introduction to go
+
+## Why we use go for this project
+
+- cross platform
+- compile into binary, no need to setup the environment
+- sync, compared with nodejs, most libs are async in node
