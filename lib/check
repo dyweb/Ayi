@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo 'Ayi is busy, call her later.'
+
+. ${AYI_ROOT}/lib/checks/node
+

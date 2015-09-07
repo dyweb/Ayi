@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 current_version=0.0.1
 
+if [ -n "${BASH_SOURCE[0]}" ]
+then
+	AYI_ROOT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+else
+	AYI_ROOT=$( cd "$( dirname "$0" )" && pwd )
+fi
+
 case $1 in
 	# FIXME: Improve cooking method for mie
 	mie)
@@ -8,7 +15,7 @@ case $1 in
 		;;
 	# TODO: the logic for check here
 	check)
-		echo "Ayi is busy, call her later"
+		. ${AYI_ROOT}/lib/check
 		;;
 	install)
 		echo "You can you install, no can no bb"
@@ -25,3 +32,4 @@ case $1 in
 		fi
 		;;
 esac
+
