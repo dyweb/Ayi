@@ -1,0 +1,12 @@
+{
+  "bin": "node",
+  "tools": [
+    {
+      "name":"gulp",
+      "bin":"gulp",
+      "version":"3.0",
+      "install":"npm install -g gulp",
+      "uninstall":"npm uninstall -g gulp"
+    }
+  ]
+}
