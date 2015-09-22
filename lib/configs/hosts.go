@@ -4,6 +4,7 @@ package configs
 
 import (
 	"fmt"
+	"regexp"
 	"io/ioutil"
 )
 
@@ -31,6 +32,8 @@ func readHostsFile(path string) (string, error) {
 //}
 
 func parseHost(s string) Host {
-	// TODO: implement
-	return Host{ip: "127.0.0.1", name: "localhost"}
+	// TODO: handle wrong config that does not match
+	r, _ := regexp.Compile("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\s*(\\S*)$")
+	m := r.FindStringSubmatch(s)
+	return Host{ip: m[1], name: m[2]}
 }
