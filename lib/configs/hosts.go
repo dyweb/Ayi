@@ -1,5 +1,7 @@
 package configs
 
+// TODO: ref https://golang.org/src/net/hosts.go
+
 import (
 	"fmt"
 	"io/ioutil"
@@ -7,15 +9,16 @@ import (
 
 type Host struct {
 	// TODO: must use upper case ?
-	Ip   string
-	Name string
+	ip   string
+	name string
+
 }
 
 func AddLocalHost() {
 	fmt.Println("Add localhost! ")
 }
 
-func ReadHostsFile(path string) (string, error) {
+func readHostsFile(path string) (string, error) {
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		return "", err
@@ -27,9 +30,7 @@ func ReadHostsFile(path string) (string, error) {
 //	return
 //}
 
-//func parseHost(s string) Host {
-//	return Host{
-//		Ip: "a",
-//		Name: "b"
-//	}
-//}
+func parseHost(s string) Host {
+	// TODO: implement
+	return Host{ip: "127.0.0.1", name: "localhost"}
+}
