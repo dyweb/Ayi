@@ -1,6 +1,7 @@
 # Ayi
 
 [![Build Status](https://travis-ci.org/dyweb/Ayi.svg)](https://travis-ci.org/dyweb/Ayi)
+[![GoDoc](https://godoc.org/github.com/dyweb/Ayi?status.svg)](https://godoc.org/github.com/dyweb/Ayi)
 
 Run composer, npm, bower, gulp, vagrant commands in one command, ayi make your life easier. Just type Ayi pia
 
