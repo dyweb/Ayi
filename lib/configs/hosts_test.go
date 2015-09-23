@@ -14,7 +14,7 @@ func TestHostRead(t *testing.T) {
 }
 
 func TestRegexp(t *testing.T) {
-	r, _ := regexp.Compile("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\s*(\\S*)$")
+	r, _ := regexp.Compile("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\s*(\\S*)\\s*$")
 	if r.MatchString("127.0.0.1 localhost") == false {
 		t.Fail()
 		t.Log("can't match host config")
@@ -24,22 +24,36 @@ func TestRegexp(t *testing.T) {
 		t.Fail()
 		t.Log("can't mactch host ip and name from config")
 	}
+	configWithTab := "127.0.0.1 \t\tlocalhost"
+	a = r.FindStringSubmatch(configWithTab)
+	if len(a) != 3 || a[2] != "localhost" {
+		t.Fail()
+//		t.Log("host is " + a[2])
+		t.Log("can't match with tab")
+	}
+	configWithTrailingSpace := "127.0.0.1 localhost "
+	a = r.FindStringSubmatch(configWithTrailingSpace)
+	if len(a) != 3 || a[2] != "localhost" {
+		t.Fail()
+//		t.Log("host is " + a[2])
+		t.Log("can't match with extra space")
+	}
 
 }
 
 func TestRemoveComment(t *testing.T) {
 	noComment := "Dia da bu di da bu"
-	if noComment != removeComment(noComment){
+	if noComment != removeComment(noComment) {
 		t.Fail()
 		t.Log("should return original string if no comment")
 	}
 	prefixComment := "# I have a dream"
-	if "" != removeComment(prefixComment){
+	if "" != removeComment(prefixComment) {
 		t.Fail()
 		t.Log("should remove the whole line if found # at start")
 	}
 	suffixComment := "roast mie! # la da di da di "
-	if "roast mie! " != removeComment(suffixComment){
+	if "roast mie! " != removeComment(suffixComment) {
 		t.Fail()
 		t.Log("should only remove the commented part")
 	}
@@ -54,9 +68,10 @@ func TestParseHost(t *testing.T) {
 }
 
 func TestParseHostsFile(t *testing.T) {
-	hosts := parseHostsFile("/etc/hosts")
-	if len(hosts) == 0 {
+	fixtureHostsFile := "../../fixture/hosts"
+	hosts := parseHostsFile(fixtureHostsFile)
+	if len(hosts) != 3 {
 		t.Fail()
-		t.Log("Can't parse hosts file")
+		t.Log("Didn't parse all hosts file")
 	}
 }

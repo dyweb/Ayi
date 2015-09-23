@@ -62,6 +62,8 @@ func parseHostsFile(hostsFile string) []Host {
 		host, err := parseHost(line)
 		if err != nil {
 			// TODO: log?
+			//			log.Println(line)
+			//			log.Fatal(err)
 		}else {
 			hosts = append(hosts, host)
 		}
@@ -71,7 +73,7 @@ func parseHostsFile(hostsFile string) []Host {
 
 func parseHost(s string) (Host, error) {
 	s = removeComment(s)
-	r, _ := regexp.Compile("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\s*(\\S*)$")
+	r, _ := regexp.Compile("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\s*(\\S*)\\s*$")
 	m := r.FindStringSubmatch(s)
 	if len(m) == 3 {
 		return Host{ip: m[1], name: m[2]}, nil
