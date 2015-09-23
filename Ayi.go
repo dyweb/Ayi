@@ -3,12 +3,12 @@ package main
 import (
 	"os"
 	"github.com/codegangsta/cli"
-	"github.com/dyweb/Ayi/lib/configs"
+	"github.com/dyweb/Ayi/lib/config"
 )
 
 func main() {
 	//	fmt.Println("Hello Mie!")
-	//	configs.PrintHosts(configs.ParseHosts())
+	//	config.PrintHosts(config.ParseHosts())
 	app := cli.NewApp()
 	app.Name = "Ayi"
 	app.Usage = "Help you solve all the messy commands"
@@ -34,7 +34,7 @@ func main() {
 					Aliases:[]string{"l"},
 					Usage:"Show all current hosts in /etc/hosts, ipv4 only",
 					Action:func(c *cli.Context) {
-						configs.PrintHosts(configs.ParseHosts())
+						config.PrintHosts(config.ParseHosts())
 					},
 				},
 			},

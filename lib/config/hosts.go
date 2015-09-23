@@ -1,4 +1,4 @@
-package configs
+package config
 
 // TODO: ref https://golang.org/src/net/hosts.go
 
