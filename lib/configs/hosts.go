@@ -9,6 +9,7 @@ import (
 	"os"
 	"log"
 	"errors"
+	"github.com/crackcomm/go-clitable"
 )
 
 type Host struct {
@@ -23,20 +24,30 @@ func (host Host) Print() {
 }
 
 func PrintHosts(hosts []Host) {
+	table := clitable.New([]string{"ip", "host"})
 	for i := 0; i < len(hosts); i++ {
-		hosts[i].Print()
+		table.AddRow(map[string]interface{}{
+			"ip": hosts[i].ip,
+			"host":hosts[i].name,
+		})
 	}
+	table.Print()
 }
 
 func ParseHosts() []Host {
-	// TODO: support for win
-	hostsFile := "/etc/hosts"
+	// TODO: error handling
+	hostsFile, _ := getHostFile()
 	return parseHostsFile(hostsFile)
 }
 
 func AddDomainToLocalhost(domain string) (bool, error) {
 	fmt.Println("Add localhost! ")
 	return false, nil
+}
+
+func getHostFile() (string, error) {
+	// TODO: support for win
+	return "/etc/hosts", nil
 }
 
 func parseHostsFile(hostsFile string) []Host {
