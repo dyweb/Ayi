@@ -5,7 +5,6 @@ package configs
 import (
 	"fmt"
 	"regexp"
-	"io/ioutil"
 	"bufio"
 	"os"
 	"log"
@@ -38,14 +37,6 @@ func ParseHosts() []Host {
 func AddDomainToLocalhost(domain string) (bool, error) {
 	fmt.Println("Add localhost! ")
 	return false, nil
-}
-
-func readHostsFile(path string) (string, error) {
-	data, err := ioutil.ReadFile(path)
-	if err != nil {
-		return "", err
-	}
-	return string(data), nil
 }
 
 func parseHostsFile(hostsFile string) []Host {
@@ -81,6 +72,7 @@ func parseHost(s string) (Host, error) {
 	return Host{}, errors.New("invalid host config")
 }
 
+// copied from net/hosts.go
 func removeComment(line string) string {
 	if i := byteIndex(line, '#'); i >= 0 {
 		// Discard comments.
@@ -89,6 +81,7 @@ func removeComment(line string) string {
 	return line
 }
 
+// copied from net/parser.go
 func byteIndex(s string, c byte) int {
 	for i := 0; i < len(s); i++ {
 		if s[i] == c {

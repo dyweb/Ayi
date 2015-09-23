@@ -5,14 +5,6 @@ import (
 	"regexp"
 )
 
-func TestHostRead(t *testing.T) {
-	_, err := readHostsFile("../../fixture/hosts")
-	if err != nil {
-		t.Fail()
-		t.Log(err)
-	}
-}
-
 func TestRegexp(t *testing.T) {
 	r, _ := regexp.Compile("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\s*(\\S*)\\s*$")
 	if r.MatchString("127.0.0.1 localhost") == false {
