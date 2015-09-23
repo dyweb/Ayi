@@ -11,12 +11,6 @@ func TestHostRead(t *testing.T) {
 		t.Fail()
 		t.Log(err)
 	}
-	//	if len(file) > 0 {
-	//		t.Skipped()
-	//	}else {
-	//		t.Fail()
-	//		t.Log("hosts file should not be empty")
-	//	}
 }
 
 func TestRegexp(t *testing.T) {
@@ -33,10 +27,36 @@ func TestRegexp(t *testing.T) {
 
 }
 
+func TestRemoveComment(t *testing.T) {
+	noComment := "Dia da bu di da bu"
+	if noComment != removeComment(noComment){
+		t.Fail()
+		t.Log("should return original string if no comment")
+	}
+	prefixComment := "# I have a dream"
+	if "" != removeComment(prefixComment){
+		t.Fail()
+		t.Log("should remove the whole line if found # at start")
+	}
+	suffixComment := "roast mie! # la da di da di "
+	if "roast mie! " != removeComment(suffixComment){
+		t.Fail()
+		t.Log("should only remove the commented part")
+	}
+}
+
 func TestParseHost(t *testing.T) {
-	host := parseHost("127.0.0.1	localhost")
+	host, _ := parseHost("127.0.0.1	localhost")
 	if host.name != "localhost" || host.ip != "127.0.0.1" {
 		t.Fail()
 		t.Log("Can't parse single line of host")
+	}
+}
+
+func TestParseHostsFile(t *testing.T) {
+	hosts := parseHostsFile("/etc/hosts")
+	if len(hosts) == 0 {
+		t.Fail()
+		t.Log("Can't parse hosts file")
 	}
 }

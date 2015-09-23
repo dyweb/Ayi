@@ -6,17 +6,38 @@ import (
 	"fmt"
 	"regexp"
 	"io/ioutil"
+	"bufio"
+	"os"
+	"log"
+	"errors"
 )
 
 type Host struct {
 	// TODO: must use upper case ?
 	ip   string
 	name string
-
 }
 
-func AddLocalHost() {
+func (host Host) Print() {
+	fmt.Println("ip: " + host.ip)
+	fmt.Println("name: " + host.name)
+}
+
+func PrintHosts(hosts []Host) {
+	for i := 0; i < len(hosts); i++ {
+		hosts[i].Print()
+	}
+}
+
+func ParseHosts() []Host {
+	// TODO: support for win
+	hostsFile := "/etc/hosts"
+	return parseHostsFile(hostsFile)
+}
+
+func AddDomainToLocalhost(domain string) (bool, error) {
 	fmt.Println("Add localhost! ")
+	return false, nil
 }
 
 func readHostsFile(path string) (string, error) {
@@ -27,13 +48,50 @@ func readHostsFile(path string) (string, error) {
 	return string(data), nil
 }
 
-//func parseHosts(s string) []Host {
-//	return
-//}
+func parseHostsFile(hostsFile string) []Host {
+	file, err := os.Open(hostsFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
 
-func parseHost(s string) Host {
-	// TODO: handle wrong config that does not match
+	hosts := make([]Host, 0)
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		host, err := parseHost(line)
+		if err != nil {
+			// TODO: log?
+		}else {
+			hosts = append(hosts, host)
+		}
+	}
+	return hosts
+}
+
+func parseHost(s string) (Host, error) {
+	s = removeComment(s)
 	r, _ := regexp.Compile("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\s*(\\S*)$")
 	m := r.FindStringSubmatch(s)
-	return Host{ip: m[1], name: m[2]}
+	if len(m) == 3 {
+		return Host{ip: m[1], name: m[2]}, nil
+	}
+	return Host{}, errors.New("invalid host config")
+}
+
+func removeComment(line string) string {
+	if i := byteIndex(line, '#'); i >= 0 {
+		// Discard comments.
+		line = line[0:i]
+	}
+	return line
+}
+
+func byteIndex(s string, c byte) int {
+	for i := 0; i < len(s); i++ {
+		if s[i] == c {
+			return i
+		}
+	}
+	return -1
 }
