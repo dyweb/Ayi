@@ -10,6 +10,7 @@ import (
 	"log"
 	"errors"
 	"github.com/crackcomm/go-clitable"
+	"github.com/dyweb/Ayi/lib/util"
 )
 
 type Host struct {
@@ -99,20 +100,14 @@ func addHostToFile(hostsFile string, ip string, name string) (bool, error) {
 			return false, errors.New("name " + name + " already exists ")
 		}
 	}
-	file, err := os.Open(hostsFile)
+	file, err := os.OpenFile(hostsFile, os.O_APPEND | os.O_WRONLY, 0600)
 	defer file.Close()
 	if err != nil {
 		return false, err
 	}
-	file.WriteString("aaaa")
+	// TODO: need to check the error here
+	file.WriteString(ip + "	" + name + "\n")
 	file.Sync()
-//	writer := bufio.NewWriter(file)
-//	_, err2 := writer.WriteString(ip + "	" + name + "\n")
-////	log.Fatal(l)
-//	writer.Sync()
-//	if err2 != nil {
-//		return false, err2
-//	}
 	return true, nil
 }
 
@@ -121,6 +116,10 @@ func removeHostFromFile(hostsFile string, name string) (bool, error) {
 	for i := 0; i < len(hosts); i++ {
 		if hosts[i].name == name {
 			// TODO: real remove
+			err := util.RemoveLine(hostsFile, hosts[i].line)
+			if err != nil {
+				return false, err
+			}
 			return true, nil
 		}
 	}
