@@ -7,13 +7,12 @@ import (
 
 // lineToRemove starts from 1
 func RemoveLine(fileName string, lineToRemove int) (error) {
-	file, err := os.Create(fileName)
-	defer file.Close()
+	r, err := os.Open(fileName)
+	defer r.Close()
 	if err != nil {
 		return err
 	}
-	scanner := bufio.NewScanner(file)
-	writer := bufio.NewWriter(file)
+	scanner := bufio.NewScanner(r)
 	text := ""
 	lineNumber := 0
 	for scanner.Scan() {
@@ -22,6 +21,8 @@ func RemoveLine(fileName string, lineToRemove int) (error) {
 			text += scanner.Text() + "\n"
 		}
 	}
-	writer.WriteString(text)
-	return writer.Flush()
+	w, err := os.Create(fileName)
+	defer w.Close()
+	w.WriteString(text)
+	return w.Sync()
 }

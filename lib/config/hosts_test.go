@@ -68,28 +68,28 @@ func TestParseHostsFile(t *testing.T) {
 	}
 }
 
-//func TestAddHostToFile(t *testing.T) {
-//	fixtureHostsFile := "../../fixture/hosts"
-//	_, err := addHostToFile(fixtureHostsFile, "127.0.0.1", "localhost")
-//	if err == nil {
-//		t.Fail()
-//		t.Log("Should not add if old one already exists")
-//	}
-//	_, err = addHostToFile(fixtureHostsFile, "127.0.0.1", "doubi.lk")
-//	t.Log(err)
-//	if err != nil {
-//		t.Log(err)
-//		t.Log("Can't add new host")
-//		t.Fail()
-//	}
-//}
-//
-//func TestRemoveHostFromFile(t *testing.T) {
-//	fixtureHostsFile := "../../fixture/hosts"
-//	// TODO: will the tests run in order?
-//	removed, err := removeHostFromFile(fixtureHostsFile, "doubi.lk")
-//	if !removed {
-//		t.Fail()
-//		t.Log(err)
-//	}
-//}
+func TestAddHostToFile(t *testing.T) {
+	fixtureHostsFile := "../../fixture/hosts"
+	_, err := addHostToFile(fixtureHostsFile, "127.0.0.1", "localhost")
+	if err == nil {
+		t.Fail()
+		t.Log("Should not add if old one already exists")
+	}
+	_, err = addHostToFile(fixtureHostsFile, "127.0.0.1", "doubi.lk")
+	t.Log(err)
+	if err != nil {
+		t.Log(err)
+		t.Log("Can't add new host")
+		t.Fail()
+	}
+}
+
+func TestRemoveHostFromFile(t *testing.T) {
+	fixtureHostsFile := "../../fixture/hosts"
+	// TODO: will the tests run in order?
+	removed, err := removeHostFromFile(fixtureHostsFile, "doubi.lk")
+	if !removed {
+		t.Fail()
+		t.Log(err)
+	}
+}
