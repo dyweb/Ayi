@@ -7,8 +7,6 @@ import (
 )
 
 func main() {
-	//	fmt.Println("Hello Mie!")
-	//	config.PrintHosts(config.ParseHosts())
 	app := cli.NewApp()
 	app.Name = "Ayi"
 	app.Usage = "Help you solve all the messy commands"

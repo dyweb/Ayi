@@ -20,14 +20,14 @@ func TestRegexp(t *testing.T) {
 	a = r.FindStringSubmatch(configWithTab)
 	if len(a) != 3 || a[2] != "localhost" {
 		t.Fail()
-//		t.Log("host is " + a[2])
+		//		t.Log("host is " + a[2])
 		t.Log("can't match with tab")
 	}
 	configWithTrailingSpace := "127.0.0.1 localhost "
 	a = r.FindStringSubmatch(configWithTrailingSpace)
 	if len(a) != 3 || a[2] != "localhost" {
 		t.Fail()
-//		t.Log("host is " + a[2])
+		//		t.Log("host is " + a[2])
 		t.Log("can't match with extra space")
 	}
 
@@ -52,8 +52,8 @@ func TestRemoveComment(t *testing.T) {
 }
 
 func TestParseHost(t *testing.T) {
-	host, _ := parseHost("127.0.0.1	localhost")
-	if host.name != "localhost" || host.ip != "127.0.0.1" {
+	host, _ := parseHost("127.0.0.1	localhost", 1)
+	if host.name != "localhost" || host.ip != "127.0.0.1" || host.line != 1 {
 		t.Fail()
 		t.Log("Can't parse single line of host")
 	}
@@ -65,5 +65,28 @@ func TestParseHostsFile(t *testing.T) {
 	if len(hosts) != 3 {
 		t.Fail()
 		t.Log("Didn't parse all hosts file")
+	}
+}
+
+func TestAddHostToFile(t *testing.T) {
+	fixtureHostsFile := "../../fixture/hosts"
+	_, err := addHostToFile(fixtureHostsFile, "127.0.0.1", "localhost")
+	if err == nil {
+		t.Fail()
+		t.Log("Should not add if old one already exists")
+	}
+	_, err = addHostToFile(fixtureHostsFile, "127.0.0.1", "doubi.lk")
+	if err != nil {
+		t.Fail()
+		t.Log("Can't add new host")
+	}
+}
+
+func TestRemoveHostFromFile(t *testing.T) {
+	fixtureHostsFile := "../../fixture/hosts"
+	removed, err := removeHostFromFile(fixtureHostsFile, "localhost")
+	if !removed {
+		t.Fail()
+		t.Log(err)
 	}
 }

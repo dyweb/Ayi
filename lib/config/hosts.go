@@ -13,22 +13,29 @@ import (
 )
 
 type Host struct {
-	// TODO: must use upper case ?
+	// must use upper case ? no.
 	ip   string
 	name string
+	line int
+	// TODO: add line, useful for remove
 }
 
 func (host Host) Print() {
-	fmt.Println("ip: " + host.ip)
-	fmt.Println("name: " + host.name)
+	table := clitable.New([]string{"ip", "host", "line"})
+	table.AddRow(map[string]interface{}{
+		"ip":host.ip,
+		"host":host.name,
+		"line":host.line,
+	})
 }
 
 func PrintHosts(hosts []Host) {
-	table := clitable.New([]string{"ip", "host"})
+	table := clitable.New([]string{"ip", "host", "line"})
 	for i := 0; i < len(hosts); i++ {
 		table.AddRow(map[string]interface{}{
 			"ip": hosts[i].ip,
 			"host":hosts[i].name,
+			"line":hosts[i].line,
 		})
 	}
 	table.Print()
@@ -45,6 +52,28 @@ func AddDomainToLocalhost(domain string) (bool, error) {
 	return false, nil
 }
 
+func addHostToFile(hostsFile string, ip string, name string) (bool, error) {
+	hosts := parseHostsFile(hostsFile)
+	for i := 0; i < len(hosts); i++ {
+		if hosts[i].name == name {
+			return false, errors.New("name " + name + " already exists ")
+		}
+	}
+
+	return true, nil
+}
+
+func removeHostFromFile(hostsFile string, name string) (bool, error) {
+	hosts := parseHostsFile(hostsFile)
+	for i := 0; i < len(hosts); i++ {
+		if hosts[i].name == name {
+			// TODO: real remove
+			return true, nil
+		}
+	}
+	return false, errors.New("name " + name + " does not exists ")
+}
+
 func getHostFile() (string, error) {
 	// TODO: support for win
 	return "/etc/hosts", nil
@@ -59,9 +88,11 @@ func parseHostsFile(hostsFile string) []Host {
 
 	hosts := make([]Host, 0)
 	scanner := bufio.NewScanner(file)
+	lineNumber := 0
 	for scanner.Scan() {
+		lineNumber++
 		line := scanner.Text()
-		host, err := parseHost(line)
+		host, err := parseHost(line, lineNumber)
 		if err != nil {
 			// TODO: log?
 			//			log.Println(line)
@@ -73,12 +104,12 @@ func parseHostsFile(hostsFile string) []Host {
 	return hosts
 }
 
-func parseHost(s string) (Host, error) {
+func parseHost(s string, lineNumber int) (Host, error) {
 	s = removeComment(s)
 	r, _ := regexp.Compile("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\s*(\\S*)\\s*$")
 	m := r.FindStringSubmatch(s)
 	if len(m) == 3 {
-		return Host{ip: m[1], name: m[2]}, nil
+		return Host{ip: m[1], name: m[2], line:lineNumber}, nil
 	}
 	return Host{}, errors.New("invalid host config")
 }
