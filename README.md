@@ -3,9 +3,19 @@
 [![Build Status](https://travis-ci.org/dyweb/Ayi.svg)](https://travis-ci.org/dyweb/Ayi)
 [![GoDoc](https://godoc.org/github.com/dyweb/Ayi?status.svg)](https://godoc.org/github.com/dyweb/Ayi)
 
-Run composer, npm, bower, gulp, vagrant commands in one command, ayi make your life easier. Just type Ayi pia
+Centralize all your commands for config development environment
 
-Usually we need to run a lot of commands after we create a project, composer install, npm install, gulp build, vagrant up. And this will cause a lot of troubles for people who are not familiar with these tools, so we created
-`Ayi` to centralize all these commands and config files, provide some default settings so you can set up a project very quickly. It's kind of like yeoman, except it's for php developers using vagrant on windows system only.
+- run several build commands in one command, ie `npm install; composer install;./create_mysql_table.sh;vi /etc/hosts` -> `Ayi install`
+- check your environment and try to fix it, ie `Ayi check node` will check if you are using `nvm` and have `node`,`npm`,`gulp` available
+- run your test and show result in browser.
+- report your machine environment for your colleague to see why your code only runs on your machine. 
 
-Btw: If you bother Ayi too often, she will give u a dozen.
+## Example
+
+Config your hosts file
+
+- `Ayi host list` list all your host file
+- `Ayi host add -ip 127.0.0.1 -name ayi.dev` add `ayi.dev` to `localhost`
+- `Ayi host rm -name ayi.dev` remove `ayi.dev`
+
+
