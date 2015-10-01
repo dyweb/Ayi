@@ -3,6 +3,7 @@ package util
 import (
 	"bufio"
 	"os"
+	"github.com/go-errors/errors"
 )
 
 // lineToRemove starts from 1
@@ -10,7 +11,7 @@ func RemoveLine(fileName string, lineToRemove int) (error) {
 	r, err := os.Open(fileName)
 	defer r.Close()
 	if err != nil {
-		return err
+		return errors.Wrap(err, 1)
 	}
 	scanner := bufio.NewScanner(r)
 	text := ""
@@ -22,7 +23,14 @@ func RemoveLine(fileName string, lineToRemove int) (error) {
 		}
 	}
 	w, err := os.Create(fileName)
+	if err != nil {
+		return errors.Wrap(err, 1)
+	}
 	defer w.Close()
 	w.WriteString(text)
-	return w.Sync()
+	err = w.Sync()
+	if err != nil {
+		return errors.Wrap(err, 1)
+	}
+	return nil
 }

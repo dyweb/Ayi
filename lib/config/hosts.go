@@ -3,12 +3,11 @@ package config
 // TODO: ref https://golang.org/src/net/hosts.go
 
 import (
-	"fmt"
 	"regexp"
 	"bufio"
 	"os"
 	"log"
-	"errors"
+	"github.com/go-errors/errors"
 	"github.com/crackcomm/go-clitable"
 	"github.com/dyweb/Ayi/lib/util"
 )
@@ -48,9 +47,23 @@ func ParseHosts() []Host {
 	return parseHostsFile(hostsFile)
 }
 
-func AddDomainToLocalhost(domain string) (bool, error) {
-	fmt.Println("Add localhost! ")
-	return false, nil
+func AddDomainToIp(domain string, ip string) (bool, error) {
+	hostFile, _ := getHostFile()
+	added, err := addHostToFile(hostFile, ip, domain)
+	if added {
+		return true, nil
+	}
+	return false, err
+}
+
+func RemoveDomain(domain string) (bool, error) {
+	hostFile, _ := getHostFile()
+	removed, err := removeHostFromFile(hostFile, domain)
+	if removed {
+		return true, nil
+	}
+	// TODO: 0 or 1
+	return false, errors.Wrap(err, 1)
 }
 
 func getHostFile() (string, error) {
