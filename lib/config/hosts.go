@@ -52,28 +52,6 @@ func AddDomainToLocalhost(domain string) (bool, error) {
 	return false, nil
 }
 
-func addHostToFile(hostsFile string, ip string, name string) (bool, error) {
-	hosts := parseHostsFile(hostsFile)
-	for i := 0; i < len(hosts); i++ {
-		if hosts[i].name == name {
-			return false, errors.New("name " + name + " already exists ")
-		}
-	}
-
-	return true, nil
-}
-
-func removeHostFromFile(hostsFile string, name string) (bool, error) {
-	hosts := parseHostsFile(hostsFile)
-	for i := 0; i < len(hosts); i++ {
-		if hosts[i].name == name {
-			// TODO: real remove
-			return true, nil
-		}
-	}
-	return false, errors.New("name " + name + " does not exists ")
-}
-
 func getHostFile() (string, error) {
 	// TODO: support for win
 	return "/etc/hosts", nil
@@ -114,6 +92,45 @@ func parseHost(s string, lineNumber int) (Host, error) {
 	return Host{}, errors.New("invalid host config")
 }
 
+func addHostToFile(hostsFile string, ip string, name string) (bool, error) {
+	hosts := parseHostsFile(hostsFile)
+	for i := 0; i < len(hosts); i++ {
+		if hosts[i].name == name {
+			return false, errors.New("name " + name + " already exists ")
+		}
+	}
+	file, err := os.Open(hostsFile)
+	defer file.Close()
+	if err != nil {
+		return false, err
+	}
+	file.WriteString("aaaa")
+	file.Sync()
+//	writer := bufio.NewWriter(file)
+//	_, err2 := writer.WriteString(ip + "	" + name + "\n")
+////	log.Fatal(l)
+//	writer.Sync()
+//	if err2 != nil {
+//		return false, err2
+//	}
+	return true, nil
+}
+
+func removeHostFromFile(hostsFile string, name string) (bool, error) {
+	hosts := parseHostsFile(hostsFile)
+	for i := 0; i < len(hosts); i++ {
+		if hosts[i].name == name {
+			// TODO: real remove
+			return true, nil
+		}
+	}
+	return false, errors.New("name " + name + " does not exists ")
+}
+
+
+
+// start of util functions
+
 // copied from net/hosts.go
 func removeComment(line string) string {
 	if i := byteIndex(line, '#'); i >= 0 {
@@ -132,3 +149,5 @@ func byteIndex(s string, c byte) int {
 	}
 	return -1
 }
+
+// end of util functions
