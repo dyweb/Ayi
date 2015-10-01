@@ -53,7 +53,7 @@ func AddDomainToIp(domain string, ip string) (bool, error) {
 	if added {
 		return true, nil
 	}
-	return false, err
+	return false, errors.Wrap(err, 1)
 }
 
 func RemoveDomain(domain string) (bool, error) {
@@ -74,6 +74,7 @@ func getHostFile() (string, error) {
 func parseHostsFile(hostsFile string) []Host {
 	file, err := os.Open(hostsFile)
 	if err != nil {
+		// TODO: return error instead of shutdown here
 		log.Fatal(err)
 	}
 	defer file.Close()
@@ -89,6 +90,7 @@ func parseHostsFile(hostsFile string) []Host {
 			// TODO: log?
 			//			log.Println(line)
 			//			log.Fatal(err)
+			// Just ignore it ....
 		}else {
 			hosts = append(hosts, host)
 		}
@@ -116,7 +118,7 @@ func addHostToFile(hostsFile string, ip string, name string) (bool, error) {
 	file, err := os.OpenFile(hostsFile, os.O_APPEND | os.O_WRONLY, 0600)
 	defer file.Close()
 	if err != nil {
-		return false, err
+		return false, errors.Wrap(err, 1)
 	}
 	// TODO: need to check the error here
 	file.WriteString(ip + "	" + name + "\n")
@@ -131,7 +133,7 @@ func removeHostFromFile(hostsFile string, name string) (bool, error) {
 			// TODO: real remove
 			err := util.RemoveLine(hostsFile, hosts[i].line)
 			if err != nil {
-				return false, err
+				return false, errors.Wrap(err, 1)
 			}
 			return true, nil
 		}

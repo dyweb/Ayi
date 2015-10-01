@@ -80,6 +80,7 @@ func main() {
 						}
 						removed, err := config.RemoveDomain(c.String("name"))
 						if !removed {
+							// TODO: only print the stack in debug mode
 							println(err.(*errors.Error).ErrorStack())
 						}
 					},
