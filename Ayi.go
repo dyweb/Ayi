@@ -5,6 +5,7 @@ import (
 	"github.com/codegangsta/cli"
 	"github.com/go-errors/errors"
 	"github.com/dyweb/Ayi/lib/config"
+	"github.com/dyweb/Ayi/lib/server"
 )
 
 func main() {
@@ -26,6 +27,7 @@ func main() {
 			Name: "hosts",
 			Aliases:[]string{"host"},
 			// TODO: this should show help?
+			// TODO: update the usage
 			Usage:"config/show  host",
 			Subcommands:[]cli.Command{
 				{
@@ -85,6 +87,13 @@ func main() {
 						}
 					},
 				},
+			},
+		},
+		{
+			Name:"serve",
+			Usage:"serve static files",
+			Action:func(c *cli.Context) {
+				server.Run("front", 8888)
 			},
 		},
 	}
