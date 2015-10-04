@@ -13,6 +13,7 @@ func main() {
 	app.Name = "Ayi"
 	app.Usage = "Help you solve all the messy commands"
 	app.Commands = []cli.Command{
+		// TODO: Move the command to different packages, not a good idea to have a big file here
 		// roast is not just for fun, it's for eating
 		{
 			Name: "roast",
@@ -93,7 +94,7 @@ func main() {
 			Name:"serve",
 			Usage:"serve static files",
 			Action:func(c *cli.Context) {
-				server.Run("front", 8888)
+				server.Run("front/public_html", 8888)
 			},
 		},
 	}
