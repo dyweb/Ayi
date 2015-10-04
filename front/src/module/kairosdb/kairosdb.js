@@ -15,13 +15,26 @@
     function KairosdbClient($http) {
         // test if inject is ok
         this.ping = ping;
+        this.metricNames = metricNames;
 
         function ping() {
-            post("version", {}).then(function (res) {
-                console.log(res);
+            get("version").then(function (res) {
+                console.log(res.data.version);
             }, function (err) {
                 console.error(err);
             });
+        }
+
+        function metricNames() {
+            get("metricnames").then(function (res) {
+                console.log(res.data.results);
+            }, function (err) {
+                console.error(err);
+            });
+        }
+
+        function get(url) {
+            return $http.get(host + '/' + url);
         }
 
         function post(url, data) {
