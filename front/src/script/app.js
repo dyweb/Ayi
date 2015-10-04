@@ -3,6 +3,8 @@
  */
 (function () {
     'use strict';
-
-    angular.module('ayi', []);
+    var app = angular.module('ayi', ['kairosdb']);
+    app.run(['KairosdbClient',function(KairosdbClient){
+        KairosdbClient.ping();
+    }]);
 })();

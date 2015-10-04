@@ -13,7 +13,8 @@ var jsFiles = [
     'src/script/app.js',
     'src/script/**/*.js',
     'src/script/controllers/**/*.js',
-    'src/script/controllers/**/**/*.js'
+    'src/script/controllers/**/**/*.js',
+    'src/module/**/*.js'
 ];
 var scssFiles = [
     './src/style/*.scss',

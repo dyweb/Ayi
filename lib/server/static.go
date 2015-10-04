@@ -23,6 +23,8 @@ func serveFileWithCORS(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Server", "Apiache")
 	// allow cross domain AJAX requests
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	fp := path.Join("front/public_html", r.URL.Path)
 	log.Print(fp)
