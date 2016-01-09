@@ -12,6 +12,10 @@ Centralize all your commands for config development environment
 
 ## Example
 
+Serve as static server
+
+- `Ayi host` start a static server in current folder
+
 Config your hosts file
 
 - `Ayi host list` list all your host file

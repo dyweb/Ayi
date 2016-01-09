@@ -86,7 +86,6 @@ func TestAddHostToFile(t *testing.T) {
 
 func TestRemoveHostFromFile(t *testing.T) {
 	fixtureHostsFile := "../../fixture/hosts"
-	// TODO: will the tests run in order?
 	removed, err := removeHostFromFile(fixtureHostsFile, "doubi.lk")
 	if !removed {
 		t.Fail()
