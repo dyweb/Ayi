@@ -14,7 +14,7 @@ Centralize all your commands for config development environment
 
 Serve as static server
 
-- `Ayi host` start a static server in current folder
+- `Ayi serve` start a static server in current folder
 
 Config your hosts file
 
