@@ -57,5 +57,4 @@ _testmain.go
 *.test
 *.prof
 
-
 cover.txt

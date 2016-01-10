@@ -1,53 +1,59 @@
-package config
+package net
 
 // TODO: ref https://golang.org/src/net/hosts.go
 
 import (
-	"regexp"
 	"bufio"
-	"os"
 	"log"
-	"github.com/go-errors/errors"
+	"os"
+	"regexp"
+
 	"github.com/crackcomm/go-clitable"
-	"github.com/dyweb/Ayi/lib/util"
+	"github.com/dyweb/Ayi/util"
+	"github.com/go-errors/errors"
 )
 
+// Host has ip, name, line
 type Host struct {
-	// must use upper case ? no.
+	// this not for external use
 	ip   string
 	name string
 	line int
 	// TODO: add line, useful for remove
 }
 
+// Print print a host object as a table row
 func (host Host) Print() {
 	table := clitable.New([]string{"ip", "host", "line"})
 	table.AddRow(map[string]interface{}{
-		"ip":host.ip,
-		"host":host.name,
-		"line":host.line,
+		"ip":   host.ip,
+		"host": host.name,
+		"line": host.line,
 	})
 }
 
+// PrintHosts print a list of host as table
 func PrintHosts(hosts []Host) {
 	table := clitable.New([]string{"ip", "host", "line"})
 	for i := 0; i < len(hosts); i++ {
 		table.AddRow(map[string]interface{}{
-			"ip": hosts[i].ip,
-			"host":hosts[i].name,
-			"line":hosts[i].line,
+			"ip":   hosts[i].ip,
+			"host": hosts[i].name,
+			"line": hosts[i].line,
 		})
 	}
 	table.Print()
 }
 
+// ParseHosts parse system host file
 func ParseHosts() []Host {
 	// TODO: error handling
 	hostsFile, _ := getHostFile()
 	return parseHostsFile(hostsFile)
 }
 
-func AddDomainToIp(domain string, ip string) (bool, error) {
+// AddDomainToIP add a record of domain to system host file
+func AddDomainToIP(domain string, ip string) (bool, error) {
 	hostFile, _ := getHostFile()
 	added, err := addHostToFile(hostFile, ip, domain)
 	if added {
@@ -56,6 +62,7 @@ func AddDomainToIp(domain string, ip string) (bool, error) {
 	return false, errors.Wrap(err, 1)
 }
 
+// RemoveDomain remove a record of domain form system host file
 func RemoveDomain(domain string) (bool, error) {
 	hostFile, _ := getHostFile()
 	removed, err := removeHostFromFile(hostFile, domain)
@@ -79,7 +86,7 @@ func parseHostsFile(hostsFile string) []Host {
 	}
 	defer file.Close()
 
-	hosts := make([]Host, 0)
+	var hosts []Host
 	scanner := bufio.NewScanner(file)
 	lineNumber := 0
 	for scanner.Scan() {
@@ -91,7 +98,7 @@ func parseHostsFile(hostsFile string) []Host {
 			//			log.Println(line)
 			//			log.Fatal(err)
 			// Just ignore it ....
-		}else {
+		} else {
 			hosts = append(hosts, host)
 		}
 	}
@@ -103,7 +110,7 @@ func parseHost(s string, lineNumber int) (Host, error) {
 	r, _ := regexp.Compile("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\s*(\\S*)\\s*$")
 	m := r.FindStringSubmatch(s)
 	if len(m) == 3 {
-		return Host{ip: m[1], name: m[2], line:lineNumber}, nil
+		return Host{ip: m[1], name: m[2], line: lineNumber}, nil
 	}
 	return Host{}, errors.New("invalid host config")
 }
@@ -115,7 +122,7 @@ func addHostToFile(hostsFile string, ip string, name string) (bool, error) {
 			return false, errors.New("name " + name + " already exists ")
 		}
 	}
-	file, err := os.OpenFile(hostsFile, os.O_APPEND | os.O_WRONLY, 0600)
+	file, err := os.OpenFile(hostsFile, os.O_APPEND|os.O_WRONLY, 0600)
 	defer file.Close()
 	if err != nil {
 		return false, errors.Wrap(err, 1)
@@ -140,8 +147,6 @@ func removeHostFromFile(hostsFile string, name string) (bool, error) {
 	}
 	return false, errors.New("name " + name + " does not exists ")
 }
-
-
 
 // start of util functions
 

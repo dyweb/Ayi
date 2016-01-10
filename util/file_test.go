@@ -5,8 +5,8 @@ import (
 )
 
 func TestRemoveLine(t *testing.T) {
-	fixtureFile := "../../fixture/text.txt"
+	fixtureFile := "../fixture/text.txt"
 	err := RemoveLine(fixtureFile, 1)
-	t.Log(err)
 	// TODO: real test logic
+	t.Log(err)
 }

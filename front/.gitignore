@@ -1,4 +1,0 @@
-node_modules
-# TODO: find a way to install vendor, maybe use bower
-public_html/assets/vendor
-public_html/assets/bundle

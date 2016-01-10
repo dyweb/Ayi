@@ -1,8 +1,8 @@
-package config
+package net
 
 import (
-	"testing"
 	"regexp"
+	"testing"
 )
 
 func TestRegexp(t *testing.T) {

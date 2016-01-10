@@ -3,11 +3,13 @@ package util
 import (
 	"bufio"
 	"os"
+
 	"github.com/go-errors/errors"
 )
 
-// lineToRemove starts from 1
-func RemoveLine(fileName string, lineToRemove int) (error) {
+// RemoveLine will remove one line from file, line number starts from 1
+func RemoveLine(fileName string, lineToRemove int) error {
+	// read the file as string, skip the line to remove
 	r, err := os.Open(fileName)
 	defer r.Close()
 	if err != nil {
@@ -19,9 +21,12 @@ func RemoveLine(fileName string, lineToRemove int) (error) {
 	for scanner.Scan() {
 		lineNumber++
 		if lineNumber != lineToRemove {
+			// TODO: what if the line ending is CR-LF
 			text += scanner.Text() + "\n"
 		}
 	}
+
+	// write the file
 	w, err := os.Create(fileName)
 	if err != nil {
 		return errors.Wrap(err, 1)
