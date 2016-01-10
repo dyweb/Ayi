@@ -2,7 +2,9 @@ package main
 
 import (
 	"os"
+
 	"github.com/codegangsta/cli"
+	"github.com/dyweb/Ayi/util"
 )
 
 func main() {
@@ -13,13 +15,14 @@ func main() {
 		// TODO: Move the command to different packages, not a good idea to have a big file here
 		{
 			// Ayi like roast mie
-			Name: "mie",
-			Aliases:[]string{"arrowrowe"},
-			Usage: "roast mie",
+			Name:    "mie",
+			Aliases: []string{"arrowrowe"},
+			Usage:   "roast mie",
 			Action: func(c *cli.Context) {
 				println("roast mie")
 			},
 		},
+		util.DummyCommand,
 	}
 	app.Run(os.Args)
 }
