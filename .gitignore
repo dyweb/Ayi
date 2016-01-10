@@ -56,3 +56,5 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+cover.txt
