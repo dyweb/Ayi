@@ -6,4 +6,15 @@ go:
   - 1.5
   - tip
 
-script: go test -v github.com/dyweb/Ayi/...
+before_install:
+  - go get github.com/onsi/gomega
+  - go get github.com/onsi/ginkgo
+  - if ! go get github.com/golang/tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
+  - go get github.com/pierrre/gotestcover
+
+script:
+  - go test -v ./...
+  - gotestcover -coverprofile=cover.txt -covermode=atomic ./...
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
