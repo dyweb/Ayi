@@ -1,14 +1,12 @@
 # disable auto crlf
 * text=false
 
-# force lf for these files
-
+# force lf for sh, go
 *.sh text eol=lf
 *.go eol=lf
-
 .gitignore eol=lf
 .gitattributes eol=lf
 
-# force encoding for these files
-
+# force encoding for sh, go
 *.sh encoding=utf-8
+*.go encoding=utf-8
