@@ -9,12 +9,13 @@ go:
 before_install:
   - go get github.com/onsi/gomega
   - go get github.com/onsi/ginkgo
-  - go get github.com/golang/tools/cmd/cover
+  - go get github.com/golang/tools/cmd/
+  - go get github.com/pierrre/gotestcover
 
 
 script:
-#  - go test -v github.com/dyweb/Ayi/...
-   - ./test.sh
+  - go test -v ./...
+  - gotestcover -coverprofile=cover.txt -covermode=atomic ./...
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
