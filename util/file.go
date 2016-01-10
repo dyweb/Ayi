@@ -7,7 +7,7 @@ import (
 	"github.com/go-errors/errors"
 )
 
-// RemoveLine, line number starts from 1
+// RemoveLine will remove one line from file, line number starts from 1
 func RemoveLine(fileName string, lineToRemove int) error {
 	// read the file as string, skip the line to remove
 	r, err := os.Open(fileName)
