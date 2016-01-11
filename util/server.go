@@ -6,6 +6,7 @@ import (
 	"os"
 	"path"
 	"strconv"
+	"github.com/spf13/viper"
 )
 
 // http://www.alexedwards.net/blog/golang-response-snippets
@@ -13,12 +14,12 @@ import (
 // http://stackoverflow.com/questions/12830095/setting-http-headers-in-golang
 
 // ServeStatic start a static server use folder as public directory on port
-func ServeStatic(folder string, port int) {
-	// TODO: folder is never used ....
+func ServeStatic() {
+	port := viper.GetInt("port")
 	//	log.Fatal(http.ListenAndServe("localhost:" + strconv.Itoa(port), http.FileServer(http.Dir(folder))))
 	log.Print("start on localhost:" + strconv.Itoa(port))
 	http.HandleFunc("/", serveFileWithCORS)
-	http.ListenAndServe("localhost:"+strconv.Itoa(port), nil)
+	http.ListenAndServe("localhost:" + strconv.Itoa(port), nil)
 }
 
 // all the response include CORS header
@@ -29,10 +30,8 @@ func serveFileWithCORS(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	//	fp := path.Join("front/public_html", r.URL.Path)
-	//	TODO: allow config folder
-	fp := path.Join(".", r.URL.Path)
-	//	log the real path
+	fp := path.Join(viper.GetString("base"), r.URL.Path)
+	// TODO: log the real path
 	// TODO: use http request log library
 	log.Print(fp)
 

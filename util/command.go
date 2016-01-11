@@ -2,6 +2,7 @@ package util
 
 import (
 	"github.com/codegangsta/cli"
+	"github.com/spf13/viper"
 )
 
 // DummyCommand for test if the package is working
@@ -18,6 +19,8 @@ var ServeStaticCommand = cli.Command{
 	Name:  "static",
 	Usage: "serve static files",
 	Action: func(c *cli.Context) {
-		ServeStatic(".", 8888)
+		viper.SetDefault("base", ".")
+		viper.SetDefault("port", 8888)
+		ServeStatic()
 	},
 }
