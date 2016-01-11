@@ -6,6 +6,7 @@ import (
 	"os"
 	"path"
 	"strconv"
+
 	"github.com/spf13/viper"
 )
 
@@ -18,7 +19,7 @@ func ServeStatic() {
 	port := viper.GetInt("port")
 	log.Print("start on localhost:" + strconv.Itoa(port))
 	http.HandleFunc("/", serveFileWithCORS)
-	http.ListenAndServe("localhost:" + strconv.Itoa(port), nil)
+	http.ListenAndServe("localhost:"+strconv.Itoa(port), nil)
 }
 
 // all the response include CORS header
