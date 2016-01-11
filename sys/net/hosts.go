@@ -1,7 +1,5 @@
 package net
 
-// TODO: ref https://golang.org/src/net/hosts.go
-
 import (
 	"bufio"
 	"log"
@@ -14,12 +12,12 @@ import (
 )
 
 // Host has ip, name, line
+// some impl and util functions are from https://golang.org/src/net/hosts.go
 type Host struct {
 	// this not for external use
 	ip   string
 	name string
 	line int
-	// TODO: add line, useful for remove
 }
 
 // Print print a host object as a table row
@@ -123,7 +121,7 @@ func addHostToFile(hostsFile string, ip string, name string) (bool, error) {
 			return false, errors.New("name " + name + " already exists ")
 		}
 	}
-	file, err := os.OpenFile(hostsFile, os.O_APPEND|os.O_WRONLY, 0600)
+	file, err := os.OpenFile(hostsFile, os.O_APPEND | os.O_WRONLY, 0600)
 	defer file.Close()
 	if err != nil {
 		return false, errors.Wrap(err, 1)
@@ -138,7 +136,6 @@ func removeHostFromFile(hostsFile string, name string) (bool, error) {
 	hosts := parseHostsFile(hostsFile)
 	for i := 0; i < len(hosts); i++ {
 		if hosts[i].name == name {
-			// TODO: real remove
 			err := util.RemoveLine(hostsFile, hosts[i].line)
 			if err != nil {
 				return false, errors.Wrap(err, 1)
@@ -152,22 +149,13 @@ func removeHostFromFile(hostsFile string, name string) (bool, error) {
 // start of util functions
 
 // copied from net/hosts.go
+// TODO: this should be put into util too
 func removeComment(line string) string {
-	if i := byteIndex(line, '#'); i >= 0 {
+	if i := util.ByteIndex(line, '#'); i >= 0 {
 		// Discard comments.
 		line = line[0:i]
 	}
 	return line
-}
-
-// copied from net/parser.go
-func byteIndex(s string, c byte) int {
-	for i := 0; i < len(s); i++ {
-		if s[i] == c {
-			return i
-		}
-	}
-	return -1
 }
 
 // end of util functions
