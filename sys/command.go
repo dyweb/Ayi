@@ -24,7 +24,6 @@ var HostCommand = cli.Command{
 			Name:    "add",
 			Aliases: []string{"a"},
 			Usage:   "Add ip and domain to host",
-			// TODO: share the flags with remove
 			Flags: []cli.Flag{
 				cli.StringFlag{
 					Name:  "ip",
@@ -38,9 +37,6 @@ var HostCommand = cli.Command{
 				},
 			},
 			Action: func(c *cli.Context) {
-				//						println(c.String("ip"))
-				//						println(c.String("name"))
-				//						println(c.String("aaa") == "")
 				added, err := net.AddDomainToIP(c.String("name"), c.String("ip"))
 				if !added {
 					println("Fail adding host: " + err.Error())
@@ -61,6 +57,7 @@ var HostCommand = cli.Command{
 			Action: func(c *cli.Context) {
 				if c.String("name") == "" {
 					println("must speicify domain name to remove from host file")
+					return
 				}
 				removed, err := net.RemoveDomain(c.String("name"))
 				if !removed {

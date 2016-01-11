@@ -18,9 +18,17 @@ var DummyCommand = cli.Command{
 var ServeStaticCommand = cli.Command{
 	Name:  "static",
 	Usage: "serve static files",
+	Flags: []cli.Flag{
+		// TODO: add flag for folder
+		cli.IntFlag{
+			Name:  "port",
+			Value: 8888,
+			Usage: "the port to listen on",
+		},
+	},
 	Action: func(c *cli.Context) {
 		viper.SetDefault("base", ".")
-		viper.SetDefault("port", 8888)
+		viper.Set("port", c.Int("port"))
 		ServeStatic()
 	},
 }

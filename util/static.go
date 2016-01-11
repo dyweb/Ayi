@@ -16,7 +16,6 @@ import (
 // ServeStatic start a static server use folder as public directory on port
 func ServeStatic() {
 	port := viper.GetInt("port")
-	//	log.Fatal(http.ListenAndServe("localhost:" + strconv.Itoa(port), http.FileServer(http.Dir(folder))))
 	log.Print("start on localhost:" + strconv.Itoa(port))
 	http.HandleFunc("/", serveFileWithCORS)
 	http.ListenAndServe("localhost:" + strconv.Itoa(port), nil)
