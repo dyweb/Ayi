@@ -78,6 +78,7 @@ func getHostFile() (string, error) {
 	return "/etc/hosts", nil
 }
 
+// TODO: support ipv6
 func parseHostsFile(hostsFile string) []Host {
 	file, err := os.Open(hostsFile)
 	if err != nil {

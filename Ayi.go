@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/codegangsta/cli"
+	"github.com/dyweb/Ayi/sys"
 	"github.com/dyweb/Ayi/util"
 )
 
@@ -12,7 +13,6 @@ func main() {
 	app.Name = "Ayi"
 	app.Usage = "Let Ayi do it for you"
 	app.Commands = []cli.Command{
-		// TODO: Move the command to different packages, not a good idea to have a big file here
 		{
 			// Ayi like roast mie
 			Name:    "mie",
@@ -23,6 +23,7 @@ func main() {
 			},
 		},
 		util.DummyCommand,
+		sys.HostCommand,
 	}
 	app.Run(os.Args)
 }
