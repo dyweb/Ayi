@@ -121,7 +121,7 @@ func addHostToFile(hostsFile string, ip string, name string) (bool, error) {
 			return false, errors.New("name " + name + " already exists ")
 		}
 	}
-	file, err := os.OpenFile(hostsFile, os.O_APPEND | os.O_WRONLY, 0600)
+	file, err := os.OpenFile(hostsFile, os.O_APPEND|os.O_WRONLY, 0600)
 	defer file.Close()
 	if err != nil {
 		return false, errors.Wrap(err, 1)

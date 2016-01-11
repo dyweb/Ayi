@@ -23,6 +23,7 @@ func main() {
 			},
 		},
 		util.DummyCommand,
+		util.ServeStaticCommand,
 		sys.HostCommand,
 	}
 	app.Run(os.Args)

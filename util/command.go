@@ -12,3 +12,12 @@ var DummyCommand = cli.Command{
 		println("util command is working!")
 	},
 }
+
+// ServeStaticCommand serve static file in current folder
+var ServeStaticCommand = cli.Command{
+	Name:  "static",
+	Usage: "serve static files",
+	Action: func(c *cli.Context) {
+		ServeStatic(".", 8888)
+	},
+}

@@ -14,7 +14,7 @@ Centralize all your commands for config development environment
 
 Serve as static server
 
-- `Ayi serve` start a static server in current folder
+- `Ayi static` start a static server in current folder
 
 Config your hosts file
 
@@ -22,4 +22,8 @@ Config your hosts file
 - `Ayi host add -ip 127.0.0.1 -name ayi.dev` add `ayi.dev` to `localhost`
 - `Ayi host rm -name ayi.dev` remove `ayi.dev`
 
+## Dependency
+
+- `github.com/spf13/viper` configuration
+- `github.com/codegangsta/cli` commandline 
 

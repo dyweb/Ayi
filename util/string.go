@@ -1,6 +1,6 @@
 package util
 
-// copied from net/parser.go
+// ByteIndex is copied from https://golang.org/src/net/parser.go
 func ByteIndex(s string, c byte) int {
 	for i := 0; i < len(s); i++ {
 		if s[i] == c {
