@@ -6,8 +6,8 @@ import (
 	"github.com/go-errors/errors"
 )
 
-// HostCommand for list and modify host file
-var HostCommand = cli.Command{
+// HostCommands for list and modify host file
+var HostCommands = cli.Command{
 	Name:    "hosts",
 	Aliases: []string{"host"},
 	Usage:   "config/show  host",

@@ -4,15 +4,16 @@ import (
 	"os"
 
 	"github.com/codegangsta/cli"
+	"github.com/dyweb/Ayi/app"
 	"github.com/dyweb/Ayi/sys"
 	"github.com/dyweb/Ayi/util"
 )
 
 func main() {
-	app := cli.NewApp()
-	app.Name = "Ayi"
-	app.Usage = "Let Ayi do it for you"
-	app.Commands = []cli.Command{
+	application := cli.NewApp()
+	application.Name = "Ayi"
+	application.Usage = "Let Ayi do it for you"
+	application.Commands = []cli.Command{
 		{
 			// Ayi like roast mie
 			Name:    "mie",
@@ -24,7 +25,8 @@ func main() {
 		},
 		util.DummyCommand,
 		util.ServeStaticCommand,
-		sys.HostCommand,
+		sys.HostCommands,
+		app.GitCommands,
 	}
-	app.Run(os.Args)
+	application.Run(os.Args)
 }
