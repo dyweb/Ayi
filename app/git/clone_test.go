@@ -56,3 +56,35 @@ func TestRegexpGitLab(t *testing.T) {
 		t.Log("cant match repo name")
 	}
 }
+
+func TestGetRemote(t *testing.T) {
+	r, e := getRemote("https://github.com/dyweb/Ayi")
+	if e != nil {
+		t.Fail()
+		t.Log("should have parsed remote properly")
+	}
+	if r.Protocol != "https" {
+		t.Fail()
+	}
+	if r.Host != "github.com" {
+		t.Fail()
+	}
+	if r.Org != "dyweb" {
+		t.Fail()
+	}
+	if r.Repo != "Ayi" {
+		t.Fail()
+	}
+}
+
+func TestTransformAddress(t *testing.T) {
+	ssh, http := transformAddress("https://github.com/dyweb/Ayi")
+	if ssh != "git@github.com:dyweb/Ayi.git" {
+		t.Fail()
+		t.Log(ssh)
+	}
+	if http != "https://github.com/dyweb/Ayi.git" {
+		t.Fail()
+		t.Log(http)
+	}
+}
