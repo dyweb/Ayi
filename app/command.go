@@ -1,9 +1,10 @@
 package app
 
 import (
+	"log"
+
 	"github.com/codegangsta/cli"
 	"github.com/dyweb/Ayi/app/git"
-	"log"
 )
 
 // GitCommands wrap common git operations with config defined in Ayi
