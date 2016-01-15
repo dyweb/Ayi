@@ -36,7 +36,7 @@ func TestRegexpGitLab(t *testing.T) {
 	r, _ := regexp.Compile(browserRegexp)
 	if r.MatchString(gh) == false {
 		t.Fail()
-		t.Log("cant match github url")
+		t.Log("cant match gitlab url")
 	}
 	a := r.FindStringSubmatch(gh)
 	if a[1] != "http" {

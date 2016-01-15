@@ -1,7 +1,7 @@
 package git
 
 // browserRegexp extract information from browser url like https://github.com/dyweb/Ayi
-var browserRegexp = "(https|https):\\/\\/(.*?)\\/(.*?)\\/(.*)"
+var browserRegexp = "(http|https):\\/\\/(.*?)\\/(.*?)\\/(.*)"
 
 type Remote struct {
 	// Protocol is http, https, ssh
@@ -16,7 +16,6 @@ type Remote struct {
 
 func getRemote(url string) (remote Remote, err error) {
 	// parse the url
-
 	return remote, err
 }
 
