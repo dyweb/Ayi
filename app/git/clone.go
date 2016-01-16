@@ -24,6 +24,31 @@ type Remote struct {
 	Repo string
 }
 
+// Clone clones a remote repo to the configured folder
+func (remote Remote) Clone(err error) {
+	// first try ssh
+
+}
+
+// GetSSH return the ssh address for clone
+func (remote Remote) GetSSH() string {
+	return fmt.Sprintf("git@%s:%s/%s.git",
+		remote.Host,
+		remote.Org,
+		remote.Repo,
+	)
+}
+
+// GetHTTP return the http address for clone
+func (remote Remote) GetHTTP() string {
+	return fmt.Sprintf("%s://%s/%s/%s.git",
+		remote.Protocol,
+		remote.Host,
+		remote.Org,
+		remote.Repo,
+	)
+}
+
 func getRemote(url string) (remote Remote, err error) {
 	// parse the url
 	r, _ := regexp.Compile(browserRegexp)
@@ -46,17 +71,8 @@ func getRemote(url string) (remote Remote, err error) {
 func transformAddress(url string) (sshAddress string, httpAddress string) {
 	remote, _ := getRemote(url)
 	// git@github.com:dyweb/Ayi.git
-	sshAddress = fmt.Sprintf("git@%s:%s/%s.git",
-		remote.Host,
-		remote.Org,
-		remote.Repo,
-	)
+	sshAddress = remote.GetSSH()
 	// https://github.com/dyweb/Ayi.git
-	httpAddress = fmt.Sprintf("%s://%s/%s/%s.git",
-		remote.Protocol,
-		remote.Host,
-		remote.Org,
-		remote.Repo,
-	)
+	httpAddress = remote.GetHTTP()
 	return sshAddress, httpAddress
 }
