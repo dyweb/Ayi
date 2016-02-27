@@ -1,3 +1,10 @@
+# test data
+./fixture/hosts
+./fixture/
+
+# Build
+Ayi
+
 # Logs
 logs
 *.log
