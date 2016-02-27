@@ -72,6 +72,15 @@ naive-build:
 	zip build/ayi.win.zip build/win/Ayi.exe
 .PHONY: naive-build
 
-tests:
+test-travis:
 	go test -v ./...
-.PHONY: tests
+.PHONY: test-travis
+
+test-local:
+	echo "backup the fixture"
+	cp -r fixture fixture-bak
+	go test -v -cover github.com/dyweb/Ayi/...
+	echo "recover the fixture"
+	rm -r fixture
+	mv fixture-bak fixture
+.PHONY: test-local
