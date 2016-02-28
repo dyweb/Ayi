@@ -2,6 +2,6 @@ debug: true
 mailgun:
   domain: your domain
   prikey: your key
-  pubkey: 
+  pubkey: useless now, could be empty
   sender: your name <your email>
   
