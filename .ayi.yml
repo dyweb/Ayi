@@ -1,2 +1,5 @@
----
 debug: true
+mailgun:
+  domain: mg.gaocegege.com
+  pubkey: 1
+  prikey: 2
