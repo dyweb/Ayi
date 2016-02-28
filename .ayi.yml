@@ -1,2 +1,9 @@
----
 debug: true
+mailgun:
+  domain: mg.gaocegege.com
+  prikey: key-c59d88eb312de2549ce903119cf9ca21
+  pubkey: 2
+  sender: Ce Gao <test@mg.gaocegege.com>
+  member:
+  - gaocegege@hotmail.com
+  - ce.gao@outlook.com

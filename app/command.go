@@ -5,6 +5,7 @@ import (
 
 	"github.com/codegangsta/cli"
 	"github.com/dyweb/Ayi/app/git"
+	"github.com/dyweb/Ayi/app/mail"
 )
 
 // GitCommands wrap common git operations with config defined in Ayi
@@ -25,6 +26,21 @@ var GitCommands = cli.Command{
 				}
 				println(out)
 			},
+		},
+	},
+}
+
+// MailCommands wrap mail service
+var MailCommands = cli.Command{
+	Name:    "mail",
+	Aliases: []string{"m"},
+	Usage:   "send mail to all web stuff",
+	Subcommands: []cli.Command{
+		{
+			Name:    "send",
+			Aliases: []string{"s"},
+			Usage:   "Ayi mail send <email address> <subject> <html file>",
+			Action:  mail.SendMailToWebStuff,
 		},
 	},
 }
