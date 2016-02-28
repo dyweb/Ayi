@@ -1,0 +1,7 @@
+debug: true
+mailgun:
+  domain: your domain
+  prikey: your key
+  pubkey: 
+  sender: your name <your email>
+  
