@@ -53,7 +53,6 @@ func validateConfig(domain string, prikey string, pubkey string) bool {
 }
 
 func validateArgs(email string, subject string, fileName string) bool {
-	fmt.Println(subject, fileName)
 	if email == "" || fileName == "" || subject == "" {
 		return false
 	}
