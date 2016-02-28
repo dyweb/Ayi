@@ -11,7 +11,19 @@ Centralize all your commands for config development environment
 - run your test and show result in browser.
 - report your machine environment for your colleague to see why your code only runs on your machine. 
 
-## Example
+## Quick Start
+
+### Installation
+
+Just run the follow code in the terminal:
+
+```
+go build github.com/dyweb/Ayi
+```
+
+Or download the release in the [release page](https://github.com/dyweb/Ayi/releases)
+
+### Example
 
 Serve as static server
 
@@ -23,8 +35,8 @@ Config your hosts file
 - `Ayi host add -ip 127.0.0.1 -name ayi.dev` add `ayi.dev` to `localhost`
 - `Ayi host rm -name ayi.dev` remove `ayi.dev`
 
-## Dependency
 
-- `github.com/spf13/viper` configuration
-- `github.com/codegangsta/cli` commandline 
+## For Dev
 
+1. Before push, use `gofmt` to format your code.
+2. feel free to add commands, do not change commands.
