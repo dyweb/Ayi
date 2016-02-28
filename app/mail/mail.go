@@ -19,8 +19,7 @@ func SendMailToWebStuff(c *cli.Context) {
 	email := c.Args().Get(0)
 	subject := c.Args().Get(1)
 	fileName := c.Args().Get(2)
-	
-	
+
 	// validate the args and config of mailgun
 	if validateConfig(domain, prikey, pubkey) == false {
 		fmt.Println("Mailgun error: config needed.")
@@ -32,7 +31,7 @@ func SendMailToWebStuff(c *cli.Context) {
 		cli.ShowCommandHelp(c, "send")
 		return
 	}
-	
+
 	gun := mailgun.NewMailgun(domain, prikey, pubkey)
 	m := mailgun.NewMessage(sender, subject, "nil", fmt.Sprintf("Web stuff <%s>", email))
 	m.SetHtml(readHTMLFile(fileName))
@@ -60,7 +59,6 @@ func validateArgs(email string, subject string, fileName string) bool {
 }
 
 func readHTMLFile(fileName string) string {
-	
 
 	b, err := ioutil.ReadFile(fileName)
 	if err != nil {
