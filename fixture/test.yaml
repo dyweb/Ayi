@@ -1,0 +1,27 @@
+%YAML 1.2
+---
+number: '1'
+url: '2'
+topics:
+- title: '3'
+  description: '4'
+editor: '5'
+volunteers:
+- name: '6'
+body: '7'
+sender: '8'
+date: '9'
+colors:
+  bg: "#ffbaba"
+  title:
+    bg: "#ff0000"
+    fg: "#ffffff"
+  body:
+    bg: "#ffdcdc"
+    fg: "#000000"
+  text:
+    a: "#ff3b3b"
+    shadow: "#ffa3a3"
+  button:
+    bg: "#ee0000"
+    fg: "#eeeeee"
