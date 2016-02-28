@@ -39,7 +39,7 @@ var MailCommands = cli.Command{
 		{
 			Name:    "send",
 			Aliases: []string{"s"},
-			Usage:   "git status",
+			Usage:   "Ayi mail send <email address> <subject> <html file>",
 			Action:  mail.SendMailToWebStuff,
 		},
 	},
