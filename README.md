@@ -15,13 +15,27 @@ Centralize all your commands for config development environment
 
 ### Installation
 
+#### The Go way
+
 Just run the follow code in the terminal:
 
 ```
 go build github.com/dyweb/Ayi
 ```
 
-Or download the release in the [release page](https://github.com/dyweb/Ayi/releases)
+#### The Docker way
+
+If you don't want to install golang in your PC or Mac, just run:
+
+```
+make docker-build-linux
+```
+
+you will get a binary file in the directory.
+
+#### The Github way
+
+you could get the binary in the [release page](https://github.com/dyweb/Ayi/releases)
 
 ### Example
 
