@@ -6,8 +6,8 @@ import (
 	"io"
 	"text/tabwriter"
 
-	"github.com/dyweb/Ayi/Godeps/_workspace/src/github.com/hashicorp/hcl/hcl/ast"
-	"github.com/dyweb/Ayi/Godeps/_workspace/src/github.com/hashicorp/hcl/hcl/parser"
+	"github.com/hashicorp/hcl/hcl/ast"
+	"github.com/hashicorp/hcl/hcl/parser"
 )
 
 var DefaultConfig = Config{

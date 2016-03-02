@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/dyweb/Ayi/Godeps/_workspace/src/github.com/hashicorp/hcl/hcl/ast"
-	"github.com/dyweb/Ayi/Godeps/_workspace/src/github.com/hashicorp/hcl/json/scanner"
-	"github.com/dyweb/Ayi/Godeps/_workspace/src/github.com/hashicorp/hcl/json/token"
+	"github.com/hashicorp/hcl/hcl/ast"
+	"github.com/hashicorp/hcl/json/scanner"
+	"github.com/hashicorp/hcl/json/token"
 )
 
 type Parser struct {
