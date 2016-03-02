@@ -37,7 +37,33 @@ you will get a binary file in the directory.
 
 you could get the binary in the [release page](https://github.com/dyweb/Ayi/releases)
 
-### Example
+### Usage
+
+```
+NAME:
+   Ayi - Let Ayi do it for you
+
+USAGE:
+   Ayi [global options] command [command options] [arguments...]
+
+VERSION:
+   0.0.0
+
+COMMANDS:
+   mie, arrowrowe	roast mie
+   util-dummy		dummy util command
+   static		serve static files
+   hosts, host		config/show  host
+   git, g		git command wrapper
+   mail, m		send mail to all web stuff
+   help, h		Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --help, -h		show help
+   --version, -v	print the version
+```
+
+#### Example
 
 Serve as static server
 
