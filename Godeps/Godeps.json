@@ -42,9 +42,17 @@
 			"Rev": "497d0afefddf378f9ffb3c89db6a326985908519"
 		},
 		{
+			"ImportPath": "github.com/mailgun/mailgun-go",
+			"Rev": "01bd6a648bb5d95d5f6ebd190fee8bb4158d0339"
+		},
+		{
 			"ImportPath": "github.com/mattn/go-runewidth",
 			"Comment": "travisish-45-gd037b52",
 			"Rev": "d037b52ae5c0338c2bb18da01fb7ddf0e8be9aa1"
+		},
+		{
+			"ImportPath": "github.com/mbanzon/simplehttp",
+			"Rev": "ed64292224debb8a65122f3c2b71d4cd514bc48b"
 		},
 		{
 			"ImportPath": "github.com/mitchellh/mapstructure",

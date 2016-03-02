@@ -3,9 +3,9 @@ package hcl
 import (
 	"fmt"
 
-	"github.com/dyweb/Ayi/Godeps/_workspace/src/github.com/hashicorp/hcl/hcl/ast"
-	hclParser "github.com/dyweb/Ayi/Godeps/_workspace/src/github.com/hashicorp/hcl/hcl/parser"
-	jsonParser "github.com/dyweb/Ayi/Godeps/_workspace/src/github.com/hashicorp/hcl/json/parser"
+	"github.com/hashicorp/hcl/hcl/ast"
+	hclParser "github.com/hashicorp/hcl/hcl/parser"
+	jsonParser "github.com/hashicorp/hcl/json/parser"
 )
 
 // Parse parses the given input and returns the root object.

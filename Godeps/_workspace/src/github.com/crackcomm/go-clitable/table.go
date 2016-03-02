@@ -31,7 +31,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dyweb/Ayi/Godeps/_workspace/src/github.com/mattn/go-runewidth"
+	"github.com/mattn/go-runewidth"
 )
 
 // Table - Table structure.

@@ -84,3 +84,6 @@ test-local:
 	rm -r fixture
 	mv fixture-bak fixture
 .PHONY: test-local
+
+docker-build-linux:
+	docker run --rm -v `pwd`:/go/src/github.com/dyweb/Ayi -e GOPATH=/go:/go/src/github.com/dyweb/Ayi/Godeps/_workspace golang:1.5.3 sh -c "cd /go/src/github.com/dyweb/Ayi && go build -race ."
