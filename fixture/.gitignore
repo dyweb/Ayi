@@ -1,1 +1,3 @@
 *.bak
+# ignore the nested folder, result of local test I guess @gaocegege
+fixture

@@ -78,5 +78,10 @@ Config your hosts file
 
 ## For Dev
 
-1. Before push, use `gofmt` to format your code.
+This project is at early stage and is not actively developed, better not get into it XD.
+
+- run `make get-deps` to get the depedencies TODO: godeps is not used properly, it is only used in build, not for test and travis
+- run `make test-local`
+
+1. Before push, use `gofmt` to format your code. TODO: use git hooks to run fmt before commit (or add?)
 2. feel free to add commands, do not change commands.
