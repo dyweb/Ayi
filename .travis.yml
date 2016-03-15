@@ -5,7 +5,6 @@ go:
   - 1.6
   - tip
 
-# FIXME: migrate to glide
-install: go get ./...
+install: make travis-install
 
-script: make test-travis
+script: make test

@@ -1,6 +1,12 @@
 get-deps:
+	echo "you must have glide installed"
 	glide install
 .PHONY: get-deps
+
+travis-install:
+	./scripts/install-glide.sh
+	glide install
+.PHONY: travis-install    
 
 godep-build:
 	echo "build for OS X"
@@ -72,14 +78,9 @@ naive-build:
 	zip build/ayi.win.zip build/win/Ayi.exe
 .PHONY: naive-build
 
-# TODO: migrate to use glide and merge with test-local
-test-travis:
-	go test -v ./...
-.PHONY: test-travis
-
-test-local:
+test:
 	./scripts/test.sh
-.PHONY: test-local
+.PHONY: test
 
 docker-build-linux:
 	docker run --rm -v `pwd`:/go/src/github.com/dyweb/Ayi -e GOPATH=/go:/go/src/github.com/dyweb/Ayi/Godeps/_workspace golang:1.5.3 sh -c "cd /go/src/github.com/dyweb/Ayi && go build -race ."
