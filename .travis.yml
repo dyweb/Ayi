@@ -2,8 +2,10 @@ language: go
 
 go:
   - 1.5
+  - 1.6
   - tip
 
-install: make get-deps
+# FIXME: migrate to glide
+install: go get ./...
 
 script: make test-travis

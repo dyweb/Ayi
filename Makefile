@@ -1,5 +1,5 @@
 get-deps:
-	go get ./...
+	glide install
 .PHONY: get-deps
 
 godep-build:
@@ -72,17 +72,13 @@ naive-build:
 	zip build/ayi.win.zip build/win/Ayi.exe
 .PHONY: naive-build
 
+# TODO: migrate to use glide and merge with test-local
 test-travis:
 	go test -v ./...
 .PHONY: test-travis
 
 test-local:
-	echo "backup the fixture"
-	cp -r fixture fixture-bak
-	go test -v -cover github.com/dyweb/Ayi/...
-	echo "recover the fixture"
-	rm -r fixture
-	mv fixture-bak fixture
+	./scripts/test.sh
 .PHONY: test-local
 
 docker-build-linux:
