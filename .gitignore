@@ -1,6 +1,5 @@
 # Test data
-./fixture/hosts
-./fixture/
+fixture
 
 # Build
 Ayi
@@ -52,3 +51,5 @@ cover.txt
 
 # Vendor
 vendor
+# vendoor is used for idea go plugin
+vendoor

@@ -19,6 +19,13 @@ This project is at early stage and is not actively developed, better not get int
 - run `make get-deps` to pull the dependencies to `vendor` folder, note the `glide.lock` will use fixed version for libraries
 - run `go install` to have Ayi installed to your `$GOPATH/bin`
 
+**For use idea go plugin**
+
+see https://github.com/go-lang-plugin-org/go-lang-idea-plugin/issues/1820
+
+- `ln -s /home/at15/workspace/src/github.com/dyweb/Ayi/vendor /home/at15/workspace/src/github.com/dyweb/Ayi/vendoor/src`
+- add `vendoor` to your project `GOPATH` and the hint should work fine
+
 ### Contribute
 
 (TODO: put it to contribute.md and use .github for issue and pr template)
