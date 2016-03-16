@@ -1,0 +1,7 @@
+package: github.com/dyweb/Ayi
+import:
+- package: github.com/codegangsta/cli
+- package: github.com/crackcomm/go-clitable
+- package: github.com/go-errors/errors
+- package: github.com/mailgun/mailgun-go
+- package: github.com/spf13/viper

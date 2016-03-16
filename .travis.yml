@@ -2,8 +2,9 @@ language: go
 
 go:
   - 1.5
+  - 1.6
   - tip
 
-install: make get-deps
+install: make travis-install
 
-script: make test-travis
+script: make test
