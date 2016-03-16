@@ -24,5 +24,9 @@ glide -v
 echo "enable go vendor feature"
 export GO15VENDOREXPERIMENT=1
 
+# install dependencies
+cd ..
+glide install
+
 # go back to the old working directory
 cd ${ORIGINAL_WD}

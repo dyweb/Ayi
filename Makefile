@@ -1,11 +1,9 @@
 get-deps:
-	echo "you must have glide installed"
 	glide install
 .PHONY: get-deps
 
 travis-install:
-	./scripts/install-glide.sh
-	glide install
+	./scripts/travis-install.sh
 .PHONY: travis-install    
 
 godep-build:
