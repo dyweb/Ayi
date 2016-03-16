@@ -11,31 +11,40 @@ Centralize all your commands for config development environment
 - run your test and show result in browser.
 - report your machine environment for your colleague to see why your code only runs on your machine. 
 
+## Development
+
+This project is at early stage and is not actively developed, better not get into it XD.
+
+- have [glide](https://github.com/Masterminds/glide) installed on you system, we use `vendor` instead of `godeps` or go1.5- style
+- run `make get-deps` to pull the dependencies to `vendor` folder, note the `glide.lock` will use fixed version for libraries
+- run `go install` to have Ayi installed to your `$GOPATH/bin`
+
+### Contribute
+
+(TODO: put it to contribute.md and use .github for issue and pr template)
+
+1. Before push, use `gofmt` to format your code. (TODO: use git hooks to run fmt before commit (or add?))
+2. feel free to add commands and applications, do not make break changes to commands unless necessary.
+
 ## Quick Start
 
 ### Installation
 
-#### The Go way
+#### Use binary
 
-Just run the follow code in the terminal:
+- download the binary from the [release page](https://github.com/dyweb/Ayi/releases)
+- run it directly or put it in you path, like `mv Ayi /usr/loca/bin/Ayi`
 
-```
-go build github.com/dyweb/Ayi
-```
+#### From source
 
-#### The Docker way
+- clone the project `git clone git@github.com:dyweb/Ayi.git`
+- move to the directory `cd Ayi`
+- install `glide`, see https://github.com/Masterminds/glide (TODO: put download glide to makefile)
+- run `make install`, you will have `Ayi` in your `$GOPATH/bin/Ayi`
 
-If you don't want to install golang in your PC or Mac, just run:
+You can also build it using docker (TODO: cross build using xgo)
 
-```
-make docker-build-linux
-```
-
-you will get a binary file in the directory.
-
-#### The Github way
-
-you could get the binary in the [release page](https://github.com/dyweb/Ayi/releases)
+`make docker-build-linux` you will get a binary file in the directory. (FIXME: it is still using godeps)
 
 ### Usage
 
@@ -74,14 +83,3 @@ Config your hosts file
 - `Ayi host list` list all your host file
 - `Ayi host add -ip 127.0.0.1 -name ayi.dev` add `ayi.dev` to `localhost`
 - `Ayi host rm -name ayi.dev` remove `ayi.dev`
-
-
-## For Dev
-
-This project is at early stage and is not actively developed, better not get into it XD.
-
-- run `make get-deps` to get the depedencies TODO: godeps is not used properly, it is only used in build, not for test and travis
-- run `make test-local`
-
-1. Before push, use `gofmt` to format your code. TODO: use git hooks to run fmt before commit (or add?)
-2. feel free to add commands, do not change commands.
