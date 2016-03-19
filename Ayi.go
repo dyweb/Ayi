@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"log"
 
 	"github.com/codegangsta/cli"
 	"github.com/dyweb/Ayi/app"
@@ -21,7 +22,7 @@ func main() {
 	viper.AddConfigPath(".")
 	err := viper.ReadInConfig() // Find and read the config file
 	if err != nil {             // Handle errors reading the config file
-		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+		log.Print(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
 
 	// alloc the cli
