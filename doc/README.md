@@ -1,7 +1,9 @@
 # Documentation for Ayi
 
+- [Golang best practice](golang.md)
+
 TODO:
 
 - Develop environment setup
-- Golang best practice
 - Internal
+
