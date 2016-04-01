@@ -18,6 +18,8 @@ This project is at early stage and is not actively developed, better not get int
 - have [glide](https://github.com/Masterminds/glide) installed on you system, we use `vendor` instead of `godeps` or go1.5- style
 - run `make get-deps` to pull the dependencies to `vendor` folder, note the `glide.lock` will use fixed version for libraries
 - run `go install` to have Ayi installed to your `$GOPATH/bin`
+- note, when using `idea golang plugin`, please uncheck the use system GOPATH, since it would took a long time for indexing if you have
+a lot of projects in the workspace. related issue https://github.com/dyweb/Ayi/issues/37
 
 **For use idea go plugin**
 
