@@ -1,7 +1,8 @@
 package: github.com/dyweb/Ayi
 import:
-- package: github.com/codegangsta/cli
-- package: github.com/crackcomm/go-clitable
-- package: github.com/go-errors/errors
-- package: github.com/mailgun/mailgun-go
+- package: github.com/spf13/cobra
+  vcs: git
+  version: bc81c21bd0d8be5ba2d6630a505d79d4467566e7
 - package: github.com/spf13/viper
+  vcs: git
+  version: c1ccc378a054ea8d4e38d8c67f6938d4760b53dd
