@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -31,7 +32,8 @@ var RootCmd = &cobra.Command{
 		}
 
 		// FIXME: print the help here
-		fmt.Println("Use 'Ayi help' to see all commands")
+        // FIXME: On Windows, it works in cmd, but does not work in Git Bash
+		color.Green("Use 'Ayi help' to see all commands")
 	},
 }
 

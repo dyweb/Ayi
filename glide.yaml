@@ -6,3 +6,6 @@ import:
 - package: github.com/spf13/viper
   vcs: git
   version: c1ccc378a054ea8d4e38d8c67f6938d4760b53dd
+- package: github.com/fatih/color
+  vcs: git
+  version: 87d4004f2ab62d0d255e0a38f1680aa534549fe3
