@@ -15,11 +15,21 @@ cd ${SCRIPTPATH}
 cd ..
 
 # run the test
-# TODO: test if glide exists
 # FIXME: the backup seems to have folder issue, will generate a nested fixture folder
 
 echo "backup the fixture"
 cp -r fixture fixture-bak    
+
+# TODO: only do this in travis 
+# add glide to path
+export PATH=$PATH:${SCRIPTPATH}/linux-amd64
+# show it is working
+glide -v
+
+# enable go vendor feature for 1.5
+echo "enable go vendor feature"
+export GO15VENDOREXPERIMENT=1
+
 go test -v -cover $(glide novendor)
 echo "recover the fixture"
 rm -r fixture
