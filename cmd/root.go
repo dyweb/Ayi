@@ -32,7 +32,7 @@ var RootCmd = &cobra.Command{
 		}
 
 		// FIXME: print the help here
-        // FIXME: On Windows, it works in cmd, but does not work in Git Bash
+		// FIXME: On Windows, it works in cmd, but does not work in Git Bash
 		color.Green("Use 'Ayi help' to see all commands")
 	},
 }
@@ -44,6 +44,10 @@ func Execute() {
 		fmt.Println(err)
 		os.Exit(-1)
 	}
+}
+
+func loadDefaultSettings() {
+	viper.SetDefault("Verbose", false)
 }
 
 func init() {
@@ -78,4 +82,9 @@ func initConfig() {
 			fmt.Println("Using config file:", viper.ConfigFileUsed())
 		}
 	}
+
+	loadDefaultSettings()
+
+	// Update value from command line TODO: does viper support parse flag directly
+	viper.Set("Verbose", verbose)
 }
