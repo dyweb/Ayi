@@ -26,6 +26,7 @@ var versionCmd = &cobra.Command{
 	Short: "current version of Ayi",
 	Long:  "Show the current version of Ayi",
 	Run: func(cmd *cobra.Command, args []string) {
+		// TODO: define it in other file like common cosntants etc
 		fmt.Println("0.0.1")
 	},
 }

@@ -12,7 +12,12 @@ import (
 	"github.com/spf13/viper"
 )
 
+// Flags that are to be added to commands.
 var cfgFile string
+var (
+	version bool
+	verbose bool
+)
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
@@ -20,7 +25,13 @@ var RootCmd = &cobra.Command{
 	Short: "Ayi makes your life easier",
 	Long:  `Ayi is a collection of small applications and tools that speed up your develop process`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("TODO: put sth here")
+		if version {
+			versionCmd.Run(cmd, args)
+			return
+		}
+
+		// FIXME: print the help here
+		fmt.Println("Use 'Ayi help' to see all commands")
 	},
 }
 
@@ -41,6 +52,8 @@ func init() {
 	// will be global for your application.
 
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.ayi.yaml)")
+	RootCmd.PersistentFlags().BoolVar(&version, "version", false, "show current version")
+	RootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
@@ -57,9 +70,10 @@ func initConfig() {
 	viper.AddConfigPath(".")     // adding current folder as second search path
 	viper.AutomaticEnv()         // read in environment variables that match
 
-	// TODO: only show this when called with debug flag
-	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-		fmt.Println("Using config file:", viper.ConfigFileUsed())
+	if verbose {
+		// If a config file is found, read it in.
+		if err := viper.ReadInConfig(); err == nil {
+			fmt.Println("Using config file:", viper.ConfigFileUsed())
+		}
 	}
 }
