@@ -19,9 +19,9 @@ var RootCmd = &cobra.Command{
 	Use:   "Ayi",
 	Short: "Ayi makes your life easier",
 	Long:  `Ayi is a collection of small applications and tools that speed up your develop process`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("TODO: put sth here")
+	},
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.
@@ -54,8 +54,10 @@ func initConfig() {
 
 	viper.SetConfigName(".ayi")  // name of config file (without extension)
 	viper.AddConfigPath("$HOME") // adding home directory as first search path
+	viper.AddConfigPath(".")     // adding current folder as second search path
 	viper.AutomaticEnv()         // read in environment variables that match
 
+	// TODO: only show this when called with debug flag
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
