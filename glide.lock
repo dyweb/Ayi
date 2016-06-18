@@ -1,5 +1,5 @@
-hash: 58141daa58fde0bee98a7f668ef5a5e424439c5ab2bcbfd4e0b74f34caf67d82
-updated: 2016-06-18T01:05:52.0413851+08:00
+hash: 1a6b31d927805c6ea3d34893c94ea8277312bfde460777c711ac124bc47c2873
+updated: 2016-06-18T12:05:02.9348201+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -46,6 +46,11 @@ imports:
   version: d2dd0262208475919e1a362f675cfc0e7c10e905
   subpackages:
   - github.com\mitchellh\mapstructure
+- name: github.com/pkg/errors
+  version: 01fa4104b9c248c8945d14d9f128454d5b28d595
+  vcs: git
+  subpackages:
+  - github.com\pkg\errors
 - name: github.com/spf13/cast
   version: 27b586b42e29bec072fe7379259cc719e1289da6
   subpackages:
@@ -69,7 +74,7 @@ imports:
   subpackages:
   - github.com\spf13\viper
 - name: golang.org/x/sys
-  version: 5c92836558a3fcfb08ba527cc8d8f150b4dcb34a
+  version: c63fd5f730d82e36355d2c329650f60bd9a81aa9
   subpackages:
   - golang.org\x\sys\unix
 - name: gopkg.in/yaml.v2
