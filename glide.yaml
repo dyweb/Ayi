@@ -12,3 +12,6 @@ import:
 - package: github.com/fatih/color
   vcs: git
   version: 87d4004f2ab62d0d255e0a38f1680aa534549fe3
+- package: github.com/stretchr/testify
+  vcs: git
+  version: d77da356e56a7428ad25149ca77381849a6a5232

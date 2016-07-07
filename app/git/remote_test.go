@@ -1,15 +1,21 @@
 package git
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestBrowserRegexp(t *testing.T) {
-	_, err := parseBrowserURL("https://github.com/dyweb/Ayi")
+	r, err := parseBrowserURL("https://github.com/dyweb/Ayi")
 	if err != nil {
 		t.Error(err)
 	}
+	assert.Equal(t, "https", r.Protocol)
+	assert.Equal(t, "github.com", r.Host)
+	assert.Equal(t, "dyweb", r.Owner)
+	assert.Equal(t, "Ayi", r.Repo)
 	_, err = parseBrowserURL("file:///D:/tmp/mapreduce.pdf")
 	errMsg := "not a browser url"
-	if !(err.Error() == errMsg) {
-		t.Errorf("Error message should be '%s', got '%s' instead", errMsg, err.Error())
-	}
+	assert.Equal(t, errMsg, err.Error())
 }
