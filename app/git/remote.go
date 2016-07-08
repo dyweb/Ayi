@@ -24,15 +24,19 @@ type Remote struct {
 }
 
 // Regular expressions used to match remote info
-// browserRegexp extract information from browser url like https://github.com/dyweb/Ayi
-// TODO: support url with trailng stuff like https://github.com/dyweb/Ayi/issues
+// browserRegexp extract information from browser url like https://github.com/dyweb/Ayi,
+// trailing slash and query parameters will be ignored
 var browserRegexp = regexp.MustCompile("(http|https):\\/\\/(.+?)\\/(.+?)\\/([^\\/?]+)/*")
 
 const browserSegmentsCount = 4
 
-var importRegexp = regexp.MustCompile("(.+?)\\/(.+?)\\/([^\\/?]+)/*")
+var importRegexp = regexp.MustCompile("^([^\\/]+?)\\/([^\\/]+?)\\/([^\\/?]+)/*")
 
 const importSegmentsCount = 3
+
+var shortRegexp = regexp.MustCompile("^([^\\/]+)\\/([^\\/]+)/*$")
+
+const shortSegmentsCount = 2
 
 // NewFromURL returns a remote based on the url, which could be
 // - url in browser https://github.com/dyweb/Ayi
@@ -49,6 +53,11 @@ func NewFromURL(url string) (Remote, error) {
 		}
 	case importRegexp.MatchString(url):
 		r, err = parseImportURL(url)
+		if err != nil {
+			return r, err
+		}
+	case shortRegexp.MatchString(url):
+		r, err = parseShortURL(url)
 		if err != nil {
 			return r, err
 		}
@@ -80,5 +89,17 @@ func parseImportURL(url string) (Remote, error) {
 	r.Host = segments[1]
 	r.Owner = segments[2]
 	r.Repo = segments[3]
+	return r, nil
+}
+
+// TODO: deal with github.com/dyweb, this is not <owner>/<repo> but <host>/<owner>
+func parseShortURL(url string) (Remote, error) {
+	r := Remote{}
+	segments := shortRegexp.FindStringSubmatch(url)
+	if len(segments) != (shortSegmentsCount + 1) {
+		return r, errors.New(fmt.Sprintf("not a short url, need %d segments but got %d", shortSegmentsCount, len(segments)-1))
+	}
+	r.Owner = segments[1]
+	r.Repo = segments[2]
 	return r, nil
 }

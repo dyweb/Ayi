@@ -38,12 +38,20 @@ func TestImportRegexp(t *testing.T) {
 	assert.Equal(t, "Ayi", r.Repo)
 }
 
+func TestShortRegexp(t *testing.T) {
+	r, err := parseShortURL("dyweb/web-stuff")
+	assert.Equal(t, nil, err)
+	assert.Equal(t, "web-stuff", r.Repo)
+}
+
 func TestNewFromURL(t *testing.T) {
 	r, err := NewFromURL("github.com/dyweb/Ayi")
 	assert.Equal(t, nil, err)
 	assert.Equal(t, "Ayi", r.Repo)
 	r, err = NewFromURL("http://github.com/dyweb/Ayi")
 	assert.Equal(t, "Ayi", r.Repo)
-	r, err = NewFromURL("github.com/dyweb")
-	assert.Contains(t, "invalid url", err.Error())
+	r, err = NewFromURL("dyweb/Ayi")
+	assert.Equal(t, "Ayi", r.Repo)
+	r, err = NewFromURL("file:///D:/tmp/mapreduce.pdf")
+	assert.NotEqual(t, nil, err)
 }
