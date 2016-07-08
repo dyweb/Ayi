@@ -14,12 +14,18 @@ func TestBrowserRegexp(t *testing.T) {
 	assert.Equal("github.com", r.Host)
 	assert.Equal("dyweb", r.Owner)
 	assert.Equal("Ayi", r.Repo)
+	// ignore trailing slash
 	r, err = parseBrowserURL("https://github.com/dyweb/Ayi/")
 	assert.Equal("Ayi", r.Repo)
+	// ignore extra segements
 	r, err = parseBrowserURL("https://github.com/dyweb/Ayi/util")
 	assert.Equal("Ayi", r.Repo)
+	// ignore query parameters
 	r, err = parseBrowserURL("https://github.com/dyweb/Ayi?detail=1")
 	assert.Equal("Ayi", r.Repo)
+	// ignore .git
+	r, err = parseBrowserURL("https://bitbucket.org/at6/kc-3g.git")
+	assert.Equal("kc-3g", r.Repo)
 	_, err = parseBrowserURL("file:///D:/tmp/mapreduce.pdf")
 	errMsg := "not a browser url"
 	assert.Contains(err.Error(), errMsg)

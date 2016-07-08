@@ -44,9 +44,8 @@ func (r Remote) GetSSH() string {
 
 // Regular expressions used to match remote info
 // browserRegexp extract information from browser url like https://github.com/dyweb/Ayi,
-// trailing slash and query parameters will be ignored
-// TODO: trim .git like https://bitbucket.org/at6/kc-3g.git
-var browserRegexp = regexp.MustCompile("(http|https)://(.+?)/(.+?)/([^/?]+)/*")
+// trailing slash, query parameters and .git will be ignored
+var browserRegexp = regexp.MustCompile("^(http|https)://(.+?)/(.+?)/([^/?]+?)(?:\\.git)?(?:/.*)?(?:\\?.*)?$")
 
 const browserSegmentsCount = 4
 
