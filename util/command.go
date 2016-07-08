@@ -10,17 +10,12 @@ import (
 
 // Command return a Command struct from a full commad
 func Command(cmd string) (*exec.Cmd, error) {
+	// NOTE: do not use strings.Fields or Split !
 	segments, err := shellquote.Split(cmd)
 	if err != nil {
 		return nil, errors.Wrap(err, "Cannot parse command")
 	}
 	name := segments[0]
-	// FIXME: this is not working ...
-	// if (name == "sh") && (segments[1] == "-c") {
-	// 	// TODO: this does not support use like go test $(glide novendor)
-	// 	fmt.Println(strings.Join(segments[2:], " "))
-	// 	return exec.Command("sh", "-c", strings.Join(segments[2:], " "))
-	// }
 	return exec.Command(name, segments[1:]...), nil
 }
 
