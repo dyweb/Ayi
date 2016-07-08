@@ -1,6 +1,7 @@
 debug: true
 test:
-    - go test -v -cover $(glide novendor)
+    # FIXME: why sh is needed.... why can't just run the script
+    - sh ./scripts/test.sh
 user: example-user
 project:
     name: example

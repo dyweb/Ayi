@@ -45,7 +45,7 @@ build-all:
 .PHONY: build-all
 
 test:
-	./scripts/test.sh
+	./scripts/travis-test.sh
 .PHONY: test
 
 install:
