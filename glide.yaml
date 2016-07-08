@@ -15,3 +15,6 @@ import:
 - package: github.com/stretchr/testify
   vcs: git
   version: d77da356e56a7428ad25149ca77381849a6a5232
+- package: github.com/kballard/go-shellquote
+  vcs: git
+  version: d8ec1a69a250a17bb0e419c386eac1f3711dc142

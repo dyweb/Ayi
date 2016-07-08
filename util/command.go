@@ -3,12 +3,17 @@ package util
 import (
 	"os"
 	"os/exec"
-	"strings"
+
+	"github.com/kballard/go-shellquote"
+	"github.com/pkg/errors"
 )
 
 // Command return a Command struct from a full commad
-func Command(cmd string) *exec.Cmd {
-	segments := strings.Fields(cmd)
+func Command(cmd string) (*exec.Cmd, error) {
+	segments, err := shellquote.Split(cmd)
+	if err != nil {
+		return nil, errors.Wrap(err, "Cannot parse command")
+	}
 	name := segments[0]
 	// FIXME: this is not working ...
 	// if (name == "sh") && (segments[1] == "-c") {
@@ -16,16 +21,21 @@ func Command(cmd string) *exec.Cmd {
 	// 	fmt.Println(strings.Join(segments[2:], " "))
 	// 	return exec.Command("sh", "-c", strings.Join(segments[2:], " "))
 	// }
-	return exec.Command(name, segments[1:]...)
+	return exec.Command(name, segments[1:]...), nil
 }
 
 // RunCommand runs a commad and show all output in console, block current routine
 func RunCommand(cmd string) error {
-	command := Command(cmd)
+	command, err := Command(cmd)
+	if err != nil {
+		return err
+	}
 	command.Stdin = os.Stdin
 	command.Stdout = os.Stdout
 	command.Stderr = os.Stderr
-	// TODO: wrap it up using errors
-	err := command.Run()
-	return err
+	err = command.Run()
+	if err != nil {
+		return errors.Wrap(err, "Failure when executing command")
+	}
+	return nil
 }

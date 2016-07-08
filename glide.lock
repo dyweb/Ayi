@@ -1,5 +1,5 @@
-hash: fdc947f5d6612b86d2e8768b21f180f5936f1718d86b71e2ea96e3c3a19269af
-updated: 2016-07-07T22:55:36.5512877+08:00
+hash: b4548f5368b604731bbdadbe2ac3227698bd2742ada8cecdc464c1ceaa0e34ce
+updated: 2016-07-09T00:01:57.2141105+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -21,6 +21,9 @@ imports:
   - json/token
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
+- name: github.com/kballard/go-shellquote
+  version: d8ec1a69a250a17bb0e419c386eac1f3711dc142
+  vcs: git
 - name: github.com/magiconair/properties
   version: c265cfa48dda6474e208715ca93e987829f572f8
 - name: github.com/mattn/go-colorable
@@ -47,10 +50,18 @@ imports:
 - name: github.com/stretchr/testify
   version: d77da356e56a7428ad25149ca77381849a6a5232
   vcs: git
-- name: golang.org/x/sys
-  version: a408501be4d17ee978c04a618e7a1b22af058c0e
   subpackages:
-  - unix
+  - assert
+- name: golang.org/x/sys/unix
+  version: ""
 - name: gopkg.in/yaml.v2
   version: a83829b6f1293c91addabc89d0571c246397bbf4
-testImports: []
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 5215b55f46b2b919f50a1df0eaa5886afe4e3b3d
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
