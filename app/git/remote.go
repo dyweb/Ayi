@@ -32,10 +32,8 @@ func (r Remote) GetSSH() string {
 	case "bitbucket.org":
 		return fmt.Sprintf("git@bitbucket.org:%s/%s.git", r.Owner, r.Repo)
 	case "coding.net":
-		// TODO: coding.net's url is quite different https://coding.net/u/vace/p/vue-spectre/git
 		return fmt.Sprintf("git@git.coding.net:%s/%s.git", r.Owner, r.Repo)
 	case "git.oschina.net":
-		// http://git.oschina.net/caixw/apidoc
 		return fmt.Sprintf("git@git.oschina.net:%s/%s.git", r.Owner, r.Repo)
 	}
 	// TODO: For non public hosts, we need to check config files
@@ -45,7 +43,8 @@ func (r Remote) GetSSH() string {
 // Regular expressions used to match remote info
 // browserRegexp extract information from browser url like https://github.com/dyweb/Ayi,
 // trailing slash, query parameters and .git will be ignored
-var browserRegexp = regexp.MustCompile("^(http|https)://(.+?)/(.+?)/([^/?]+?)(?:\\.git)?(?:/.*)?(?:\\?.*)?$")
+// (?:u/)? and (?:p/)? are added to deal with coding.net, ie: https://coding.net/u/at15/p/apm-v5/git
+var browserRegexp = regexp.MustCompile("^(http|https)://(.+?)/(?:u/)?(.+?)/(?:p/)?([^/?]+?)(?:\\.git)?(?:/.*)?(?:\\?.*)?$")
 
 const browserSegmentsCount = 4
 

@@ -26,6 +26,8 @@ func TestBrowserRegexp(t *testing.T) {
 	// ignore .git
 	r, err = parseBrowserURL("https://bitbucket.org/at6/kc-3g.git")
 	assert.Equal("kc-3g", r.Repo)
+	r, err = parseBrowserURL("https://coding.net/u/at15/p/apm-v5/")
+	assert.Equal("apm-v5", r.Repo)
 	_, err = parseBrowserURL("file:///D:/tmp/mapreduce.pdf")
 	errMsg := "not a browser url"
 	assert.Contains(err.Error(), errMsg)
@@ -67,10 +69,21 @@ func TestNewFromURL(t *testing.T) {
 
 func TestGetSSH(t *testing.T) {
 	assert := assert.New(t)
+	// github
 	r, err := NewFromURL("github.com/dyweb/Ayi")
 	assert.Nil(err)
 	assert.Equal("git@github.com:dyweb/Ayi.git", r.GetSSH())
-	// FIXME: .git is not trimed
-	// r, _ = NewFromURL("https://bitbucket.org/at6/kc-3g.git")
-	// assert.Equal("git@bitbucket.org:at6/kc-3g.git", r.GetSSH())
+	// gitlab
+	r, err = NewFromURL("https://gitlab.com/leanlabsio/kanban")
+	assert.Nil(err)
+	assert.Equal("git@gitlab.com:leanlabsio/kanban.git", r.GetSSH())
+	// bitbucket
+	r, _ = NewFromURL("https://bitbucket.org/at6/kc-3g.git")
+	assert.Equal("git@bitbucket.org:at6/kc-3g.git", r.GetSSH())
+	// coding.net
+	r, _ = NewFromURL("https://coding.net/u/at15/p/apm-v5/git")
+	assert.Equal("git@git.coding.net:at15/apm-v5.git", r.GetSSH())
+	// oschina
+	r, _ = NewFromURL("http://git.oschina.net/caixw/apidoc")
+	assert.Equal("git@git.oschina.net:caixw/apidoc.git", r.GetSSH())
 }
