@@ -29,6 +29,11 @@ see https://github.com/go-lang-plugin-org/go-lang-idea-plugin/issues/1820
 - `ln -s /home/at15/workspace/src/github.com/dyweb/Ayi/vendor /home/at15/workspace/src/github.com/dyweb/Ayi/vendoor/src`
 - add `vendoor` to your project `GOPATH` and the hint should work fine
 
+### FAQ
+
+- Q: How to change file mode on windows
+- A: `git update-index --chmod=+x <file>` from dedek's [answer](http://stackoverflow.com/a/13593391/4116260) for this [question](http://stackoverflow.com/questions/6476513/git-file-permissions-on-windows).
+
 ### Contribute
 
 (TODO: put it to contribute.md and use .github for issue and pr template)
@@ -41,6 +46,8 @@ see https://github.com/go-lang-plugin-org/go-lang-idea-plugin/issues/1820
 ### Installation
 
 #### Use binary
+
+There are NO stable release now, better build from source
 
 - download the binary from the [release page](https://github.com/dyweb/Ayi/releases)
 - run it directly or put it in you path, like `mv Ayi /usr/loca/bin/Ayi`
@@ -57,6 +64,8 @@ You can also build it using docker (TODO: cross build using xgo)
 `make docker-build-linux` you will get a binary file in the directory. (FIXME: it is still using godeps)
 
 ### Usage
+
+TODO: outdated
 
 ```
 NAME:
