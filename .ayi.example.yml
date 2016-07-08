@@ -1,4 +1,6 @@
 debug: true
+test:
+    - go test -v -cover $(glide novendor)
 user: example-user
 project:
     name: example

@@ -76,10 +76,13 @@ func initConfig() {
 	viper.AddConfigPath(".")     // adding current folder as second search path
 	viper.AutomaticEnv()         // read in environment variables that match
 
+	err := viper.ReadInConfig()
+
 	if verbose {
-		// If a config file is found, read it in.
-		if err := viper.ReadInConfig(); err == nil {
+		if err == nil {
 			fmt.Println("Using config file:", viper.ConfigFileUsed())
+		} else {
+			fmt.Println("Config file not found!")
 		}
 	}
 
