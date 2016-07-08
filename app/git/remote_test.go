@@ -58,3 +58,13 @@ func TestNewFromURL(t *testing.T) {
 	r, err = NewFromURL("file:///D:/tmp/mapreduce.pdf")
 	assert.NotNil(err)
 }
+
+func TestGetSSH(t *testing.T) {
+	assert := assert.New(t)
+	r, err := NewFromURL("github.com/dyweb/Ayi")
+	assert.Nil(err)
+	assert.Equal("git@github.com:dyweb/Ayi.git", r.GetSSH())
+	// FIXME: .git is not trimed
+	// r, _ = NewFromURL("https://bitbucket.org/at6/kc-3g.git")
+	// assert.Equal("git@bitbucket.org:at6/kc-3g.git", r.GetSSH())
+}

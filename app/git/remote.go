@@ -23,18 +23,38 @@ type Remote struct {
 	Repo string
 }
 
+func (r Remote) GetSSH() string {
+	switch r.Host {
+	case "github.com":
+		return fmt.Sprintf("git@github.com:%s/%s.git", r.Owner, r.Repo)
+	case "gitlab.com":
+		return fmt.Sprintf("git@gitlab.com:%s/%s.git", r.Owner, r.Repo)
+	case "bitbucket.org":
+		return fmt.Sprintf("git@bitbucket.org:%s/%s.git", r.Owner, r.Repo)
+	case "coding.net":
+		// TODO: coding.net's url is quite different https://coding.net/u/vace/p/vue-spectre/git
+		return fmt.Sprintf("git@git.coding.net:%s/%s.git", r.Owner, r.Repo)
+	case "git.oschina.net":
+		// http://git.oschina.net/caixw/apidoc
+		return fmt.Sprintf("git@git.oschina.net:%s/%s.git", r.Owner, r.Repo)
+	}
+	// TODO: For non public hosts, we need to check config files
+	return ""
+}
+
 // Regular expressions used to match remote info
 // browserRegexp extract information from browser url like https://github.com/dyweb/Ayi,
 // trailing slash and query parameters will be ignored
-var browserRegexp = regexp.MustCompile("(http|https):\\/\\/(.+?)\\/(.+?)\\/([^\\/?]+)/*")
+// TODO: trim .git like https://bitbucket.org/at6/kc-3g.git
+var browserRegexp = regexp.MustCompile("(http|https)://(.+?)/(.+?)/([^/?]+)/*")
 
 const browserSegmentsCount = 4
 
-var importRegexp = regexp.MustCompile("^([^\\/]+?)\\/([^\\/]+?)\\/([^\\/?]+)/*")
+var importRegexp = regexp.MustCompile("^([^/]+?)/([^/]+?)/([^/?]+)/*")
 
 const importSegmentsCount = 3
 
-var shortRegexp = regexp.MustCompile("^([^\\/]+)\\/([^\\/]+)/*$")
+var shortRegexp = regexp.MustCompile("^([^/]+)/([^/]+)/*$")
 
 const shortSegmentsCount = 2
 
