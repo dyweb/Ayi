@@ -8,14 +8,42 @@ import (
 
 func TestBrowserRegexp(t *testing.T) {
 	r, err := parseBrowserURL("https://github.com/dyweb/Ayi")
-	if err != nil {
-		t.Error(err)
-	}
+	assert.Equal(t, nil, err)
 	assert.Equal(t, "https", r.Protocol)
 	assert.Equal(t, "github.com", r.Host)
 	assert.Equal(t, "dyweb", r.Owner)
 	assert.Equal(t, "Ayi", r.Repo)
+	r, err = parseBrowserURL("https://github.com/dyweb/Ayi/")
+	assert.Equal(t, "Ayi", r.Repo)
+	r, err = parseBrowserURL("https://github.com/dyweb/Ayi/util")
+	assert.Equal(t, "Ayi", r.Repo)
+	r, err = parseBrowserURL("https://github.com/dyweb/Ayi?detail=1")
+	assert.Equal(t, "Ayi", r.Repo)
 	_, err = parseBrowserURL("file:///D:/tmp/mapreduce.pdf")
 	errMsg := "not a browser url"
-	assert.Equal(t, errMsg, err.Error())
+	assert.Contains(t, err.Error(), errMsg)
+}
+
+func TestImportRegexp(t *testing.T) {
+	r, err := parseImportURL("github.com/dyweb/Ayi")
+	assert.Equal(t, nil, err)
+	assert.Equal(t, "github.com", r.Host)
+	assert.Equal(t, "dyweb", r.Owner)
+	assert.Equal(t, "Ayi", r.Repo)
+	r, err = parseImportURL("github.com/dyweb/Ayi/")
+	assert.Equal(t, "Ayi", r.Repo)
+	r, err = parseImportURL("github.com/dyweb/Ayi/util")
+	assert.Equal(t, "Ayi", r.Repo)
+	r, err = parseImportURL("github.com/dyweb/Ayi/util/")
+	assert.Equal(t, "Ayi", r.Repo)
+}
+
+func TestNewFromURL(t *testing.T) {
+	r, err := NewFromURL("github.com/dyweb/Ayi")
+	assert.Equal(t, nil, err)
+	assert.Equal(t, "Ayi", r.Repo)
+	r, err = NewFromURL("http://github.com/dyweb/Ayi")
+	assert.Equal(t, "Ayi", r.Repo)
+	r, err = NewFromURL("github.com/dyweb")
+	assert.Contains(t, "invalid url", err.Error())
 }
