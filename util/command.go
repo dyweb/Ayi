@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"strings"
@@ -8,8 +9,13 @@ import (
 
 // Command return a Command struct from a full commad
 func Command(cmd string) *exec.Cmd {
-	segments := strings.Split(cmd, " ")
+	segments := strings.Fields(cmd)
 	name := segments[0]
+	if (name == "sh") && (segments[1] == "-c") {
+		// TODO: this does not support use like go test $(glide novendor)
+		fmt.Println(strings.Join(segments[2:], " "))
+		return exec.Command("sh", "-c", strings.Join(segments[2:], " "))
+	}
 	return exec.Command(name, segments[1:]...)
 }
 
