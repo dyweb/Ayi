@@ -7,35 +7,37 @@ import (
 )
 
 func TestBrowserRegexp(t *testing.T) {
+	assert := assert.New(t)
 	r, err := parseBrowserURL("https://github.com/dyweb/Ayi")
-	assert.Equal(t, nil, err)
-	assert.Equal(t, "https", r.Protocol)
-	assert.Equal(t, "github.com", r.Host)
-	assert.Equal(t, "dyweb", r.Owner)
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Nil(err)
+	assert.Equal("https", r.Protocol)
+	assert.Equal("github.com", r.Host)
+	assert.Equal("dyweb", r.Owner)
+	assert.Equal("Ayi", r.Repo)
 	r, err = parseBrowserURL("https://github.com/dyweb/Ayi/")
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Equal("Ayi", r.Repo)
 	r, err = parseBrowserURL("https://github.com/dyweb/Ayi/util")
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Equal("Ayi", r.Repo)
 	r, err = parseBrowserURL("https://github.com/dyweb/Ayi?detail=1")
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Equal("Ayi", r.Repo)
 	_, err = parseBrowserURL("file:///D:/tmp/mapreduce.pdf")
 	errMsg := "not a browser url"
-	assert.Contains(t, err.Error(), errMsg)
+	assert.Contains(err.Error(), errMsg)
 }
 
 func TestImportRegexp(t *testing.T) {
+	assert := assert.New(t)
 	r, err := parseImportURL("github.com/dyweb/Ayi")
-	assert.Equal(t, nil, err)
-	assert.Equal(t, "github.com", r.Host)
-	assert.Equal(t, "dyweb", r.Owner)
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Nil(err)
+	assert.Equal("github.com", r.Host)
+	assert.Equal("dyweb", r.Owner)
+	assert.Equal("Ayi", r.Repo)
 	r, err = parseImportURL("github.com/dyweb/Ayi/")
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Equal("Ayi", r.Repo)
 	r, err = parseImportURL("github.com/dyweb/Ayi/util")
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Equal("Ayi", r.Repo)
 	r, err = parseImportURL("github.com/dyweb/Ayi/util/")
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Equal("Ayi", r.Repo)
 }
 
 func TestShortRegexp(t *testing.T) {
@@ -45,13 +47,14 @@ func TestShortRegexp(t *testing.T) {
 }
 
 func TestNewFromURL(t *testing.T) {
+	assert := assert.New(t)
 	r, err := NewFromURL("github.com/dyweb/Ayi")
-	assert.Equal(t, nil, err)
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Nil(err)
+	assert.Equal("Ayi", r.Repo)
 	r, err = NewFromURL("http://github.com/dyweb/Ayi")
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Equal("Ayi", r.Repo)
 	r, err = NewFromURL("dyweb/Ayi")
-	assert.Equal(t, "Ayi", r.Repo)
+	assert.Equal("Ayi", r.Repo)
 	r, err = NewFromURL("file:///D:/tmp/mapreduce.pdf")
-	assert.NotEqual(t, nil, err)
+	assert.NotNil(err)
 }
