@@ -1,0 +1,8 @@
+debug: true
+user: example-user
+project:
+    name: example
+    src: https://github.com/ex/exx
+runtime-deps:
+    - node
+    - php
