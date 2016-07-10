@@ -11,6 +11,8 @@ import (
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+
+	"github.com/dyweb/Ayi/util"
 )
 
 // Flags that are to be added to commands.
@@ -19,6 +21,9 @@ var (
 	version bool
 	verbose bool
 )
+
+// local shortcut
+var log = util.Logger
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
@@ -41,6 +46,7 @@ var RootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
+		// TODO: use logger
 		fmt.Println(err)
 		os.Exit(-1)
 	}
@@ -79,11 +85,13 @@ func initConfig() {
 	err := viper.ReadInConfig()
 
 	if verbose {
-		if err == nil {
-			fmt.Println("Using config file:", viper.ConfigFileUsed())
-		} else {
-			fmt.Println("Config file not found!")
-		}
+		util.UseVerboseLog()
+	}
+
+	if err == nil {
+		log.WithField("file", viper.ConfigFileUsed()).Debug("Config file found")
+	} else {
+		log.Debug("Config file not found!")
 	}
 
 	loadDefaultSettings()

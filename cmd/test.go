@@ -11,7 +11,7 @@ import (
 
 var testCmd = &cobra.Command{
 	Use:   "test",
-	Short: "run test configed in .ayi.yml",
+	Short: "run test configured in .ayi.yml",
 	Long:  "run user defined test commands in .ayi.yml",
 	Run: func(cmd *cobra.Command, args []string) {
 		hasTest := viper.IsSet("test")

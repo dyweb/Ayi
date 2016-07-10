@@ -1,5 +1,5 @@
-hash: b4548f5368b604731bbdadbe2ac3227698bd2742ada8cecdc464c1ceaa0e34ce
-updated: 2016-07-09T00:01:57.2141105+08:00
+hash: 1a5b41591f518bc67e535fb513573b6bdcb96965da708bc6a2a6217c74ea6459
+updated: 2016-07-10T13:24:48.9107374+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -34,6 +34,9 @@ imports:
   version: d2dd0262208475919e1a362f675cfc0e7c10e905
 - name: github.com/pkg/errors
   version: 01fa4104b9c248c8945d14d9f128454d5b28d595
+  vcs: git
+- name: github.com/Sirupsen/logrus
+  version: 4b6ea7319e214d98c938f12692336f7ca9348d6b
   vcs: git
 - name: github.com/spf13/cast
   version: 27b586b42e29bec072fe7379259cc719e1289da6
