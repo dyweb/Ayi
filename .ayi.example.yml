@@ -15,10 +15,9 @@ runtime-deps:
 # the follow configs are user wide, should be put in ~/.ayi.yml
 git:
     hosts:
-        # order by priority
-        git.saber.io:
-            port: 10086
-            https: false
-        git.pika.io:
-            port: 10086
-            https: true
+        - name: git.saber.io
+          port: 10086
+          https: false
+        - name: git.pika.io
+          port: 10086
+          https: true

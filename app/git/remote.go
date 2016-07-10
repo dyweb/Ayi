@@ -21,6 +21,8 @@ type Remote struct {
 	Owner string
 	// Repo is repository name
 	Repo string
+	// SupportHTTPS shows if the host is using HTTPS
+	SupportHTTPS bool
 }
 
 func (r Remote) GetSSH() string {
@@ -95,6 +97,10 @@ func parseBrowserURL(url string) (Remote, error) {
 	r.Host = segments[2]
 	r.Owner = segments[3]
 	r.Repo = segments[4]
+	if r.Protocol == "https" {
+		r.SupportHTTPS = true
+	}
+	// TODO: loop the config, user maybe using http url for a https host
 	return r, nil
 }
 
@@ -107,6 +113,7 @@ func parseImportURL(url string) (Remote, error) {
 	r.Host = segments[1]
 	r.Owner = segments[2]
 	r.Repo = segments[3]
+	// TODO: loop the config, determine https by host name, there are only a few common public hosts
 	return r, nil
 }
 

@@ -6,8 +6,10 @@ This file used to track TODO list
 
 ### Applications
 
-- [ ] `git` should have `git.hosts` config in `.ayi.yml` parsed by order, but golang map does not have order. 
-(@gaocegege has met this before)
+- [x] `git` should have `git.hosts` config in `.ayi.yml` parsed by order, but golang map does not have order. 
+(@gaocegege has met this before) -> use array instead
+- [ ] `viper` does not support array of `map[string]interface{}`, need to use `spf13/cast` to convert, which is also 
+used by `viper`. see [git/config_test.go](git/config_test.go) `TestReadConfig` for detail
 
 ### Commands
 
