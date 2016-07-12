@@ -17,6 +17,9 @@ used by `viper`. see [git/config_test.go](git/config_test.go) `TestReadConfig` f
 
 ### Util
 
-- [ ] https://github.com/uber-go/zap is a faster log library (TODO: the webframework I plan to use may also has its own logging library)
+- [ ] https://github.com/dyweb/Ayi/issues/7 need to resolved to use coveralls.io
+- [x] https://github.com/go-playground/overalls can generate coverage report for multi package project
+- [ ] https://github.com/uber-go/zap is a faster log library (TODO: the webframework I plan to use has its 
+[own logging library](https://github.com/kataras/iris/blob/master/logger/logger.go))
 - [x] use https://github.com/Sirupsen/logrus for logging and use the `color` package in logrus if possible
 - [x] better shell execute, see `github/hub/cmd`, which use `github.com/kballard/go-shellquote` for split and join

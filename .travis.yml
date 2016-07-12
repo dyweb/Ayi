@@ -6,6 +6,13 @@ go:
   - 1.6
   - tip
 
+before_install:
+  - go get github.com/mattn/goveralls
+  - go get golang.org/x/tools/cmd/cover
+  - go get github.com/at15/overalls
+
 install: make travis-install
 
 script: make test
+
+# TODO: use overalls for test and use goveralls to upload to coveralls.io
