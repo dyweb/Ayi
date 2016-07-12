@@ -18,6 +18,6 @@ import:
 - package: github.com/kballard/go-shellquote
   vcs: git
   version: d8ec1a69a250a17bb0e419c386eac1f3711dc142
-- package: github.com/Sirupsen/logrus
+- package: github.com/uber-go/zap
   vcs: git
-  version: 0.10.0
+  version: 63d56df197a79e16899d69b6a7665cb9b7c8ea99

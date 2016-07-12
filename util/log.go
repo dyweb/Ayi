@@ -1,18 +1,17 @@
 package util
 
 import (
-	"github.com/Sirupsen/logrus"
+	"github.com/uber-go/zap"
 )
 
 // Logger is the default logger with info level
-var Logger = logrus.New()
+var Logger = zap.NewJSON()
 
 func init() {
-	// Logger.Formatter = new(logrus.TextFormatter)
-	Logger.Level = logrus.InfoLevel
+	Logger.SetLevel(zap.InfoLevel)
 }
 
 // UseVerboseLog set logger level to debug
 func UseVerboseLog() {
-	Logger.Level = logrus.DebugLevel
+	Logger.SetLevel(zap.DebugLevel)
 }

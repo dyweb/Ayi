@@ -1,5 +1,5 @@
-hash: 1a5b41591f518bc67e535fb513573b6bdcb96965da708bc6a2a6217c74ea6459
-updated: 2016-07-10T13:24:48.9107374+08:00
+hash: fc1d431e0364d6ab50cde4717a607dcad7b93894bbc1804c9b219f2137b998fa
+updated: 2016-07-12T21:35:12.6375994+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -35,9 +35,6 @@ imports:
 - name: github.com/pkg/errors
   version: 01fa4104b9c248c8945d14d9f128454d5b28d595
   vcs: git
-- name: github.com/Sirupsen/logrus
-  version: 4b6ea7319e214d98c938f12692336f7ca9348d6b
-  vcs: git
 - name: github.com/spf13/cast
   version: 27b586b42e29bec072fe7379259cc719e1289da6
 - name: github.com/spf13/cobra
@@ -55,8 +52,15 @@ imports:
   vcs: git
   subpackages:
   - assert
-- name: golang.org/x/sys/unix
-  version: ""
+- name: github.com/uber-go/atomic
+  version: e682c1008ac17bf26d2e4b5ad6cdd08520ed0b22
+- name: github.com/uber-go/zap
+  version: 63d56df197a79e16899d69b6a7665cb9b7c8ea99
+  vcs: git
+- name: golang.org/x/sys
+  version: a408501be4d17ee978c04a618e7a1b22af058c0e
+  subpackages:
+  - unix
 - name: gopkg.in/yaml.v2
   version: a83829b6f1293c91addabc89d0571c246397bbf4
 testImports:
