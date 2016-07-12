@@ -13,7 +13,6 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/dyweb/Ayi/util"
-	"github.com/uber-go/zap"
 )
 
 // Flags that are to be added to commands.
@@ -90,7 +89,7 @@ func initConfig() {
 	}
 
 	if err == nil {
-		log.Debug("Config file found", zap.String("file",  viper.ConfigFileUsed()))
+		log.WithField("file", viper.ConfigFileUsed()).Debug("Config file found")
 	} else {
 		log.Debug("Config file not found!")
 	}
