@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -16,14 +14,12 @@ var testCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		hasTest := viper.IsSet("test")
 		if !hasTest {
-			// TODO: add color
-			fmt.Println("Test not found!")
+			log.Error("Test not found!")
 			return
 		}
 		commands := viper.GetStringSlice("test")
 		for _, cmd := range commands {
-			// TODO: color or put it in RunCommand, may need a log library
-			fmt.Printf("executing: %s \n", cmd)
+			log.Infof("executing: %s \n", cmd)
 			util.RunCommand(cmd)
 		}
 	},

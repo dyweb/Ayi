@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -16,16 +14,14 @@ var installCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		hasInstall := viper.IsSet("install")
 		if !hasInstall {
-			// TODO: add color
-			fmt.Println("Install configuration not found!")
+			log.Warn("Install configuration not found!")
 			// TODO: try lookup composer.json package.json
-			fmt.Println("TODO: looking for available commands")
+			log.Debug("TODO: looking for available commands")
 			return
 		}
 		commands := viper.GetStringSlice("install")
 		for _, cmd := range commands {
-			// TODO: color or put it in RunCommand, may need a log library
-			fmt.Printf("executing: %s \n", cmd)
+			log.Infof("executing: %s \n", cmd)
 			util.RunCommand(cmd)
 		}
 	},

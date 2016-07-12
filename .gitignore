@@ -48,6 +48,7 @@ _testmain.go
 
 # Test coverage result
 cover.txt
+*.coverprofile
 
 # Vendor
 vendor
