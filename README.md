@@ -1,8 +1,9 @@
 # Ayi
 
+[![GoDoc](https://godoc.org/github.com/dyweb/Ayi?status.svg)](https://godoc.org/github.com/dyweb/Ayi)
 [![Go Report Card](https://goreportcard.com/badge/github.com/dyweb/Ayi)](https://goreportcard.com/report/github.com/dyweb/Ayi)
 [![Build Status](https://travis-ci.org/dyweb/Ayi.svg)](https://travis-ci.org/dyweb/Ayi)
-[![GoDoc](https://godoc.org/github.com/dyweb/Ayi?status.svg)](https://godoc.org/github.com/dyweb/Ayi)
+[![Coverage Status](https://coveralls.io/repos/github/dyweb/Ayi/badge.svg?branch=master)](https://coveralls.io/github/dyweb/Ayi?branch=master)
 
 Centralize all your commands for config development environment
 
