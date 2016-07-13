@@ -30,7 +30,8 @@ glide -v
 echo "enable go vendor feature"
 export GO15VENDOREXPERIMENT=1
 
-go test -v -cover $(glide novendor)
+overalls -project=github.com/dyweb/Ayi -debug
+
 echo "recover the fixture"
 rm -r fixture
 mv fixture-bak fixture

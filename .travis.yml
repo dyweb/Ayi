@@ -11,8 +11,11 @@ before_install:
   - go get golang.org/x/tools/cmd/cover
   - go get github.com/at15/overalls
 
-install: make travis-install
+install: 
+    - make travis-install
 
-script: make test
-
-# TODO: use overalls for test and use goveralls to upload to coveralls.io
+script: 
+    - make test
+    
+after_success:
+  - $HOME/gopath/bin/goveralls -service=travis-ci -coverprofile=overalls.coverprofile

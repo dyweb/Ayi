@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -16,16 +14,13 @@ var updateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		hasupdate := viper.IsSet("update")
 		if !hasupdate {
-			// TODO: add color
-			fmt.Println("update configuration not found!")
-			// TODO: try lookup composer.json package.json
-			fmt.Println("TODO: looking for available commands")
+			log.Warn("update configuration not found!")
+			log.Errorf("TODO: looking for available commands")
 			return
 		}
 		commands := viper.GetStringSlice("update")
 		for _, cmd := range commands {
-			// TODO: color or put it in RunCommand, may need a log library
-			fmt.Printf("executing: %s \n", cmd)
+			log.Infof("executing: %s \n", cmd)
 			util.RunCommand(cmd)
 		}
 	},
