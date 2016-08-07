@@ -14,7 +14,6 @@ type Host struct {
 	HTTPPort     int
 	SSHPort      int
 	SSHURL       string
-	// TODO: add ssh url to be used in remote
 	// TODO: add type, github or gitlab in order to use api client
 	// TODO: add access token
 }
