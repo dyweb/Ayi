@@ -6,6 +6,7 @@ This file used to track TODO list
 
 ### Applications
 
+- [ ] `git` should be able to clone public repo in github and private repo in self hosted gitlab
 - [x] `git` should have `git.hosts` config in `.ayi.yml` parsed by order, but golang map does not have order. 
 (@gaocegege has met this before) -> use array instead
 - [x] `viper` does not support array of `map[string]interface{}`, need to use `spf13/cast` to convert, which is also 
