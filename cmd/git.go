@@ -9,13 +9,14 @@ var gitCmd = &cobra.Command{
 	Use:   "git",
 	Short: "wrapper for git commands",
 	Long:  "git expand url and e ... TODO",
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		// Need to call ReadConfigFile manually, can't put it in init func
+		git.ReadConfigFile()
+		log.Debug(git.GetAllHosts())
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		log.Info("I am the git command !")
-		log.Info(git.DefaultHosts)
-		// Need to call ReadConfigFile manually
-		// TODO: how to avoid call this in every subcommand
-		git.ReadConfigFile()
-		log.Info(git.GetAllHosts())
+
 	},
 }
 
