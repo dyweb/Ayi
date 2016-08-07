@@ -15,7 +15,7 @@ type Remote struct {
 	Protocol string
 	// Host is the git host provider domain name, like github.com
 	Host string
-	// Port is used for remote that does not use default port
+	// Port is used for remote that does not use default ssh port
 	Port int
 	// Owner is user name or organization name
 	Owner string
@@ -27,20 +27,14 @@ type Remote struct {
 
 // GetSSH return the ssh clone address
 func (r Remote) GetSSH() string {
-	switch r.Host {
-	case "github.com":
-		return fmt.Sprintf("git@github.com:%s/%s.git", r.Owner, r.Repo)
-	case "gitlab.com":
-		return fmt.Sprintf("git@gitlab.com:%s/%s.git", r.Owner, r.Repo)
-	case "bitbucket.org":
-		return fmt.Sprintf("git@bitbucket.org:%s/%s.git", r.Owner, r.Repo)
-	case "coding.net":
-		return fmt.Sprintf("git@git.coding.net:%s/%s.git", r.Owner, r.Repo)
-	case "git.oschina.net":
-		return fmt.Sprintf("git@git.oschina.net:%s/%s.git", r.Owner, r.Repo)
+	// TODO: handle ssh port
+	hostsMap = GetAllHostsMap()
+	host, exists := hostsMap[r.Host]
+	if !exists {
+		log.Warn(r.Host + "does not exists")
+		return ""
 	}
-	// TODO: For non public hosts, we need to check the hosts we have
-	return ""
+	return fmt.Sprintf("git@%s:%s/%s.git", host.SSHURL, r.Owner, r.Repo)
 }
 
 // Regular expressions used to match remote info

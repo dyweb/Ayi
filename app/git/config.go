@@ -13,6 +13,7 @@ type Host struct {
 	SupportSSH   bool
 	HTTPPort     int
 	SSHPort      int
+	SSHURL       string
 	// TODO: add ssh url to be used in remote
 	// TODO: add type, github or gitlab in order to use api client
 	// TODO: add access token
@@ -30,7 +31,7 @@ var DefaultHosts = [...]Host{
 	*NewHost("github.com"),
 	*NewHost("gitlab.com"),
 	*NewHost("bitbucket.org"),
-	*NewHost("coding.net"),
+	*NewHost("coding.net", "git.coding.net"),
 	*NewHost("git.oschina.net"),
 }
 
@@ -94,6 +95,14 @@ func GetAllHostsMap() map[string]Host {
 // NewHost return a new Host object with default config
 // https://golang.org/doc/effective_go.html#allocation_new
 // TODO: why use poniter instead of return object directly, The Go Programming Language P32 2.3.2 pointer
-func NewHost(url string) *Host {
-	return &Host{URL: url, SupportHTTPS: true, SupportSSH: true, HTTPPort: DefaultHTTPPort, SSHPort: DefaultSSHPort}
+func NewHost(urls ...string) *Host {
+	h := Host{SupportHTTPS: true, SupportSSH: true, HTTPPort: DefaultHTTPPort, SSHPort: DefaultSSHPort}
+	if len(urls) > 0 {
+		h.URL = urls[0]
+		h.SSHURL = h.URL
+	}
+	if len(urls) > 1 {
+		h.SSHURL = urls[1]
+	}
+	return &h
 }

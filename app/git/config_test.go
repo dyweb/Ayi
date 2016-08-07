@@ -64,6 +64,9 @@ func (suite *GitConfigTestSuite) TestReadConfig() {
 
 	// Config value is working
 	assert.Equal(hostsMap["git.saber.io"].SSHPort, 10086)
+
+	// SSHURL is working
+	assert.Equal(hostsMap["coding.net"].SSHURL, "git.coding.net")
 }
 
 func TestGitConfigTestSuite(t *testing.T) {
