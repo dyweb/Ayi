@@ -5,7 +5,6 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/fatih/color"
@@ -47,7 +46,9 @@ var RootCmd = &cobra.Command{
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
 		// TODO: use logger
-		fmt.Println(err)
+		// https://github.com/spf13/cobra/issues/304
+		// error message is printed twice for command not found
+		// fmt.Println(err)
 		os.Exit(-1)
 	}
 }
