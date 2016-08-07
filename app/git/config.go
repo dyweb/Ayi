@@ -13,10 +13,15 @@ type Host struct {
 	SupportSSH   bool
 	HTTPPort     int
 	SSHPort      int
+	// TODO: add ssh url to be used in remote
 	// TODO: add type, github or gitlab in order to use api client
+	// TODO: add access token
 }
 
+// DefaultSSHPort 25
 const DefaultSSHPort = 25
+
+// DefaultHTTPPort 80
 const DefaultHTTPPort = 80
 
 // DefaultHosts include common public git hosts
@@ -29,38 +34,61 @@ var DefaultHosts = [...]Host{
 	*NewHost("git.oschina.net"),
 }
 
+// host array keep the order of hosts
 var hosts []Host
+
+// host map is more convenient
+var hostsMap map[string]Host
 var log = util.Logger
 
 // ReadConfigFile read user defined hosts in .ayi.yml
 func ReadConfigFile() {
 	log.Debug("Read git section in config file")
-	hostsNameMap := make(map[string]bool)
+	hostsMap = make(map[string]Host)
 	hostsSlice := cast.ToSlice(viper.Get("git.hosts"))
+
 	for _, h := range hostsSlice {
 		m := cast.ToStringMap(h)
-		// TODO: if name is not included, warn and skip this one
+		_, exists := m["name"]
+		if !exists {
+			log.Warn("Skipp host without name")
+			continue
+		}
+
+		// TODO: more attributes, the following is not working
+		// - http port
+		// - support ssh
 		name := cast.ToString(m["name"])
-		// TODO: check if attributes exist and give default value
-		https := cast.ToBool(m["https"])
-		// TODO: more attributes
+		https := cast.ToBool(util.GetWithDefault(m, "https", true))
+		port := cast.ToInt(util.GetWithDefault(m, "port", DefaultSSHPort))
+
 		h := NewHost(name)
 		h.SupportHTTPS = https
+		h.SSHPort = port
+
 		hosts = append(hosts, *h)
-		hostsNameMap[name] = true
+		// TODO: may add order to host
+		hostsMap[name] = *h
 	}
+
 	// only merge default hosts that are not configed in config files
 	for _, defaultHost := range DefaultHosts {
-		_, exists := hostsNameMap[defaultHost.URL]
+		_, exists := hostsMap[defaultHost.URL]
 		if !exists {
 			hosts = append(hosts, defaultHost)
+			hostsMap[defaultHost.URL] = defaultHost
 		}
 	}
 }
 
-// GetAllHosts return hard coded hosts and user defined hosts
+// GetAllHosts return an array of hosts
 func GetAllHosts() []Host {
 	return hosts
+}
+
+// GetAllHostsMap return a map with host name(url) as key
+func GetAllHostsMap() map[string]Host {
+	return hostsMap
 }
 
 // NewHost return a new Host object with default config

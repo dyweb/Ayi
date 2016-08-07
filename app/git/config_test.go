@@ -3,9 +3,9 @@ package git
 // TODO: use sutie http://godoc.org/github.com/stretchr/testify/suite for test
 // - [x] read config in setup
 // - [x] test cast
-// - [ ] test if config is readed
+// - [x] test if config is readed
 // - [ ] test if default host is merged
-// - [ ] test if default value for host exists
+// - [x] test if default value for host exists
 
 import (
 	"testing"
@@ -43,6 +43,27 @@ func (suite *GitConfigTestSuite) TestCast() {
 			assert.Equal(false, https)
 		}
 	}
+}
+
+func (suite *GitConfigTestSuite) TestReadConfig() {
+	assert := assert.New(suite.T())
+	ReadConfigFile()
+	hosts := GetAllHosts()
+	hostsMap := GetAllHostsMap()
+	assert.NotEqual(0, len(hosts))
+	assert.Equal(len(hosts), len(hostsMap))
+
+	// Skip host without name
+	defaultHostsLength := len(DefaultHosts)
+	// ayi.example.yml has three hosts and one does not have name
+	assert.Equal(2+defaultHostsLength, len(hosts))
+
+	// Default value is working
+	assert.Equal(hostsMap["github.com"].SSHPort, DefaultSSHPort)
+	assert.Equal(hostsMap["github.com"].HTTPPort, DefaultHTTPPort)
+
+	// Config value is working
+	assert.Equal(hostsMap["git.saber.io"].SSHPort, 10086)
 }
 
 func TestGitConfigTestSuite(t *testing.T) {

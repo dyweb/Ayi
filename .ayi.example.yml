@@ -15,6 +15,9 @@ runtime-deps:
 # the follow configs are user wide, should be put in ~/.ayi.yml
 git:
     hosts:
+        # host without name attribute should be skipped
+        - port: 1997
+          https: false
         - name: git.saber.io
           port: 10086
           https: false
