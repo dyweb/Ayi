@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/viper"
 )
 
+// Host represent a remote git host server like github.com, gitlab.com
 type Host struct {
 	URL          string
 	SupportHTTPS bool
@@ -14,6 +15,9 @@ type Host struct {
 	SSHPort      int
 	// TODO: add type, github or gitlab in order to use api client
 }
+
+const DefaultSSHPort = 25
+const DefaultHTTPPort = 80
 
 // DefaultHosts include common public git hosts
 // TODO: maybe use an string array to construct this is better
@@ -35,6 +39,7 @@ func ReadConfigFile() {
 	hostsSlice := cast.ToSlice(viper.Get("git.hosts"))
 	for _, h := range hostsSlice {
 		m := cast.ToStringMap(h)
+		// TODO: if name is not included, warn and skip this one
 		name := cast.ToString(m["name"])
 		// TODO: check if attributes exist and give default value
 		https := cast.ToBool(m["https"])
@@ -62,5 +67,5 @@ func GetAllHosts() []Host {
 // https://golang.org/doc/effective_go.html#allocation_new
 // TODO: why use poniter instead of return object directly, The Go Programming Language P32 2.3.2 pointer
 func NewHost(url string) *Host {
-	return &Host{URL: url, SupportHTTPS: true, SupportSSH: true, HTTPPort: 80, SSHPort: 25}
+	return &Host{URL: url, SupportHTTPS: true, SupportSSH: true, HTTPPort: DefaultHTTPPort, SSHPort: DefaultSSHPort}
 }

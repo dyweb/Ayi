@@ -25,6 +25,7 @@ type Remote struct {
 	SupportHTTPS bool
 }
 
+// GetSSH return the ssh clone address
 func (r Remote) GetSSH() string {
 	switch r.Host {
 	case "github.com":
@@ -38,7 +39,7 @@ func (r Remote) GetSSH() string {
 	case "git.oschina.net":
 		return fmt.Sprintf("git@git.oschina.net:%s/%s.git", r.Owner, r.Repo)
 	}
-	// TODO: For non public hosts, we need to check config files
+	// TODO: For non public hosts, we need to check the hosts we have
 	return ""
 }
 
