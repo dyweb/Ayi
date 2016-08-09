@@ -19,6 +19,7 @@ var cfgFile string
 var (
 	version bool
 	verbose bool
+	dryRun  bool
 )
 
 // local shortcut shared among the whole cmd package, only needs to define in one file
@@ -34,6 +35,9 @@ var RootCmd = &cobra.Command{
 			versionCmd.Run(cmd, args)
 			return
 		}
+
+		// fmt.Println(viper.GetBool("Verbose"))
+		// fmt.Println(viper.GetBool("DryRun"))
 
 		// FIXME: print the help here
 		// FIXME: On Windows, it works in cmd, but does not work in Git Bash
@@ -55,6 +59,12 @@ func Execute() {
 
 func loadDefaultSettings() {
 	viper.SetDefault("Verbose", false)
+	viper.SetDefault("DryRun", false)
+}
+
+func bindFlagsToViper() {
+	viper.BindPFlag("Verbose", RootCmd.PersistentFlags().Lookup("verbose"))
+	viper.BindPFlag("DryRun", RootCmd.PersistentFlags().Lookup("dry-run"))
 }
 
 func init() {
@@ -67,9 +77,13 @@ func init() {
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.ayi.yaml)")
 	RootCmd.PersistentFlags().BoolVar(&version, "version", false, "show current version")
 	RootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
+	RootCmd.PersistentFlags().BoolVarP(&dryRun, "dry-run", "n", false, "show commands to execute")
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	// https://github.com/spf13/viper#working-with-flags
+	bindFlagsToViper()
 }
 
 // initConfig reads in config file and ENV variables if set.
@@ -95,8 +109,6 @@ func initConfig() {
 		log.Debug("Config file not found!")
 	}
 
+	// Set default value for viper
 	loadDefaultSettings()
-
-	// Update value from command line TODO: does viper support parse flag directly
-	viper.Set("Verbose", verbose)
 }

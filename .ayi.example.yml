@@ -14,6 +14,7 @@ runtime-deps:
     - php
 # the follow configs are user wide, should be put in ~/.ayi.yml
 git:
+    repositories: /home/at15/repos
     hosts:
         # host without name attribute should be skipped
         - port: 1997
