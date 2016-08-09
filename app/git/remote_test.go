@@ -6,6 +6,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TesstHttpCloneRegexp(t *testing.T) {
+	assert := assert.New(t)
+	r, err := parseHttpCloneURL("https://bitbucket.org/at6/kc-3g.git")
+	assert.Nil(err)
+	assert.Equal("bitbucket.org", r.Host)
+	_, err = parseHttpCloneURL("https://coding.net/u/at15/p/apm-v5/git")
+	assert.NotNil(err)
+}
+
 func TestBrowserRegexp(t *testing.T) {
 	assert := assert.New(t)
 	r, err := parseBrowserURL("https://github.com/dyweb/Ayi")
@@ -61,7 +70,10 @@ func TestShortRegexp(t *testing.T) {
 
 func TestNewFromURL(t *testing.T) {
 	assert := assert.New(t)
-	r, err := NewFromURL("github.com/dyweb/Ayi")
+	r, err := NewFromURL("https://bitbucket.org/at6/kc-3g.git")
+	assert.Nil(err)
+	assert.Equal("bitbucket.org", r.Host)
+	r, err = NewFromURL("github.com/dyweb/Ayi")
 	assert.Nil(err)
 	assert.Equal("Ayi", r.Repo)
 	r, err = NewFromURL("http://github.com/dyweb/Ayi")
@@ -83,10 +95,14 @@ func TestGetSSH(t *testing.T) {
 	assert.Nil(err)
 	assert.Equal("git@gitlab.com:leanlabsio/kanban.git", r.GetSSH())
 	// bitbucket
+	// FIXME: http clone break this
 	r, _ = NewFromURL("https://bitbucket.org/at6/kc-3g.git")
+	assert.Equal("bitbucket.org", r.Host)
 	assert.Equal("git@bitbucket.org:at6/kc-3g.git", r.GetSSH())
 	// coding.net
+	// FIXME: http clone break this
 	r, _ = NewFromURL("https://coding.net/u/at15/p/apm-v5/git")
+	assert.Equal("coding.net", r.Host)
 	assert.Equal("git@git.coding.net:at15/apm-v5.git", r.GetSSH())
 	// oschina
 	r, _ = NewFromURL("http://git.oschina.net/caixw/apidoc")

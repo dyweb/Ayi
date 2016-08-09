@@ -25,7 +25,20 @@ var gitCloneCmd = &cobra.Command{
 	Short: "clone a repo to workspace",
 	Long:  "clone a repository to your workspace, short and browser urls are supported",
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Info("I am the git clone command !")
+		log.Debug("I am the git clone command !")
+		if len(args) == 0 {
+			// TODO: add example or add example to help
+			log.Warn("Insufficient arguments, please provide url to repository.")
+			return
+		}
+		repoURL := args[0]
+		err := git.CloneFromURL(repoURL)
+		if err != nil {
+			log.Warn(err.Error())
+			return
+		}
+		// TODO: clone may need to return more information
+		log.Info("Sucessfully cloned ... repo to ...")
 	},
 }
 

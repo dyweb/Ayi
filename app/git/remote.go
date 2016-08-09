@@ -14,6 +14,7 @@ type Remote struct {
 	// Protocol is http, https, ssh
 	Protocol string
 	// Host is the git host provider domain name, like github.com
+	// TODO: store a HostURL and embed a Host object
 	Host string
 	// Port is used for remote that does not use default ssh port
 	Port int
@@ -22,6 +23,7 @@ type Remote struct {
 	// Repo is repository name
 	Repo string
 	// SupportHTTPS shows if the host is using HTTPS
+	// TODO: change is to a method
 	SupportHTTPS bool
 }
 
@@ -53,6 +55,10 @@ var shortRegexp = regexp.MustCompile("^([^/]+)/([^/]+)/*$")
 
 const shortSegmentsCount = 2
 
+var httpCloneRegexp = regexp.MustCompile("^(http|https)://([^/?]+)/([^/?]+)/([^/?]+).git$")
+
+const httpCloneSegmentsCount = 4
+
 // NewFromURL returns a remote based on the url, which could be
 // - url in browser https://github.com/dyweb/Ayi
 // - import url, like import "github.com/dyweb/Ayi/util"
@@ -61,6 +67,11 @@ func NewFromURL(url string) (Remote, error) {
 	r := Remote{}
 	err := errors.New("invalid url")
 	switch {
+	case httpCloneRegexp.MatchString(url):
+		r, err = parseHttpCloneURL(url)
+		if err != nil {
+			return r, err
+		}
 	case browserRegexp.MatchString(url):
 		r, err = parseBrowserURL(url)
 		if err != nil {
@@ -78,6 +89,22 @@ func NewFromURL(url string) (Remote, error) {
 		}
 	}
 	return r, err
+}
+
+func parseHttpCloneURL(url string) (Remote, error) {
+	r := Remote{}
+	segments := httpCloneRegexp.FindStringSubmatch(url)
+	if len(segments) != (httpCloneSegmentsCount + 1) {
+		return r, errors.New(fmt.Sprintf("not a http clone url, need %d segments but got %d", httpCloneSegmentsCount, len(segments)-1))
+	}
+	r.Protocol = segments[1]
+	r.Host = segments[2]
+	r.Owner = segments[3]
+	r.Repo = segments[4]
+	if r.Protocol == "https" {
+		r.SupportHTTPS = true
+	}
+	return r, nil
 }
 
 func parseBrowserURL(url string) (Remote, error) {
