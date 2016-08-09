@@ -36,9 +36,6 @@ var RootCmd = &cobra.Command{
 			return
 		}
 
-		// fmt.Println(viper.GetBool("Verbose"))
-		// fmt.Println(viper.GetBool("DryRun"))
-
 		// FIXME: print the help here
 		// FIXME: On Windows, it works in cmd, but does not work in Git Bash
 		color.Green("Use 'Ayi help' to see all commands")
