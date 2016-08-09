@@ -15,6 +15,18 @@ func TesstHttpCloneRegexp(t *testing.T) {
 	assert.NotNil(err)
 }
 
+func TestSSHCloneRegexp(t *testing.T) {
+	assert := assert.New(t)
+	segments := sshCloneRegexp.FindStringSubmatch("ssh://git@git.tongqu.me:3022/at15/tongqu4.git")
+	assert.NotZero(segments)
+	assert.Equal(5, len(segments))
+	segments = sshCloneRegexp.FindStringSubmatch("git@github.com:dyweb/Ayi.git")
+	assert.Equal(5, len(segments))
+	// t.Log(segments)
+	// port is empty
+	assert.Equal("", segments[2])
+}
+
 func TestBrowserRegexp(t *testing.T) {
 	assert := assert.New(t)
 	r, err := parseBrowserURL("https://github.com/dyweb/Ayi")
@@ -73,6 +85,12 @@ func TestNewFromURL(t *testing.T) {
 	r, err := NewFromURL("https://bitbucket.org/at6/kc-3g.git")
 	assert.Nil(err)
 	assert.Equal("bitbucket.org", r.Host)
+	r, err = NewFromURL("ssh://git@git.tongqu.me:3022/at15/tongqu4.git")
+	assert.Nil(err)
+	assert.Equal(3022, r.Port)
+	r, err = NewFromURL("git@github.com:dyweb/Ayi.git")
+	assert.Nil(err)
+	assert.Equal("dyweb", r.Owner)
 	r, err = NewFromURL("github.com/dyweb/Ayi")
 	assert.Nil(err)
 	assert.Equal("Ayi", r.Repo)
@@ -107,4 +125,12 @@ func TestGetSSH(t *testing.T) {
 	// oschina
 	r, _ = NewFromURL("http://git.oschina.net/caixw/apidoc")
 	assert.Equal("git@git.oschina.net:caixw/apidoc.git", r.GetSSH())
+
+	// Non-default port
+	// Port is from ssh url
+	r, _ = NewFromURL("ssh://git@git.tongqu.me:3022/at15/tongqu4.git")
+	assert.Equal("git@git.tongqu.me:3022/at15/tongqu4.git", r.GetSSH())
+	// Port is from config file's host config
+	r, _ = NewFromURL("http://git.saber.io/mie/draft")
+	assert.Equal("git@git.saber.io:10086/mie/draft.git", r.GetSSH())
 }

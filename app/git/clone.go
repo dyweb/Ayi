@@ -15,5 +15,6 @@ func CloneFromURL(repoURL string) error {
 // Clone clones a remote git repo
 func Clone(r Remote) error {
 	log.Info(r.GetSSH())
+	log.Info("git clone " + r.GetSSH())
 	return nil
 }

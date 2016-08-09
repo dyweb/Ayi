@@ -3,6 +3,7 @@ package git
 import (
 	"fmt"
 	"regexp"
+	"strconv"
 
 	"github.com/pkg/errors"
 )
@@ -25,6 +26,8 @@ type Remote struct {
 	// SupportHTTPS shows if the host is using HTTPS
 	// TODO: change is to a method
 	SupportHTTPS bool
+	// SSH clone url can ignore config for known hosts
+	IgnoreConfig bool
 }
 
 // GetSSH return the ssh clone address
@@ -32,11 +35,24 @@ func (r Remote) GetSSH() string {
 	// TODO: handle ssh port
 	hostsMap = GetAllHostsMap()
 	host, exists := hostsMap[r.Host]
-	if !exists {
-		log.Warn(r.Host + "does not exists")
+	if !exists && !r.IgnoreConfig {
+		log.Warn(r.Host + " is not a known host")
 		return ""
 	}
-	return fmt.Sprintf("git@%s:%s/%s.git", host.SSHURL, r.Owner, r.Repo)
+	// NOTE: for most hosts, SSHURL and host name are same
+	// when we are using ssh clone url, we ignore the known host and get the url from remote
+	hostURL := host.SSHURL
+	if r.IgnoreConfig {
+		hostURL = r.Host
+	}
+	// TODO: have unified naming
+	if host.SSHPort != 0 {
+		r.Port = host.SSHPort
+	}
+	if r.Port != DefaultSSHPort && r.Port != 0 {
+		return fmt.Sprintf("git@%s:%d/%s/%s.git", hostURL, r.Port, r.Owner, r.Repo)
+	}
+	return fmt.Sprintf("git@%s:%s/%s.git", hostURL, r.Owner, r.Repo)
 }
 
 // Regular expressions used to match remote info
@@ -59,6 +75,14 @@ var httpCloneRegexp = regexp.MustCompile("^(http|https)://([^/?]+)/([^/?]+)/([^/
 
 const httpCloneSegmentsCount = 4
 
+var sshCloneRegexp = regexp.MustCompile("^(?:ssh://)?git@([^/]+):(\\d*)?/?(.+)/(.+).git$")
+
+const sshCloneSegmentsCount = 4
+
+// ssh://git@git.tongqu.me:3022/at15/tongqu4.git
+// git@gitlab.com:gitlab-org/gitlab-ce.git
+// git@github.com:dyweb/Ayi.git
+
 // NewFromURL returns a remote based on the url, which could be
 // - url in browser https://github.com/dyweb/Ayi
 // - import url, like import "github.com/dyweb/Ayi/util"
@@ -69,6 +93,11 @@ func NewFromURL(url string) (Remote, error) {
 	switch {
 	case httpCloneRegexp.MatchString(url):
 		r, err = parseHttpCloneURL(url)
+		if err != nil {
+			return r, err
+		}
+	case sshCloneRegexp.MatchString(url):
+		r, err = parseSSHCloneURL(url)
 		if err != nil {
 			return r, err
 		}
@@ -104,6 +133,25 @@ func parseHttpCloneURL(url string) (Remote, error) {
 	if r.Protocol == "https" {
 		r.SupportHTTPS = true
 	}
+	return r, nil
+}
+
+func parseSSHCloneURL(url string) (Remote, error) {
+	r := Remote{}
+	segments := sshCloneRegexp.FindStringSubmatch(url)
+	if len(segments) != (sshCloneSegmentsCount + 1) {
+		return r, errors.New(fmt.Sprintf("not a ssh clone url, need %d segments but got %d", sshCloneSegmentsCount, len(segments)))
+	}
+	r.Host = segments[1]
+	port, err := strconv.Atoi(segments[2])
+	if err != nil || port == 0 {
+		port = DefaultSSHPort
+	}
+	r.Port = port
+	r.Owner = segments[3]
+	r.Repo = segments[4]
+	// Ignore known host check
+	r.IgnoreConfig = true
 	return r, nil
 }
 
