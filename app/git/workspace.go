@@ -3,6 +3,7 @@ package git
 import (
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/spf13/viper"
 )
@@ -20,4 +21,14 @@ func GetRepoBasePath() string {
 		return filepath.FromSlash(gopath + "/src")
 	}
 	return ""
+}
+
+// GetCloneDirectory return path for clone destination
+func GetCloneDirectory(r Remote) string {
+	base := GetRepoBasePath()
+	if base == "" {
+		return ""
+	}
+	// git clone does not accept windows format path, so all /
+	return strings.Replace(base+"/"+r.Host+"/"+r.Owner+"/"+r.Repo, "\\", "/", -1)
 }

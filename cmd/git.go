@@ -34,7 +34,7 @@ var gitCloneCmd = &cobra.Command{
 		repoURL := args[0]
 		err := git.CloneFromURL(repoURL)
 		if err != nil {
-			log.Warn(err.Error())
+			log.Error(err.Error())
 			return
 		}
 		// TODO: clone may need to return more information

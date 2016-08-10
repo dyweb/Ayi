@@ -1,5 +1,9 @@
 package git
 
+import (
+	"github.com/dyweb/Ayi/util"
+)
+
 // CloneFromURL will clone a repository based on short url or normal git clone url
 func CloneFromURL(repoURL string) error {
 	// get the remote from url
@@ -14,7 +18,8 @@ func CloneFromURL(repoURL string) error {
 
 // Clone clones a remote git repo
 func Clone(r Remote) error {
-	log.Info(r.GetSSH())
-	log.Info("git clone " + r.GetSSH() + " " + GetRepoBasePath() + "/" + r.Repo)
-	return nil
+	// log.Info("git clone " + r.GetSSH() + " " + GetCloneDirectory(r))
+	cmdStr := "git clone " + r.GetSSH() + " " + GetCloneDirectory(r)
+	log.Info(cmdStr)
+	return util.RunCommand(cmdStr)
 }
