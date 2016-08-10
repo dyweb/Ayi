@@ -32,13 +32,12 @@ var gitCloneCmd = &cobra.Command{
 			return
 		}
 		repoURL := args[0]
-		err := git.CloneFromURL(repoURL)
+		repo, err := git.CloneFromURL(repoURL)
 		if err != nil {
 			log.Error(err.Error())
 			return
 		}
-		// TODO: clone may need to return more information
-		log.Info("Sucessfully cloned ... repo to ...")
+		log.Infof("Sucessfully cloned to: %s", repo.LocalPath)
 	},
 }
 
