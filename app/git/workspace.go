@@ -19,11 +19,5 @@ func GetRepoBasePath() string {
 	if gopath != "" {
 		return filepath.FromSlash(gopath + "/src")
 	}
-	// use current folder as repo base path
-	cwd, err := os.Getwd()
-	if err != nil {
-		log.Warn("Can't get working directory " + err.Error())
-		return ""
-	}
-	return cwd
+	return ""
 }

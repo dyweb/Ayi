@@ -29,9 +29,5 @@ func TestGetRepoBasePath(t *testing.T) {
 	viper.Set("git.repositories", "")
 	os.Setenv("GOPATH", p)
 	assert.Equal(filepath.FromSlash(p+"/src"), GetRepoBasePath())
-	// current dir is used if both config file and gopath are not set
-	os.Setenv("GOPATH", "")
-	cwd, _ := os.Getwd()
-	assert.Equal(cwd, GetRepoBasePath())
 
 }
