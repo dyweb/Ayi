@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -21,11 +22,16 @@ func TestGoPath(t *testing.T) {
 
 func TestGetRepoBasePath(t *testing.T) {
 	assert := assert.New(t)
-	// assert.Equal("D:\\workspace\\src", GetRepoBasePath())
 	p := os.Getenv("GOPATH")
-	os.Setenv("GOPATH", "")
+	// config file is used evne if gopath is not empty
 	assert.Equal(filepath.FromSlash("/home/at15/repos"), GetRepoBasePath())
+	// gopath is used if config file is not set
+	viper.Set("git.repositories", "")
 	os.Setenv("GOPATH", p)
 	assert.Equal(filepath.FromSlash(p+"/src"), GetRepoBasePath())
+	// current dir is used if both config file and gopath are not set
+	os.Setenv("GOPATH", "")
+	cwd, _ := os.Getwd()
+	assert.Equal(cwd, GetRepoBasePath())
 
 }
