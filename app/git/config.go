@@ -18,8 +18,8 @@ type Host struct {
 	// TODO: add access token
 }
 
-// DefaultSSHPort 25
-const DefaultSSHPort = 25
+// DefaultSSHPort 22
+const DefaultSSHPort = 22
 
 // DefaultHTTPPort 80
 const DefaultHTTPPort = 80

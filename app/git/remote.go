@@ -50,7 +50,8 @@ func (r Remote) GetSSH() string {
 		r.Port = host.SSHPort
 	}
 	if r.Port != DefaultSSHPort && r.Port != 0 {
-		return fmt.Sprintf("git@%s:%d/%s/%s.git", hostURL, r.Port, r.Owner, r.Repo)
+		// NOTE: the ssh:// prefix is required for non default port
+		return fmt.Sprintf("ssh://git@%s:%d/%s/%s.git", hostURL, r.Port, r.Owner, r.Repo)
 	}
 	return fmt.Sprintf("git@%s:%s/%s.git", hostURL, r.Owner, r.Repo)
 }
