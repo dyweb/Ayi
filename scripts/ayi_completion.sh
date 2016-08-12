@@ -223,9 +223,9 @@ __handle_word()
     __handle_word
 }
 
-_Ayi_gen-bash()
+_Ayi_bash-gen()
 {
-    last_command="Ayi_gen-bash"
+    last_command="Ayi_bash-gen"
     commands=()
 
     flags=()
@@ -392,7 +392,7 @@ _Ayi()
 {
     last_command="Ayi"
     commands=()
-    commands+=("gen-bash")
+    commands+=("bash-gen")
     commands+=("git")
     commands+=("install")
     commands+=("test")
