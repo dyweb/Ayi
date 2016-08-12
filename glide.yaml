@@ -2,10 +2,10 @@ package: github.com/dyweb/Ayi
 import:
 - package: github.com/spf13/cobra
   vcs: git
-  version: bc81c21bd0d8be5ba2d6630a505d79d4467566e7
+  version: 7c674d9e72017ed25f6d2b5e497a1368086b6a6f
 - package: github.com/spf13/viper
   vcs: git
-  version: c1ccc378a054ea8d4e38d8c67f6938d4760b53dd
+  version: 346299ea79e446ebdddb834371ceba2e5926b732
 - package: github.com/pkg/errors
   vcs: git
   version: 0.7.0
@@ -21,3 +21,6 @@ import:
 - package: github.com/Sirupsen/logrus
   vcs: git
   version: 0.10.0
+- package: github.com/kataras/iris
+  vcs: git
+  version: 56bd5114277aaf3dcdff5d404b20ffa339fe1771

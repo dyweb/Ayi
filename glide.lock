@@ -1,5 +1,5 @@
-hash: 1a5b41591f518bc67e535fb513573b6bdcb96965da708bc6a2a6217c74ea6459
-updated: 2016-07-12T23:18:37.0349204+08:00
+hash: 4a7b5fddc394be9feb714db30c768d8e9ba2e93ffdd6d04f7ddb873620993d1a
+updated: 2016-08-12T23:57:03.0902452+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -21,9 +21,14 @@ imports:
   - json/token
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
+- name: github.com/kataras/iris
+  version: 56bd5114277aaf3dcdff5d404b20ffa339fe1771
+  vcs: git
 - name: github.com/kballard/go-shellquote
   version: d8ec1a69a250a17bb0e419c386eac1f3711dc142
   vcs: git
+- name: github.com/kr/fs
+  version: 2788f0dbd16903de03cb8186e5c7d97b69ad387b
 - name: github.com/magiconair/properties
   version: c265cfa48dda6474e208715ca93e987829f572f8
 - name: github.com/mattn/go-colorable
@@ -35,34 +40,51 @@ imports:
 - name: github.com/pkg/errors
   version: 01fa4104b9c248c8945d14d9f128454d5b28d595
   vcs: git
+- name: github.com/pkg/sftp
+  version: a71e8f580e3b622ebff585309160b1cc549ef4d2
 - name: github.com/Sirupsen/logrus
   version: 4b6ea7319e214d98c938f12692336f7ca9348d6b
   vcs: git
+- name: github.com/spf13/afero
+  version: cc9c21814bb945440253108c4d3c65c85aac3c68
+  subpackages:
+  - mem
+  - sftp
 - name: github.com/spf13/cast
   version: 27b586b42e29bec072fe7379259cc719e1289da6
 - name: github.com/spf13/cobra
-  version: bc81c21bd0d8be5ba2d6630a505d79d4467566e7
+  version: 7c674d9e72017ed25f6d2b5e497a1368086b6a6f
   vcs: git
 - name: github.com/spf13/jwalterweatherman
   version: 33c24e77fb80341fe7130ee7c594256ff08ccc46
 - name: github.com/spf13/pflag
   version: 367864438f1b1a3c7db4da06a2f55b144e6784e0
 - name: github.com/spf13/viper
-  version: c1ccc378a054ea8d4e38d8c67f6938d4760b53dd
+  version: 346299ea79e446ebdddb834371ceba2e5926b732
   vcs: git
 - name: github.com/stretchr/testify
   version: d77da356e56a7428ad25149ca77381849a6a5232
   vcs: git
   subpackages:
   - assert
-- name: github.com/uber-go/atomic
-  version: e682c1008ac17bf26d2e4b5ad6cdd08520ed0b22
-- name: github.com/uber-go/zap
-  version: 63d56df197a79e16899d69b6a7665cb9b7c8ea99
+  - suite
+  - require
+- name: golang.org/x/crypto
+  version: 595bbbd7f5f308415a544d3c55743c91427c8d99
+  subpackages:
+  - ssh
+  - curve25519
+  - ed25519
+  - ed25519/internal/edwards25519
 - name: golang.org/x/sys
   version: a408501be4d17ee978c04a618e7a1b22af058c0e
   subpackages:
   - unix
+- name: golang.org/x/text
+  version: 2910a502d2bf9e43193af9d68ca516529614eed3
+  subpackages:
+  - transform
+  - unicode/norm
 - name: gopkg.in/yaml.v2
   version: a83829b6f1293c91addabc89d0571c246397bbf4
 testImports:
