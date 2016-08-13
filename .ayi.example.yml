@@ -1,3 +1,4 @@
+# TODO: should allow local and group config, like .ayi.yml .ayi.local.yml
 debug: true
 test:
     - sh -c "go test -v -cover $(glide novendor)"

@@ -129,8 +129,8 @@ func TestGetSSH(t *testing.T) {
 	// Non-default port
 	// Port is from ssh url
 	r, _ = NewFromURL("ssh://git@git.tongqu.me:3022/at15/tongqu4.git")
-	assert.Equal("git@git.tongqu.me:3022/at15/tongqu4.git", r.GetSSH())
+	assert.Equal("ssh://git@git.tongqu.me:3022/at15/tongqu4.git", r.GetSSH())
 	// Port is from config file's host config
 	r, _ = NewFromURL("http://git.saber.io/mie/draft")
-	assert.Equal("git@git.saber.io:10086/mie/draft.git", r.GetSSH())
+	assert.Equal("ssh://git@git.saber.io:10086/mie/draft.git", r.GetSSH())
 }

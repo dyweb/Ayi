@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"os"
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -20,8 +22,13 @@ var testCmd = &cobra.Command{
 		commands := viper.GetStringSlice("test")
 		for _, cmd := range commands {
 			log.Infof("executing: %s \n", cmd)
-			util.RunCommand(cmd)
+			err := util.RunCommand(cmd)
+			if err != nil {
+				log.Errorf("Test failed due to: %s", err.Error())
+				os.Exit(1)
+			}
 		}
+		log.Infof("All %d test commands have passed", len(commands))
 	},
 }
 

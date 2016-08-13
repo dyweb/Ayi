@@ -25,3 +25,9 @@ import:
 - package: github.com/gocraft/web
   vcs: git
   version: c8ca29bc8a1cec97abe95c662e29dd8d31aff6e3
+# - package: github.com/jteeuwen/go-bindata
+#   vcs： git
+#   version: a0ff2567cfb70903282db057e799fd826784d41d
+- package: github.com/GeertJohan/go.rice
+  vcs: git
+  version: 9fdfd46f9806a9228aae341d65ab75c5235c383c
