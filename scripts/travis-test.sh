@@ -30,7 +30,11 @@ glide -v
 echo "enable go vendor feature"
 export GO15VENDOREXPERIMENT=1
 
-overalls -project=github.com/dyweb/Ayi -debug
+if overalls -project=github.com/dyweb/Ayi -debug; then 
+    exit 1
+fi
+
+# check the exit status
 
 echo "recover the fixture"
 rm -r fixture
