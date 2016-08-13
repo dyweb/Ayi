@@ -4,10 +4,11 @@ Issues: #15
 
 ## Functionalities
 
+- [x] Serve static file `Ayi web static`
 - [ ] Desktop notifications
 - [ ] Home page
 - [ ] log viewer
 
 ## TODO
 
-- [ ] allow simple http server
+- [x] allow simple http server

@@ -59,7 +59,7 @@ func loadDefaultSettings() {
 	viper.SetDefault("DryRun", false)
 }
 
-func bindFlagsToViper() {
+func bindRootCmdFlagsToViper() {
 	viper.BindPFlag("Verbose", RootCmd.PersistentFlags().Lookup("verbose"))
 	viper.BindPFlag("DryRun", RootCmd.PersistentFlags().Lookup("dry-run"))
 }
@@ -80,7 +80,7 @@ func init() {
 	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
 	// https://github.com/spf13/viper#working-with-flags
-	bindFlagsToViper()
+	bindRootCmdFlagsToViper()
 }
 
 // initConfig reads in config file and ENV variables if set.
