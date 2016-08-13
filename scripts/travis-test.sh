@@ -30,9 +30,14 @@ glide -v
 echo "enable go vendor feature"
 export GO15VENDOREXPERIMENT=1
 
-if overalls -project=github.com/dyweb/Ayi -debug; then 
-    exit 1
+# https://github.com/dyweb/Ayi/issues/46 Need to check exit code
+overalls -project=github.com/dyweb/Ayi
+# http://stackoverflow.com/questions/90418/exit-shell-script-based-on-process-exit-code
+rc=$?
+if [[ $rc != 0 ]]; then 
+    exit $rc
 fi
+
 
 # check the exit status
 
