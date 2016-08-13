@@ -1,5 +1,5 @@
-hash: 4a7b5fddc394be9feb714db30c768d8e9ba2e93ffdd6d04f7ddb873620993d1a
-updated: 2016-08-12T23:57:03.0902452+08:00
+hash: df2d490434e7c050658745fcf7240b863772ab13b4586e11efd4255f77fa1bee
+updated: 2016-08-13T14:20:44.8783399+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -8,6 +8,9 @@ imports:
   vcs: git
 - name: github.com/fsnotify/fsnotify
   version: 30411dbcefb7a1da7e84f75530ad3abe4011b4f8
+- name: github.com/gocraft/web
+  version: c8ca29bc8a1cec97abe95c662e29dd8d31aff6e3
+  vcs: git
 - name: github.com/hashicorp/hcl
   version: aa7699b7b62c5f410f4cf7b58f3f9b17a71fb4ad
   subpackages:
@@ -21,9 +24,6 @@ imports:
   - json/token
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
-- name: github.com/kataras/iris
-  version: 56bd5114277aaf3dcdff5d404b20ffa339fe1771
-  vcs: git
 - name: github.com/kballard/go-shellquote
   version: d8ec1a69a250a17bb0e419c386eac1f3711dc142
   vcs: git
@@ -70,7 +70,7 @@ imports:
   - suite
   - require
 - name: golang.org/x/crypto
-  version: 595bbbd7f5f308415a544d3c55743c91427c8d99
+  version: 6c932297e16070bd20e9384ea78e8afabaa3fae2
   subpackages:
   - ssh
   - curve25519

@@ -21,6 +21,7 @@ import:
 - package: github.com/Sirupsen/logrus
   vcs: git
   version: 0.10.0
-- package: github.com/kataras/iris
+# https://github.com/dyweb/Ayi/issues/15 After a long struggle, I chose gocraft
+- package: github.com/gocraft/web
   vcs: git
-  version: 56bd5114277aaf3dcdff5d404b20ffa339fe1771
+  version: c8ca29bc8a1cec97abe95c662e29dd8d31aff6e3
