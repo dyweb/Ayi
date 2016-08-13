@@ -18,11 +18,12 @@ type Host struct {
 	// TODO: add access token
 }
 
-// DefaultSSHPort 22
-const DefaultSSHPort = 22
-
-// DefaultHTTPPort 80
-const DefaultHTTPPort = 80
+const (
+	// DefaultSSHPort 22
+	DefaultSSHPort = 22
+	// DefaultHTTPPort 80
+	DefaultHTTPPort = 80
+)
 
 // DefaultHosts include common public git hosts
 // TODO: maybe use an string array to construct this is better
