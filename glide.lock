@@ -1,5 +1,5 @@
 hash: 8efbec41be838b26ab031b466d75232760e685e834194670f1b0595198f50c50
-updated: 2016-08-13T22:51:14.268393+08:00
+updated: 2016-08-13T23:20:35.6954792+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -81,14 +81,15 @@ imports:
   - curve25519
   - ed25519
   - ed25519/internal/edwards25519
-- name: golang.org/x/sys/unix
+- name: golang.org/x/sys
   version: a408501be4d17ee978c04a618e7a1b22af058c0e
+  subpackages:
+  - unix
 - name: golang.org/x/text
   version: 2910a502d2bf9e43193af9d68ca516529614eed3
   subpackages:
+  - transform
   - unicode/norm
-- name: golang.org/x/text/transform
-  version: 2910a502d2bf9e43193af9d68ca516529614eed3
 - name: gopkg.in/yaml.v2
   version: a83829b6f1293c91addabc89d0571c246397bbf4
 testImports:
