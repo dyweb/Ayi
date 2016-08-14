@@ -17,7 +17,6 @@ TODO: may need to set http proxy for go get, ie: https://github.com/cyfdecyf/cow
 - https://golang.org/doc/effective_go.html
 - https://talks.golang.org/2013/bestpractices.slide
 
-
 ## Build and Run
 
 - `go run main.go` to run the file directly

@@ -3,6 +3,7 @@
 ## Notes
 
 - use PersistPreRun to hook current Command and all its child Commands. https://github.com/spf13/cobra#prerun-or-postrun-hooks
+- viper can lookup flags using `viper.BindPFlag`
 
 ## TODO
 

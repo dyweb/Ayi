@@ -1,6 +1,6 @@
 # TODO
 
-This file used to track TODO list 
+This file used to track TODO list (when don't have access to internet)
 
 ## at15
 
