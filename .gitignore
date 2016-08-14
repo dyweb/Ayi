@@ -55,5 +55,4 @@ vendor
 
 # Config
 # NOTE: see https://github.com/dyweb/Ayi/issues/49
-.ayi.yml
 .ayi.local.yml

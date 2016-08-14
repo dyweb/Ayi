@@ -89,34 +89,13 @@ func initConfig() {
 		util.UseVerboseLog()
 	}
 
-	if cfgFile != "" { // enable ability to specify config file via flag
-		viper.SetConfigFile(cfgFile)
-	}
-
-	viper.SetConfigName(".ayi") // name of config file (without extension)
-	// FIXME: viper does not support merge multiple config file, it just use the first result
-	// https://github.com/dyweb/Ayi/issues/49
-	viper.AddConfigPath("$HOME") // adding home directory as first search path
-	viper.AddConfigPath(".")     // adding current folder as second search path
-	viper.AutomaticEnv()         // read in environment variables that match
-
-	err := viper.ReadInConfig()
-
-	if err == nil {
-		log.WithField("file", viper.ConfigFileUsed()).Debug("Config file found")
-	} else {
-		log.Debug("Config file not found!")
-	}
-
-	// find local config file and merge
+	viper.AutomaticEnv() // read in environment variables that match
 	// TODO: what's the order of merge, and how does it handle array
-	if util.FileExists(".ayi.local.yml") {
-		log.Debug(".ayi.local.yml found!")
-		viper.SetConfigFile(".ayi.local.yml")
-		err = viper.MergeInConfig()
-		if err != nil {
-			log.Warn("Error merge local config: " + err.Error())
-		}
+	util.ViperReadAndMerge("$HOME/.ayi.yml")
+	util.ViperReadAndMerge(".ayi.yml")
+	util.ViperReadAndMerge(".ayi.local.yml")
+	if cfgFile != "" { // enable ability to specify config file via flag
+		util.ViperReadAndMerge(cfgFile)
 	}
 
 	// Set default value for viper

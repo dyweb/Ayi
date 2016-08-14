@@ -6,6 +6,8 @@ import (
 
 // Logger is the default logger with info level
 var Logger = logrus.New()
+// Short name use in util package
+var log = Logger
 
 func init() {
 	Logger.Formatter = &logrus.TextFormatter{ForceColors: true}

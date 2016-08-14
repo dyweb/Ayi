@@ -1,0 +1,4 @@
+debug: true
+test:
+    - go install
+    - sh -c "go test -v -cover $(glide novendor)"
