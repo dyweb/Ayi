@@ -1,5 +1,5 @@
 hash: 8efbec41be838b26ab031b466d75232760e685e834194670f1b0595198f50c50
-updated: 2016-08-13T23:20:35.6954792+08:00
+updated: 2016-08-14T14:16:04.6623922+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -75,7 +75,7 @@ imports:
   - suite
   - require
 - name: golang.org/x/crypto
-  version: 6c932297e16070bd20e9384ea78e8afabaa3fae2
+  version: a548aac93ed489257b9d959b40fe1e8c1e20778c
   subpackages:
   - ssh
   - curve25519

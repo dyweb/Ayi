@@ -13,8 +13,8 @@ ORIGINAL_WD=${PWD}
 cd ${SCRIPTPATH}
 
 # download and extract
-wget https://github.com/Masterminds/glide/releases/download/0.10.2/glide-0.10.2-linux-amd64.tar.gz
-tar -zxvf glide-0.10.2-linux-amd64.tar.gz
+wget https://github.com/Masterminds/glide/releases/download/v0.11.1/glide-v0.11.1-linux-amd64.tar.gz
+tar -zxvf glide-v0.11.1-linux-amd64.tar.gz
 # add glide to path
 export PATH=$PATH:${SCRIPTPATH}/linux-amd64
 # show it is working
