@@ -1,4 +1,7 @@
 debug: true
+install:
+    - go get github.com/GeertJohan/go.rice/rice
+    - glide install
 test:
     - go install
     - sh -c "go test -v -cover $(glide novendor)"

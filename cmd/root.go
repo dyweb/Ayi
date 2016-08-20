@@ -72,11 +72,11 @@ func init() {
 	// will be global for your application.
 
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.ayi.yaml)")
-	RootCmd.PersistentFlags().BoolVar(&version, "version", false, "show current version")
 	RootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 	RootCmd.PersistentFlags().BoolVarP(&dryRun, "dry-run", "n", false, "show commands to execute")
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
+	RootCmd.Flags().BoolVar(&version, "version", false, "show current version")
 	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
 	// https://github.com/spf13/viper#working-with-flags
