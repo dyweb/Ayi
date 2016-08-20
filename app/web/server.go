@@ -17,30 +17,46 @@ type Server struct {
 	Router *web.Router
 }
 
-type emptyContext struct {
+type ayiContext struct {
 }
 
-func NewStaticServer(root string, port int) *Server {
-	// TODO: may get the config from viper
-	server := Server{}
-	server.Root = root
-	server.Port = port
-	server.Router = web.New(emptyContext{})
-
-	// TODO: does the middleware list folder? NO
-	server.Router.Middleware(web.LoggerMiddleware)
-	server.Router.Middleware(web.StaticMiddleware(server.Root, web.StaticOption{IndexFile: "index.html"}))
-	return &server
+func (c *ayiContext) Index(rw web.ResponseWriter, req *web.Request) {
+	// NOTE: http.ServeFile(rw, req, content io.ReadSeeker ) is not supported, since when using append zip
+	// Downsides for appending ... does not provide a working Seek method.
+	box := rice.MustFindBox("app-web-public")
+	indexHTML, err := box.String("index.html")
+	if err != nil {
+		fmt.Fprintf(rw, "Error: index html not found!")
+	} else {
+		fmt.Fprint(rw, indexHTML)
+	}
 }
 
 func NewAyiServer(port int) *Server {
 	server := Server{}
 	server.Port = port
-	server.Router = web.New(emptyContext{})
+	server.Router = web.New(ayiContext{})
 
 	server.Router.Middleware(web.LoggerMiddleware)
-	box := rice.MustFindBox("assets")
-	server.Router.Middleware(web.StaticMiddlewareFromDir(box.HTTPBox(), web.StaticOption{IndexFile: "index.html"}))
+	box := rice.MustFindBox("app-web-public")
+	// NOTE: index file does not work, because isDir return false
+	server.Router.Middleware(web.StaticMiddlewareFromDir(box.HTTPBox(), web.StaticOption{}))
+	server.Router.Get("/", (*ayiContext).Index)
+	return &server
+}
+
+type emptyContext struct {
+}
+
+func NewStaticServer(root string, port int) *Server {
+	server := Server{}
+	server.Root = root
+	server.Port = port
+	server.Router = web.New(emptyContext{})
+
+	// NOTE: the middleware does NOT list folder, it is said to avoid content length problem
+	server.Router.Middleware(web.LoggerMiddleware)
+	server.Router.Middleware(web.StaticMiddleware(server.Root, web.StaticOption{IndexFile: "index.html"}))
 	return &server
 }
 
