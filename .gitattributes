@@ -8,6 +8,7 @@
 .gitattributes eol=lf
 *.yml eol=lf
 *.md eol=lf
+*.html eol=lf
 
 # force encoding for sh, go
 *.sh encoding=utf-8

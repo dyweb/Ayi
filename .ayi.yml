@@ -1,7 +1,11 @@
 debug: true
 install:
-    - go get github.com/GeertJohan/go.rice/rice
-    - glide install
+    # TODO: install deps and install should be different command
+    # - go get github.com/GeertJohan/go.rice/rice
+    # - glide install
+    - go build -o Ayi 
+    - rice append -i github.com/dyweb/Ayi/app/web --exec Ayi
+    - sh -c "mv Ayi $GOPATH/bin/Ayi"
 test:
     - go install
     - sh -c "go test -v -cover $(glide novendor)"
