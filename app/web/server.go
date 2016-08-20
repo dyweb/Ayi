@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GeertJohan/go.rice"
 	"github.com/dyweb/Ayi/util"
 	"github.com/gocraft/web"
 )
@@ -29,6 +30,17 @@ func NewStaticServer(root string, port int) *Server {
 	// TODO: does the middleware list folder? NO
 	server.Router.Middleware(web.LoggerMiddleware)
 	server.Router.Middleware(web.StaticMiddleware(server.Root, web.StaticOption{IndexFile: "index.html"}))
+	return &server
+}
+
+func NewAyiServer(port int) *Server {
+	server := Server{}
+	server.Port = port
+	server.Router = web.New(emptyContext{})
+
+	server.Router.Middleware(web.LoggerMiddleware)
+	box := rice.MustFindBox("assets")
+	server.Router.Middleware(web.StaticMiddlewareFromDir(box.HTTPBox(), web.StaticOption{IndexFile: "index.html"}))
 	return &server
 }
 

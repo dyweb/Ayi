@@ -19,7 +19,9 @@ var webCmd = &cobra.Command{
 	Short: "web start differen web servers",
 	Long:  "web can start static server, the main Ayi server etc",
 	Run: func(cmd *cobra.Command, args []string) {
-		// TODO: start the default ayi server
+		log.Infof("Use Ayi server on port %d", serverPort)
+		server := web.NewAyiServer(serverPort)
+		server.Run()
 	},
 }
 
