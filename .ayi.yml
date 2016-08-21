@@ -1,6 +1,7 @@
 debug: true
 dep-install:
     - go get github.com/at15/go.rice/rice
+    - go get github.com/mitchellh/gox
     - glide install
 install:
     - go build -o Ayi 
@@ -9,3 +10,6 @@ install:
 test:
     - go install
     - sh -c "go test -v -cover $(glide novendor)"
+scripts:
+    build: gox -output="build/Ayi_{{.OS}}_{{.Arch}}"
+    mie: echo mie
