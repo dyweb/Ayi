@@ -34,7 +34,8 @@ There are NO stable release now, better build from source
 ##### Windows
 
 - `glide install`
-- `go install`
+- `go install` this will install Ayi to $GOPATH/bin/Ayi but static assets are not included
+- `Ayi install` use the previous compiled Ayi binary to execute install commands in `.ayi.yml`
 
 ##### Linux & Mac OS
 
