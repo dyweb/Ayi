@@ -1,20 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 // FIXME: vscode ts hint says path/to/hero.ts is not a module, but it is working in browser
 import { Hero } from './hero';
-
-const HEROES: Hero[] = [
-  { id: 10, name: 'Tracer' },
-  { id: 11, name: 'Winston' },
-  { id: 12, name: 'Reaper' },
-  { id: 13, name: 'D.V.A' },
-  { id: 14, name: 'Hanzo' },
-  { id: 15, name: 'Genji' },
-  { id: 16, name: 'Mercy' },
-  { id: 17, name: 'Pharah' },
-  { id: 18, name: 'Road hog' },
-  { id: 19, name: 'Anna' },
-  { id: 20, name: 'Soilder 76' }
-];
+import { HeroService } from './hero.service';
 
 @Component({
   selector: 'my-app',
@@ -79,12 +66,24 @@ const HEROES: Hero[] = [
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
   }
-`]
+`],
+ providers: [HeroService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     title = 'Overwatch';
     selectedHero: Hero;
-    heroes = HEROES;
+    heroes: Hero[];
+    constructor(private heroService: HeroService) { }
+    getHeroes(): void {
+        this.heroService.getHeroes().then((heroes) => {
+            console.log(heroes);
+            this.heroes = heroes;
+        });
+    }
+    ngOnInit(): void {
+        this.getHeroes();
+        console.log('Init finished!');
+    }
     onSelect(hero: Hero): void {
         this.selectedHero = hero;
     }
