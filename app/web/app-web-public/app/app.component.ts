@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-
-export class Hero {
-  id: number;
-  name: string;
-}
+// FIXME: vscode ts hint says path/to/hero.ts is not a module, but it is working in browser
+import { Hero } from './hero';
 
 const HEROES: Hero[] = [
   { id: 10, name: 'Tracer' },
@@ -23,14 +20,7 @@ const HEROES: Hero[] = [
   selector: 'my-app',
   template: `
   <h1>{{title}}</h1>
-  <div *ngIf="selectedHero">
-    <h2>{{selectedHero.name}} detail</h2>
-    <div><label>id:</label>{{selectedHero.id}}</div>
-    <div>
-        <label>name:</label>
-        <input [(ngModel)]="selectedHero.name" placeholder="name">
-    </div>
-  </div>
+  <my-hero-detail [hero]="selectedHero"></my-hero-detail>
   <h2>My Heroes</h2>
   <ul class="heroes">
     <li *ngFor="let hero of heroes" 
