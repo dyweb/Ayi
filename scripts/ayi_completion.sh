@@ -242,7 +242,28 @@ _Ayi_bash-gen()
     flags+=("-n")
     flags+=("--verbose")
     flags+=("-v")
-    flags+=("--version")
+
+    must_have_one_flag=()
+    must_have_one_noun=()
+    noun_aliases=()
+}
+
+_Ayi_dep-install()
+{
+    last_command="Ayi_dep-install"
+    commands=()
+
+    flags=()
+    two_word_flags=()
+    local_nonpersistent_flags=()
+    flags_with_completion=()
+    flags_completion=()
+
+    flags+=("--config=")
+    flags+=("--dry-run")
+    flags+=("-n")
+    flags+=("--verbose")
+    flags+=("-v")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -265,7 +286,6 @@ _Ayi_git_clone()
     flags+=("-n")
     flags+=("--verbose")
     flags+=("-v")
-    flags+=("--version")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -289,7 +309,6 @@ _Ayi_git()
     flags+=("-n")
     flags+=("--verbose")
     flags+=("-v")
-    flags+=("--version")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -312,7 +331,28 @@ _Ayi_install()
     flags+=("-n")
     flags+=("--verbose")
     flags+=("-v")
-    flags+=("--version")
+
+    must_have_one_flag=()
+    must_have_one_noun=()
+    noun_aliases=()
+}
+
+_Ayi_run()
+{
+    last_command="Ayi_run"
+    commands=()
+
+    flags=()
+    two_word_flags=()
+    local_nonpersistent_flags=()
+    flags_with_completion=()
+    flags_completion=()
+
+    flags+=("--config=")
+    flags+=("--dry-run")
+    flags+=("-n")
+    flags+=("--verbose")
+    flags+=("-v")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -335,7 +375,6 @@ _Ayi_test()
     flags+=("-n")
     flags+=("--verbose")
     flags+=("-v")
-    flags+=("--version")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -358,7 +397,6 @@ _Ayi_update()
     flags+=("-n")
     flags+=("--verbose")
     flags+=("-v")
-    flags+=("--version")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -381,7 +419,57 @@ _Ayi_version()
     flags+=("-n")
     flags+=("--verbose")
     flags+=("-v")
-    flags+=("--version")
+
+    must_have_one_flag=()
+    must_have_one_noun=()
+    noun_aliases=()
+}
+
+_Ayi_web_static()
+{
+    last_command="Ayi_web_static"
+    commands=()
+
+    flags=()
+    two_word_flags=()
+    local_nonpersistent_flags=()
+    flags_with_completion=()
+    flags_completion=()
+
+    flags+=("--config=")
+    flags+=("--dry-run")
+    flags+=("-n")
+    flags+=("--port=")
+    two_word_flags+=("-p")
+    flags+=("--root=")
+    flags+=("--verbose")
+    flags+=("-v")
+
+    must_have_one_flag=()
+    must_have_one_noun=()
+    noun_aliases=()
+}
+
+_Ayi_web()
+{
+    last_command="Ayi_web"
+    commands=()
+    commands+=("static")
+
+    flags=()
+    two_word_flags=()
+    local_nonpersistent_flags=()
+    flags_with_completion=()
+    flags_completion=()
+
+    flags+=("--port=")
+    two_word_flags+=("-p")
+    flags+=("--root=")
+    flags+=("--config=")
+    flags+=("--dry-run")
+    flags+=("-n")
+    flags+=("--verbose")
+    flags+=("-v")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -393,11 +481,14 @@ _Ayi()
     last_command="Ayi"
     commands=()
     commands+=("bash-gen")
+    commands+=("dep-install")
     commands+=("git")
     commands+=("install")
+    commands+=("run")
     commands+=("test")
     commands+=("update")
     commands+=("version")
+    commands+=("web")
 
     flags=()
     two_word_flags=()
@@ -414,6 +505,7 @@ _Ayi()
     flags+=("--verbose")
     flags+=("-v")
     flags+=("--version")
+    local_nonpersistent_flags+=("--version")
 
     must_have_one_flag=()
     must_have_one_noun=()
