@@ -1,10 +1,11 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
+	"os"
 
-	"github.com/dyweb/Ayi/util"
+	"github.com/spf13/cobra"
+
+	"github.com/dyweb/Ayi/util/runner"
 )
 
 var depInstallCmd = &cobra.Command{
@@ -12,18 +13,13 @@ var depInstallCmd = &cobra.Command{
 	Short: "install dependencies configured in .ayi.yml",
 	Long:  "install required libraries and runtimes, auto detect composer.json package.json",
 	Run: func(cmd *cobra.Command, args []string) {
-		hasInstall := viper.IsSet("install")
-		if !hasInstall {
-			log.Warn("Install configuration not found!")
-			// TODO: try lookup composer.json package.json glide.yaml
-			log.Debug("TODO: looking for available commands")
-			return
+		count, err := runner.ExecuteCommand("dep-install")
+		if err != nil {
+			log.Error(err.Error())
+			log.Error("install failed")
+			os.Exit(1)
 		}
-		commands := viper.GetStringSlice("dep-install")
-		for _, cmd := range commands {
-			log.Infof("executing: %s \n", cmd)
-			util.RunCommand(cmd)
-		}
+		log.Infof("All %d dependency install commands finished", count)
 	},
 }
 
