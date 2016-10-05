@@ -33,6 +33,9 @@ func LookUpCommands(cmdName string) ([]string, error) {
 	// 	commands = viper.GetStringSlice(cmdName)
 	// }
 	_, isBuiltIn := BuiltInCommands[cmdName]
+	// FIXME: https://github.com/dyweb/Ayi/issues/54
+	// viper.GetStringSlice with use strings.Field to trun string into slices
+	// need to write own wrapper around viper.GetKey to avoid problem
 	if isBuiltIn {
 		commands = viper.GetStringSlice(cmdName)
 	} else {
@@ -40,6 +43,7 @@ func LookUpCommands(cmdName string) ([]string, error) {
 	}
 	// fall back to single string
 	if len(commands) == 0 {
+		log.Debug("fallback to single string command")
 		command := ""
 		if isBuiltIn {
 			command = viper.GetString(cmdName)
@@ -52,6 +56,7 @@ func LookUpCommands(cmdName string) ([]string, error) {
 			}
 			return commands, errors.Errorf("command %s not found", cmdName)
 		}
+		log.Debugf("command is %s", command)
 		commands[0] = command
 	}
 	return commands, nil
