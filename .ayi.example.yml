@@ -26,3 +26,8 @@ git:
         - name: git.pika.io
           port: 10086
           https: true
+scripts:
+    mie: echo mie
+    qian:
+        - echo showing off
+        - echo aha

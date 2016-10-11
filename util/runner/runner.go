@@ -33,31 +33,32 @@ func LookUpCommands(cmdName string) ([]string, error) {
 	// 	commands = viper.GetStringSlice(cmdName)
 	// }
 	_, isBuiltIn := BuiltInCommands[cmdName]
-	// FIXME: https://github.com/dyweb/Ayi/issues/54
-	// viper.GetStringSlice with use strings.Field to trun string into slices
-	// need to write own wrapper around viper.GetKey to avoid problem
-	if isBuiltIn {
-		commands = viper.GetStringSlice(cmdName)
-	} else {
-		commands = viper.GetStringSlice("scripts." + cmdName)
+
+	// FIXED: https://github.com/dyweb/Ayi/issues/54
+	// TODO: need more test to test the behavior of command
+	fullName := cmdName
+	if !isBuiltIn {
+		fullName = "scripts." + cmdName
 	}
-	// fall back to single string
-	if len(commands) == 0 {
-		log.Debug("fallback to single string command")
-		command := ""
-		if isBuiltIn {
-			command = viper.GetString(cmdName)
-		} else {
-			command = viper.GetString("scripts." + cmdName)
-		}
-		if command == "" {
-			if isBuiltIn {
-				return commands, errors.Errorf("%s configuration not found", cmdName)
-			}
-			return commands, errors.Errorf("command %s not found", cmdName)
-		}
+
+	// first try single string
+	command, err := util.ViperGetStringOrFail(fullName)
+	// TODO: maybe we should allow empty command
+	if err == nil && command != "" {
 		log.Debugf("command is %s", command)
 		commands[0] = command
+		return commands, nil
+	}
+
+	log.Debug("single string command not found, try array")
+
+	commands = viper.GetStringSlice(fullName)
+	if len(commands) == 0 {
+		if isBuiltIn {
+			return commands, errors.Errorf("%s configuration not found", cmdName)
+		}
+		return commands, errors.Errorf("command %s not found in scripts block", cmdName)
+
 	}
 	return commands, nil
 }
