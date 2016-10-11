@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dyweb/Ayi/util"
+	"github.com/dyweb/Ayi/util/runner"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -25,18 +25,13 @@ var runCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		scriptName := args[0]
-		command := viper.GetString("scripts." + scriptName)
-		if command == "" {
-			log.Errorf("script %s not found!", scriptName)
-			listAllScripts()
-			os.Exit(1)
-		}
-		log.Infof("executing: %s \n", command)
-		err := util.RunCommand(command)
+		_, err := runner.ExecuteCommand(scriptName)
 		if err != nil {
-			log.Errorf("%s failed due to: %s", scriptName, err.Error())
+			log.Error(err.Error())
+			log.Error("script failed")
 			os.Exit(1)
 		}
+		log.Info("script finished")
 	},
 }
 

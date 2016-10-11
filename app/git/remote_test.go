@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TesstHttpCloneRegexp(t *testing.T) {
+func TestHttpCloneRegexp(t *testing.T) {
 	assert := assert.New(t)
 	r, err := parseHttpCloneURL("https://bitbucket.org/at6/kc-3g.git")
 	assert.Nil(err)

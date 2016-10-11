@@ -1,11 +1,14 @@
 package util
 
+// monkey patches for viper
+
 import (
 	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
 
+	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 )
 
@@ -40,4 +43,15 @@ func userHomeDir() string {
 		return home
 	}
 	return os.Getenv("HOME")
+}
+
+// ViperGetStringOrFail returns string without any convertion
+// FIXED: https://github.com/dyweb/Ayi/issues/54
+func ViperGetStringOrFail(key string) (string, error) {
+	v := viper.Get(key)
+	s, ok := v.(string)
+	if ok {
+		return s, nil
+	}
+	return "", errors.Errorf("%v is not a string", v)
 }
