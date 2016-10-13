@@ -13,3 +13,4 @@ test:
 scripts:
     build: gox -output="build/Ayi_{{.OS}}_{{.Arch}}"
     mie: echo mie
+    ls: ls

@@ -1,6 +1,9 @@
 package runner
 
 import (
+	"io"
+	"os"
+
 	"github.com/dyweb/Ayi/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
@@ -25,10 +28,12 @@ var BuiltInCommands = map[string]bool{
 	"dep-install": true,
 }
 
+// LookUpCommands looks for single or array of commands in built-in and scripts blocks
 // TODO: test
 func LookUpCommands(cmdName string) ([]string, error) {
 	commands := make([]string, 1)
 	// FIXME: cannot use map[string]bool as type map[string]interface {}
+	// TODO: maybe because bool is a primitive type?
 	// if HasKey(BuiltInCommands, cmdName) {
 	// 	commands = viper.GetStringSlice(cmdName)
 	// }
@@ -63,6 +68,7 @@ func LookUpCommands(cmdName string) ([]string, error) {
 	return commands, nil
 }
 
+// ExecuteCommand look for configured command(s) and execute
 // TODO: return value can have name, if my memory is correct
 func ExecuteCommand(cmdName string) (int, error) {
 	commands, err := LookUpCommands(cmdName)
@@ -73,11 +79,33 @@ func ExecuteCommand(cmdName string) (int, error) {
 	success := 0
 	for _, cmd := range commands {
 		log.Infof("executing: %s \n", cmd)
-		err := util.RunCommand(cmd)
+		// err := util.RunCommand(cmd)
+		// TODO: still not working properly
+		err := runCommand(cmd)
+
 		if err != nil {
 			return success, errors.Errorf("%s failed due to: %s", cmdName, err.Error())
 		}
 		success++
 	}
 	return len(commands), nil
+}
+
+// TODO: still not working properly
+func runCommand(cmd string) error {
+	command, err := util.Command(cmd)
+	if err != nil {
+		return errors.Wrap(err, "runner cannot recognize command")
+	}
+	f, _ := os.Create("log.txt")
+	defer f.Close()
+	multiWriter := io.MultiWriter(os.Stdout, f)
+	command.Stdin = os.Stdin
+	command.Stdout = multiWriter
+	command.Stderr = os.Stderr
+	err = command.Run()
+	if err != nil {
+		return errors.Wrap(err, "Failure when executing command")
+	}
+	return nil
 }
