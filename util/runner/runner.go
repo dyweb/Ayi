@@ -96,13 +96,11 @@ func runCommand(cmd string) error {
 	if err != nil {
 		return errors.Wrap(err, "runner cannot recognize command")
 	}
-	f, _ := os.Create("log.txt")
-	defer f.Close()
+	// f, _ := os.Create("log.txt")
+	// defer f.Close()
 	// multiWriter := io.MultiWriter(os.Stdout, f)
-	multiWriter := NewMultiWriter(os.Stdout, f)
-
 	command.Stdin = os.Stdin
-	command.Stdout = multiWriter
+	command.Stdout = os.Stdout
 	command.Stderr = os.Stderr
 	err = command.Run()
 	if err != nil {

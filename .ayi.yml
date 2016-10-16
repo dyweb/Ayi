@@ -12,6 +12,9 @@ test:
     - sh -c "go test -v -cover $(glide novendor)"
 scripts:
     build: gox -output="build/Ayi_{{.OS}}_{{.Arch}}"
-    test-multiwriter: go test -v github.com/dyweb/Ayi/util/runner
+    # for test logging stdout (failed ...)
+    clone:
+     - git clone git@github.com:xephon-contrib/hey.git
+     - rm -rf hey
     mie: echo mie
     ls: ls
