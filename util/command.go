@@ -6,6 +6,7 @@ import (
 
 	"github.com/kballard/go-shellquote"
 	"github.com/pkg/errors"
+	"github.com/spf13/viper"
 )
 
 // Command return a Command struct from a full commad
@@ -24,6 +25,10 @@ func RunCommand(cmd string) error {
 	command, err := Command(cmd)
 	if err != nil {
 		return err
+	}
+	if viper.GetBool("DryRun") == true {
+		// TODO: need a new error type for dry run
+		return nil
 	}
 	command.Stdin = os.Stdin
 	command.Stdout = os.Stdout

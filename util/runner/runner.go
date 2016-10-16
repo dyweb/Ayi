@@ -1,8 +1,6 @@
 package runner
 
 import (
-	"os"
-
 	"github.com/dyweb/Ayi/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
@@ -78,9 +76,7 @@ func ExecuteCommand(cmdName string) (int, error) {
 	success := 0
 	for _, cmd := range commands {
 		log.Infof("executing: %s \n", cmd)
-		// err := util.RunCommand(cmd)
-		// TODO: still not working properly
-		err := runCommand(cmd)
+		err := util.RunCommand(cmd)
 
 		if err != nil {
 			return success, errors.Errorf("%s failed due to: %s", cmdName, err.Error())
@@ -90,21 +86,23 @@ func ExecuteCommand(cmdName string) (int, error) {
 	return len(commands), nil
 }
 
-// TODO: still not working properly
-func runCommand(cmd string) error {
-	command, err := util.Command(cmd)
-	if err != nil {
-		return errors.Wrap(err, "runner cannot recognize command")
-	}
-	// f, _ := os.Create("log.txt")
-	// defer f.Close()
-	// multiWriter := io.MultiWriter(os.Stdout, f)
-	command.Stdin = os.Stdin
-	command.Stdout = os.Stdout
-	command.Stderr = os.Stderr
-	err = command.Run()
-	if err != nil {
-		return errors.Wrap(err, "Failure when executing command")
-	}
-	return nil
-}
+// TODO: try to log stdout to file does not work for
+// - ls
+// - git clone
+// func runCommand(cmd string) error {
+// 	command, err := util.Command(cmd)
+// 	if err != nil {
+// 		return errors.Wrap(err, "runner cannot recognize command")
+// 	}
+// 	// f, _ := os.Create("log.txt")
+// 	// defer f.Close()
+// 	// multiWriter := io.MultiWriter(os.Stdout, f)
+// 	command.Stdin = os.Stdin
+// 	command.Stdout = os.Stdout
+// 	command.Stderr = os.Stderr
+// 	err = command.Run()
+// 	if err != nil {
+// 		return errors.Wrap(err, "Failure when executing command")
+// 	}
+// 	return nil
+// }
