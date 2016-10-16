@@ -1,7 +1,6 @@
 package runner
 
 import (
-	"io"
 	"os"
 
 	"github.com/dyweb/Ayi/util"
@@ -99,7 +98,9 @@ func runCommand(cmd string) error {
 	}
 	f, _ := os.Create("log.txt")
 	defer f.Close()
-	multiWriter := io.MultiWriter(os.Stdout, f)
+	// multiWriter := io.MultiWriter(os.Stdout, f)
+	multiWriter := NewMultiWriter(os.Stdout, f)
+
 	command.Stdin = os.Stdin
 	command.Stdout = multiWriter
 	command.Stderr = os.Stderr

@@ -12,5 +12,6 @@ test:
     - sh -c "go test -v -cover $(glide novendor)"
 scripts:
     build: gox -output="build/Ayi_{{.OS}}_{{.Arch}}"
+    test-multiwriter: go test -v github.com/dyweb/Ayi/util/runner
     mie: echo mie
     ls: ls
