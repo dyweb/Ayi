@@ -25,10 +25,12 @@ var BuiltInCommands = map[string]bool{
 	"dep-install": true,
 }
 
+// LookUpCommands looks for single or array of commands in built-in and scripts blocks
 // TODO: test
 func LookUpCommands(cmdName string) ([]string, error) {
 	commands := make([]string, 1)
 	// FIXME: cannot use map[string]bool as type map[string]interface {}
+	// TODO: maybe because bool is a primitive type?
 	// if HasKey(BuiltInCommands, cmdName) {
 	// 	commands = viper.GetStringSlice(cmdName)
 	// }
@@ -63,6 +65,7 @@ func LookUpCommands(cmdName string) ([]string, error) {
 	return commands, nil
 }
 
+// ExecuteCommand look for configured command(s) and execute
 // TODO: return value can have name, if my memory is correct
 func ExecuteCommand(cmdName string) (int, error) {
 	commands, err := LookUpCommands(cmdName)
@@ -74,10 +77,36 @@ func ExecuteCommand(cmdName string) (int, error) {
 	for _, cmd := range commands {
 		log.Infof("executing: %s \n", cmd)
 		err := util.RunCommand(cmd)
+
 		if err != nil {
-			return success, errors.Errorf("%s failed due to: %s", cmdName, err.Error())
+			_, ok := err.(*util.DryRunError)
+			if !ok {
+				return success, errors.Errorf("%s failed due to: %s", cmdName, err.Error())
+			}
 		}
 		success++
 	}
+	// TODO: may need to return dry run error here
 	return len(commands), nil
 }
+
+// TODO: try to log stdout to file does not work for
+// - ls
+// - git clone
+// func runCommand(cmd string) error {
+// 	command, err := util.Command(cmd)
+// 	if err != nil {
+// 		return errors.Wrap(err, "runner cannot recognize command")
+// 	}
+// 	// f, _ := os.Create("log.txt")
+// 	// defer f.Close()
+// 	// multiWriter := io.MultiWriter(os.Stdout, f)
+// 	command.Stdin = os.Stdin
+// 	command.Stdout = os.Stdout
+// 	command.Stderr = os.Stderr
+// 	err = command.Run()
+// 	if err != nil {
+// 		return errors.Wrap(err, "Failure when executing command")
+// 	}
+// 	return nil
+// }
