@@ -79,10 +79,14 @@ func ExecuteCommand(cmdName string) (int, error) {
 		err := util.RunCommand(cmd)
 
 		if err != nil {
-			return success, errors.Errorf("%s failed due to: %s", cmdName, err.Error())
+			_, ok := err.(*util.DryRunError)
+			if !ok {
+				return success, errors.Errorf("%s failed due to: %s", cmdName, err.Error())
+			}
 		}
 		success++
 	}
+	// TODO: may need to return dry run error here
 	return len(commands), nil
 }
 

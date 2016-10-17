@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 
@@ -8,6 +9,17 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 )
+
+// DryRunError indicate user specified -n flag and the command is only displayed but not actually exectuted
+// https://gobyexample.com/errors
+// https://blog.golang.org/error-handling-and-go
+type DryRunError struct {
+	Command string
+}
+
+func (e *DryRunError) Error() string {
+	return fmt.Sprintf("dry run (-n) flag is specified for command %s", e.Command)
+}
 
 // Command return a Command struct from a full commad
 func Command(cmd string) (*exec.Cmd, error) {
@@ -27,8 +39,7 @@ func RunCommand(cmd string) error {
 		return err
 	}
 	if viper.GetBool("DryRun") == true {
-		// TODO: need a new error type for dry run
-		return nil
+		return &DryRunError{cmd}
 	}
 	command.Stdin = os.Stdin
 	command.Stdout = os.Stdout
