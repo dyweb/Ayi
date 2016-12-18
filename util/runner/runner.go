@@ -75,7 +75,7 @@ func ExecuteCommand(cmdName string) (int, error) {
 	}
 	success := 0
 	for _, cmd := range commands {
-		log.Infof("executing: %s \n", cmd)
+		log.Infof("executing: %s ", cmd)
 		err := util.RunCommand(cmd)
 
 		if err != nil {
