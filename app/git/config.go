@@ -40,7 +40,6 @@ var hosts []Host
 
 // host map is more convenient
 var hostsMap map[string]Host
-var log = util.Logger
 
 // ReadConfigFile read user defined hosts in .ayi.yml
 func ReadConfigFile() {

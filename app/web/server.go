@@ -5,11 +5,8 @@ import (
 	"net/http"
 
 	"github.com/GeertJohan/go.rice"
-	"github.com/dyweb/Ayi/util"
 	"github.com/gocraft/web"
 )
-
-var log = util.Logger
 
 type Server struct {
 	Root   string

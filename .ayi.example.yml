@@ -3,7 +3,7 @@ debug: true
 test:
     - sh -c "go test -v -cover $(glide novendor)"
 install:
-    - go install   
+    - go install
 update:
     - glide update    
 user: example-user

@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var log = util.Logger
+var log = util.Logger.NewEntryWithPkg("a.u.runner")
 
 // https://github.com/dyweb/Ayi/issues/53
 // Command runner behave like nodejs's command runner, execute command in config file
@@ -75,7 +75,7 @@ func ExecuteCommand(cmdName string) (int, error) {
 	}
 	success := 0
 	for _, cmd := range commands {
-		log.Infof("executing: %s \n", cmd)
+		log.Infof("executing: %s ", cmd)
 		err := util.RunCommand(cmd)
 
 		if err != nil {

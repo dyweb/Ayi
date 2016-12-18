@@ -21,16 +21,16 @@ func ViperReadAndMerge(path string) {
 	// TODO: handle other path problems
 	path = filepath.FromSlash(path)
 	if !FileExists(path) {
-		log.WithField("file", path).Debug("Config file NOT found")
+		log.Debugf("Config file NOT found in %s", path)
 		return
 	}
 	viper.SetConfigFile(path)
 	err := viper.MergeInConfig()
 	if err != nil {
-		log.WithField("file", path).Debug("Error merge config: " + err.Error())
+		log.Debugf("Error merge config for %s: %s", path, err.Error())
 		return
 	}
-	log.WithField("file", path).Debug("Config read and merged")
+	log.Debugf("Config read and merged for %s", path)
 }
 
 // copied from viper util since it's a private function

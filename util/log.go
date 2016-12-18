@@ -1,20 +1,24 @@
 package util
 
 import (
-	"github.com/Sirupsen/logrus"
+	dlog "github.com/dyweb/Ayi/common/log"
 )
 
 // Logger is the default logger with info level
-var Logger = logrus.New()
+var Logger = dlog.NewLogger()
+
 // Short name use in util package
-var log = Logger
+var log = Logger.NewEntryWithPkg("a.util")
 
 func init() {
-	Logger.Formatter = &logrus.TextFormatter{ForceColors: true}
-	Logger.Level = logrus.InfoLevel
+	f := dlog.NewTextFormatter()
+	f.EnableColor = true
+	Logger.Formatter = f
+	Logger.Level = dlog.InfoLevel
 }
 
 // UseVerboseLog set logger level to debug
 func UseVerboseLog() {
-	Logger.Level = logrus.DebugLevel
+	Logger.Level = dlog.DebugLevel
+	log.Debug("enable debug logging")
 }

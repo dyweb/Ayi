@@ -12,22 +12,17 @@ import:
 - package: github.com/fatih/color
   vcs: git
   version: 87d4004f2ab62d0d255e0a38f1680aa534549fe3
-- package: github.com/stretchr/testify
-  vcs: git
-  version: d77da356e56a7428ad25149ca77381849a6a5232
 - package: github.com/kballard/go-shellquote
   vcs: git
   version: d8ec1a69a250a17bb0e419c386eac1f3711dc142
-- package: github.com/Sirupsen/logrus
-  vcs: git
-  version: 0.10.0
 # https://github.com/dyweb/Ayi/issues/15 After a long struggle, I chose gocraft
 - package: github.com/gocraft/web
   vcs: git
   version: c8ca29bc8a1cec97abe95c662e29dd8d31aff6e3
-# - package: github.com/jteeuwen/go-bindata
-#   vcs： git
-#   version: a0ff2567cfb70903282db057e799fd826784d41d
 - package: github.com/GeertJohan/go.rice
   vcs: git
   version: 9fdfd46f9806a9228aae341d65ab75c5235c383c
+testImport:
+- package: github.com/stretchr/testify
+  vcs: git
+  version: 2402e8e7a02fc811447d11f881aa9746cdc57983
