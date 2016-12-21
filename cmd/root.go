@@ -42,6 +42,15 @@ var RootCmd = &cobra.Command{
 // Execute adds all child commands to the root command sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
+	var dummyCmd = &cobra.Command{
+		Use:   "dummy",
+		Short: "dummy is foo",
+		Long:  `dummy is foo bar`,
+		Run: func(cmd *cobra.Command, args []string) {
+			log.Info("Hi I am dummy")
+		},
+	}
+	RootCmd.AddCommand(dummyCmd)
 	if err := RootCmd.Execute(); err != nil {
 		// TODO: use logger
 		// https://github.com/spf13/cobra/issues/304
@@ -80,15 +89,15 @@ func init() {
 	bindRootCmdFlagsToViper()
 
 	// NOTE: code here does work, but the problem is, you can't get flag?
-	var dummyCmd = &cobra.Command{
-		Use:   "dummy",
-		Short: "dummy is foo",
-		Long:  `dummy is foo bar`,
-		Run: func(cmd *cobra.Command, args []string) {
-			log.Info("Hi I am dummy")
-		},
-	}
-	RootCmd.AddCommand(dummyCmd)
+	// var dummyCmd = &cobra.Command{
+	// 	Use:   "dummy",
+	// 	Short: "dummy is foo",
+	// 	Long:  `dummy is foo bar`,
+	// 	Run: func(cmd *cobra.Command, args []string) {
+	// 		log.Info("Hi I am dummy")
+	// 	},
+	// }
+	// RootCmd.AddCommand(dummyCmd)
 }
 
 // initConfig reads in config file and ENV variables if set.
