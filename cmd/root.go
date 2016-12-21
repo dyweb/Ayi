@@ -78,6 +78,17 @@ func init() {
 
 	// https://github.com/spf13/viper#working-with-flags
 	bindRootCmdFlagsToViper()
+
+	// NOTE: code here does work, but the problem is, you can't get flag?
+	var dummyCmd = &cobra.Command{
+		Use:   "dummy",
+		Short: "dummy is foo",
+		Long:  `dummy is foo bar`,
+		Run: func(cmd *cobra.Command, args []string) {
+			log.Info("Hi I am dummy")
+		},
+	}
+	RootCmd.AddCommand(dummyCmd)
 }
 
 // initConfig reads in config file and ENV variables if set.
@@ -97,4 +108,16 @@ func initConfig() {
 
 	// Set default value for viper
 	loadDefaultSettings()
+
+	// FIXME: this is just test if dynamic registering command is possible for cobra
+	// TODO: code does not work here
+	// var dummyCmd = &cobra.Command{
+	// 	Use:   "dummy",
+	// 	Short: "dummy is foo",
+	// 	Long:  `dummy is foo bar`,
+	// 	Run: func(cmd *cobra.Command, args []string) {
+	// 		log.Info("Hi I am dummy")
+	// 	},
+	// }
+	// RootCmd.AddCommand(dummyCmd)
 }
