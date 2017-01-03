@@ -2,17 +2,28 @@
 
 Common utils that could be used outside Ayi
 
-- log
-- command runner
+- [data structure](structure) 
+- [log](log)
+- [command runner](runner)
 - web server
 - http client 
 - resource binding (replace go.rice) 
 
+## Data structure
+
+see [data structure](structure)
+
+- Set
+
 ## Log
 
-- filter log by fields
+see [log](log)
+
+- filter log by fields, built in support for pkg using `PkgFilter`
 
 ## Command runner
+
+see [runner](runner)
 
 - dry run
 - run in background (like foreman)
@@ -20,7 +31,7 @@ Common utils that could be used outside Ayi
 
 ## Web server
 
-- static file server (`Ayi web static`)
+- static file server (`Ayi web static`) like python's `SimpleHTTPServer`
 
 ## Http client
 
