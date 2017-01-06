@@ -1,5 +1,5 @@
 hash: 9e4f5cc004841687ff99d00bf2faa43db6c2f16dc336951e39fc449f3e9c19c5
-updated: 2017-01-05T21:41:57.337289198-08:00
+updated: 2017-01-05T21:49:00.477886223-08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -8,6 +8,9 @@ imports:
 - name: github.com/dyweb/gommon
   version: 7aad4c9c1ff32b9473a816ba27158bf59bfec307
   vcs: git
+  subpackages:
+  - log
+  - structure
 - name: github.com/fatih/color
   version: 87d4004f2ab62d0d255e0a38f1680aa534549fe3
   vcs: git
