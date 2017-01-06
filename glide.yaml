@@ -8,7 +8,7 @@ import:
   version: 346299ea79e446ebdddb834371ceba2e5926b732
 - package: github.com/pkg/errors
   vcs: git
-  version: 0.7.0
+  version: 0.8.0
 - package: github.com/fatih/color
   vcs: git
   version: 87d4004f2ab62d0d255e0a38f1680aa534549fe3

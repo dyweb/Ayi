@@ -1,5 +1,5 @@
-hash: 9e4f5cc004841687ff99d00bf2faa43db6c2f16dc336951e39fc449f3e9c19c5
-updated: 2017-01-05T21:49:00.477886223-08:00
+hash: 447d52b5dfb642876255e3964a9892834f1588afff9aebbc76f81afa78c9b1a2
+updated: 2017-01-05T21:52:43.449343293-08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -53,7 +53,7 @@ imports:
 - name: github.com/mitchellh/mapstructure
   version: d2dd0262208475919e1a362f675cfc0e7c10e905
 - name: github.com/pkg/errors
-  version: 01fa4104b9c248c8945d14d9f128454d5b28d595
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
   vcs: git
 - name: github.com/pkg/sftp
   version: a71e8f580e3b622ebff585309160b1cc549ef4d2
