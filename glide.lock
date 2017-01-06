@@ -1,10 +1,16 @@
-hash: be24b3745c0b93ef4a11323ec08c36a718db9dea8210546615d25cbeed81c9f6
-updated: 2017-01-01T19:42:20.521565043-08:00
+hash: 447d52b5dfb642876255e3964a9892834f1588afff9aebbc76f81afa78c9b1a2
+updated: 2017-01-05T21:52:43.449343293-08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
 - name: github.com/daaku/go.zipexe
   version: a5fe2436ffcb3236e175e5149162b41cd28bd27d
+- name: github.com/dyweb/gommon
+  version: 7aad4c9c1ff32b9473a816ba27158bf59bfec307
+  vcs: git
+  subpackages:
+  - log
+  - structure
 - name: github.com/fatih/color
   version: 87d4004f2ab62d0d255e0a38f1680aa534549fe3
   vcs: git
@@ -47,7 +53,7 @@ imports:
 - name: github.com/mitchellh/mapstructure
   version: d2dd0262208475919e1a362f675cfc0e7c10e905
 - name: github.com/pkg/errors
-  version: 01fa4104b9c248c8945d14d9f128454d5b28d595
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
   vcs: git
 - name: github.com/pkg/sftp
   version: a71e8f580e3b622ebff585309160b1cc549ef4d2

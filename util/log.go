@@ -1,7 +1,7 @@
 package util
 
 import (
-	dlog "github.com/dyweb/Ayi/common/log"
+	dlog "github.com/dyweb/gommon/log"
 )
 
 // Logger is the default logger with info level
