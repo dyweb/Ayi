@@ -11,7 +11,7 @@ always_pending:
 group_defaults:
   approve_by_comment:
     enabled: true
-    approve_regex: '^:\+1:|^LGTM|^lgtm'
+    approve_regex: '^:\+1:|^LGTM|^lgtm|^!\[LGTM\]|^:sheep:'
   reset_on_push:
     enabled: true
 
