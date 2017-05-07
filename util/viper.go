@@ -45,7 +45,7 @@ func userHomeDir() string {
 	return os.Getenv("HOME")
 }
 
-// ViperGetStringOrFail returns string without any convertion
+// ViperGetStringOrFail returns string without any conversion
 // FIXED: https://github.com/dyweb/Ayi/issues/54
 func ViperGetStringOrFail(key string) (string, error) {
 	v := viper.Get(key)

@@ -4,6 +4,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/dyweb/Ayi)](https://goreportcard.com/report/github.com/dyweb/Ayi)
 [![Build Status](https://travis-ci.org/dyweb/Ayi.svg)](https://travis-ci.org/dyweb/Ayi)
 [![Coverage Status](https://coveralls.io/repos/github/dyweb/Ayi/badge.svg?branch=master)](https://coveralls.io/github/dyweb/Ayi?branch=master)
+[![codebeat badge](https://codebeat.co/badges/d45b026a-544e-4f06-8faf-8014e8c02784)](https://codebeat.co/projects/github-com-dyweb-ayi-master)
 
 Centralize all your commands for config development environment
 
