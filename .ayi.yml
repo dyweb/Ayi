@@ -4,8 +4,9 @@ dep-install:
     - go get github.com/mitchellh/gox
     - glide install
 install:
-    - go build -o Ayi 
-    - rice append -i github.com/dyweb/Ayi/app/web --exec Ayi
+    - go build -o Ayi
+# disable it for now
+#    - rice append -i github.com/dyweb/Ayi/app/web --exec Ayi
     - sh -c "mv Ayi $GOPATH/bin/Ayi"
 test:
     - go install
