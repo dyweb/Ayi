@@ -47,16 +47,16 @@ You can also build it using docker. (TODO: cross build using xgo)
 
 `make docker-build-linux` you will get a binary file in the directory. (TODO: the docker build may not be working)
 
-### Usage
+## Usage
 
 Run `Ayi help` to see all available commands.
 
-#### Flags
+### Flags
 
 - `-v` for verbose logging
 - `-n` for dry run, it will show you the commands, but won't execute them.
 
-#### Config 
+### Config 
 
 Ayi will find config file in the following locations and merge them.
 
@@ -64,7 +64,7 @@ Ayi will find config file in the following locations and merge them.
 - `.ayi.yml` in current directory, you should put it in vcs.
 - `.ayi.local.yml` in current directly, you should ignore the local config in vcs.
 
-#### Autocomplete
+### Autocomplete
 
 NOTE: there is a license problem for including `bash_completion` in `scripts/third_party`
 
@@ -86,14 +86,18 @@ This project is at early stage and is under heavy development.
 - run `glide update` if you have added new packages, NOTE: after import new package in your code, you may need to run `glide update` again, since 
 it will analyze the code and ignore subpackages if the package is not used.
 
-### FAQ
+## FAQ
 
 - Q: How to change file mode on windows
 - A: `git update-index --chmod=+x <file>` from dedek's [answer](http://stackoverflow.com/a/13593391/4116260) for this [question](http://stackoverflow.com/questions/6476513/git-file-permissions-on-windows).
 
-### Contribute
+## Contribute
 
 (TODO: put it to contribute.md and use .github for issue and pr template)
 
 1. Before push, use `gofmt` to format your code. (TODO: use git hooks to run fmt before commit (or add?))
 2. feel free to add commands and applications, do not make break changes to commands unless necessary.
+
+## About
+
+Ayi is the nick name of a [@dyweb](https://github.com/dyweb) member
