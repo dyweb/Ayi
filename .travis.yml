@@ -1,22 +1,18 @@
 language: go
-sudo: false
+sudo: true
+git:
+  depth: 3
 
 go:
-  - 1.5
-  - 1.6
-  - 1.7
+  - 1.9.x
+  - "1.10"
   - tip
 
-before_install:
-  - go get github.com/mattn/goveralls
-  - go get golang.org/x/tools/cmd/cover
-  - go get github.com/at15/overalls
-
-install: 
-    - make travis-install
+install:
+  - go get -u github.com/golang/dep/cmd/dep
+  - dep ensure
 
 script: 
-    - make test
-    
-after_success:
-  - $HOME/gopath/bin/goveralls -service=travis-ci -coverprofile=overalls.coverprofile
+  - make install
+
+# TODO: code coverage
