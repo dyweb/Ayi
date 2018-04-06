@@ -1,9 +1,10 @@
 # Documentation for Ayi
 
-- [Golang best practice](golang.md)
-
-TODO:
-
-- Develop environment setup
+- [Applications](app)
+  - [Git](app/git.md)
 - Internal
+  - [Go](go.md)
 
+## Develop
+
+- [ ] TODO: environment setup
