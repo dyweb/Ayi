@@ -11,7 +11,7 @@ const (
 type Host struct {
 }
 
-// Repo represents address after git clone
+// Repo represents the address came after git clone <repo>
 type Repo struct {
 	// Protocol is http, https, ssh
 	Protocol Protocol

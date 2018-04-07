@@ -7,6 +7,8 @@ import (
 
 	icli "github.com/at15/go.ice/ice/cli"
 
+	"github.com/dyweb/Ayi/ayi"
+	_ "github.com/dyweb/Ayi/ayi/app/git"
 	"github.com/dyweb/Ayi/ayi/util/logutil"
 )
 
@@ -35,8 +37,20 @@ func main() {
 		icli.LogRegistry(log),
 	)
 	root := cli.Command()
-	if err := root.Execute(); err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
+	apps := ayi.Apps()
+	for _, name := range apps {
+		app, err := ayi.CreateApp(name)
+		if err != nil {
+			Err(err)
+		}
+		root.AddCommand(app.CobraCommand())
 	}
+	if err := root.Execute(); err != nil {
+		Err(err)
+	}
+}
+
+func Err(err error) {
+	fmt.Fprintln(os.Stderr, err)
+	os.Exit(1)
 }

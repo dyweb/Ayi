@@ -25,11 +25,11 @@ const (
 )
 
 // UrlToRepo detect git repository from url
-// http clone url: https://github.com/dyweb/Ayi.git
-// http common url: https://github.com/dyweb/Ayi/blob/master/README.md
-// ssh clone url: git@github.com:dyweb/Ayi.git ssh://git@git.dongyue.io:6773/at15/tongqu4.git
-// project name: go.ice -> github.com/at15/go.ice
-// owner/project: dyweb/Ayi -> github.com/dyweb/Ayi
+// - http clone url: https://github.com/dyweb/Ayi.git
+// - http common url: https://github.com/dyweb/Ayi/blob/master/README.md
+// - ssh clone url: git@github.com:dyweb/Ayi.git ssh://git@git.dongyue.io:6773/at15/tongqu4.git
+// - project name: go.ice -> github.com/at15/go.ice
+// - owner/project: dyweb/Ayi -> github.com/dyweb/Ayi
 func UrlToRepo(u string) (*Repo, error) {
 	u = strings.TrimSpace(u)
 	switch {

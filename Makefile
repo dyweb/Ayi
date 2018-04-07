@@ -12,6 +12,10 @@ install:
 update-dep:
 	dep ensure -update
 
+.PHONY: generate
+generate:
+	gommon generate -v
+
 .PHONY: fmt
 fmt:
 	gofmt -d -l -w ./cmd ./ayi
