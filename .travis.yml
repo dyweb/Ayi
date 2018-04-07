@@ -14,5 +14,6 @@ install:
 
 script: 
   - make install
+  - make test
 
 # TODO: code coverage

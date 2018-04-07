@@ -1,10 +1,11 @@
-# Documentation for Ayi
+# Ayi Documentation
 
-- [Applications](app)
-  - [Git](app/git.md)
-- Internal
-  - [Go](go.md)
+## Applications
+
+- [Git](app/git.md)
 
 ## Develop
 
-- [ ] TODO: environment setup
+- [Directory layout](directory.md)
+- [Environment setup](dev/env.md)
+- [Coding Style](dev/style.md)

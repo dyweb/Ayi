@@ -6,9 +6,8 @@ root = true
 end_of_line = lf
 
 # Matches multiple files with brace expansion notation
-# Set default charset
 [*.{sh,go}]
-charset = utf-8
+charset = utf-8 # Set default charset
 
 [*.md]
 indent_style = space

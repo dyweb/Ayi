@@ -11,3 +11,11 @@ install:
 .PHONY: update-dep
 update-dep:
 	dep ensure -update
+
+.PHONY: fmt
+fmt:
+	gofmt -d -l -w ./cmd ./ayi
+
+.PHONY: test
+test:
+	go test -v -cover ./ayi/...

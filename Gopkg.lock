@@ -11,6 +11,12 @@
   revision = "4b6c9eb5c27eb22fb8207289bd4ecd32f3207f39"
 
 [[projects]]
+  name = "github.com/davecgh/go-spew"
+  packages = ["spew"]
+  revision = "346938d642f2ec3594ed81d874461961cd0faa76"
+  version = "v1.1.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/dyweb/gommon"
   packages = [
@@ -35,6 +41,12 @@
   version = "v1.0"
 
 [[projects]]
+  name = "github.com/pmezard/go-difflib"
+  packages = ["difflib"]
+  revision = "792786c7400a136282c1664665ae0a8db921c6c2"
+  version = "v1.0.0"
+
+[[projects]]
   name = "github.com/spf13/cobra"
   packages = ["."]
   revision = "a1f051bc3eba734da4772d60e2d677f47cf93ef4"
@@ -47,6 +59,12 @@
   version = "v1.0.0"
 
 [[projects]]
+  name = "github.com/stretchr/testify"
+  packages = ["assert"]
+  revision = "12b6f73e6084dad08a7c6e575284b177ecafbc71"
+  version = "v1.2.1"
+
+[[projects]]
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
@@ -55,6 +73,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "453c3637197a64cdae0aa2f81fceb8dcca14844d23902e2e91d690e4435e2532"
+  inputs-digest = "725a0bb07f83faf4fbd34bbd9af013885c1ab5f16d99dd5a366bcf04061bae20"
   solver-name = "gps-cdcl"
   solver-version = 1
