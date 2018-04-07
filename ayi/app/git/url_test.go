@@ -33,4 +33,24 @@ func TestUrlToRepo(t *testing.T) {
 			assert.Equal("Ayi", r.Repository)
 		}
 	})
+	t.Run("ssh-noport", func(t *testing.T) {
+		assert := asst.New(t)
+		r, err := UrlToRepo("git@github.com:dyweb/Ayi.git")
+		assert.Nil(err)
+		assert.NotNil(r)
+		assert.Equal(Ssh, r.Protocol)
+		assert.Equal("github.com", r.Host)
+		assert.Equal("dyweb", r.Owner)
+		assert.Equal("Ayi", r.Repository)
+	})
+	t.Run("ssh-port", func(t *testing.T) {
+		assert := asst.New(t)
+		r, err := UrlToRepo("ssh://git@git.dongyue.io:6773/at15/tongqu4.git")
+		assert.Nil(err)
+		assert.NotNil(r)
+		assert.Equal(Ssh, r.Protocol)
+		assert.Equal("git.dongyue.io", r.Host)
+		assert.Equal("at15", r.Owner)
+		assert.Equal("tongqu4", r.Repository)
+	})
 }
