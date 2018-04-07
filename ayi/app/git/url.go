@@ -2,27 +2,26 @@ package git
 
 import (
 	"regexp"
-	"strings"
 	"strconv"
+	"strings"
 
 	"github.com/dyweb/gommon/errors"
 )
 
 var (
-	httpCloneRegexp = regexp.MustCompile("^([^/]+?)/([^/]+?)/([^/]+?).git$")
 	// ?: is non capture group for using group but don't capture content in return result
 	// https://stackoverflow.com/questions/3512471/what-is-a-non-capturing-group-what-does-do
-	httpCommonRegexp   = regexp.MustCompile("^([^/]+?)/([^/]+?)/([^/]+?)(?:\\.git)?(?:[/#?].*)?$")
-	sshCloneRegexp     = regexp.MustCompile("^(?:ssh://)?git@([^/]+?):(\\d+)?/?([^/]+?)/([^/]+?).git$")
-	ownerProjectRegexp = regexp.MustCompile("^([^/]+?)/([^/]+?)(?:.git)?$")
-	//projectRegexp = regexp.MustCompile("^([^/]+?)(?:.git)?$")
+	httpCommonRegexp = regexp.MustCompile("^([^/]+?)/([^/]+?)/([^/]+?)(?:\\.git)?(?:[/#?].*)?$")
+	sshCloneRegexp   = regexp.MustCompile("^(?:ssh://)?git@([^/]+?):(\\d+)?/?([^/]+?)/([^/]+?).git$")
+	ownerRepoRegexp  = regexp.MustCompile("^([^/]+?)/([^/]+?)(?:.git)?$")
+	repoRegexp       = regexp.MustCompile("^([^/]+?)(?:.git)?$")
 )
 
 const (
-	httpCloneSegments    = 3 // host + owner + repo
-	httpCommonSegments   = 3
-	sshCloneSegments     = 4 // host + port + owner + repo
-	ownerProjectSegments = 2
+	httpCommonSegments = 3 // host + owner + repo
+	sshCloneSegments   = 4 // host + port + owner + repo
+	ownerRepoSegments  = 2
+	repoSegments       = 1
 )
 
 // UrlToRepo detect git repository from url
@@ -36,51 +35,58 @@ func UrlToRepo(u string) (*Repo, error) {
 	switch {
 	case strings.HasPrefix(u, "http"):
 		return parseHttp(u)
+	case httpCommonRegexp.MatchString(u):
+		return parseCommon(u)
 	case sshCloneRegexp.MatchString(u):
 		return parseSsh(u)
-	case ownerProjectRegexp.MatchString(u):
-		segments := ownerProjectRegexp.FindStringSubmatch(u)
-		if len(segments)-1 != 2 {
-
+	case ownerRepoRegexp.MatchString(u):
+		segments := ownerRepoRegexp.FindStringSubmatch(u)
+		if len(segments)-1 != ownerRepoSegments {
+			return nil, errors.Errorf("invalid <owner>/<repository> %s", u)
 		}
+		return &Repo{Host: DefaultHost(), Owner: segments[1], Repository: segments[2]}, nil
+	case repoRegexp.MatchString(u):
+		segments := repoRegexp.FindStringSubmatch(u)
+		if len(segments)-1 != repoSegments {
+			return nil, errors.Errorf("invalid <repository> %s", u)
+		}
+		return &Repo{Host: DefaultHost(), Owner: DefaultUser(), Repository: segments[1]}, nil
 	default:
-
+		return nil, errors.Errorf("unknown url pattern %s", u)
 	}
-	return nil, errors.Errorf("unknown url pattern %s", u)
 }
 
 // http url
 // - clone url: https://github.com/dyweb/Ayi.git
 // - common url: https://github.com/dyweb/Ayi/blob/master/README.md
 func parseHttp(u string) (*Repo, error) {
-	r := Repo{}
+	proto := Https
 	if strings.HasPrefix(u, "https://") {
-		r.Protocol = Https
+		proto = Https
 		u = u[len("https://"):]
 	} else if strings.HasPrefix(u, "http://") {
-		r.Protocol = Http
+		proto = Http
 		u = u[len("http://"):]
 	} else {
 		return nil, errors.Errorf("invalid http protocol %s", u)
 	}
-	switch {
-	case httpCloneRegexp.MatchString(u):
-		// http clone url: https://github.com/dyweb/Ayi.git
-		segments := httpCloneRegexp.FindStringSubmatch(u)
-		if len(segments)-1 != httpCloneSegments {
-			return nil, errors.Errorf("not a http clone url, got %d segments instead of %d", len(segments)-1, httpCloneSegments)
-		}
-		r.Host, r.Owner, r.Repository = segments[1], segments[2], segments[3]
-	case httpCommonRegexp.MatchString(u):
-		// http common url: https://github.com/dyweb/Ayi/blob/master/README.md
-		segments := httpCommonRegexp.FindStringSubmatch(u)
-		if len(segments)-1 != httpCommonSegments {
-			return nil, errors.Errorf("can't infer repo from http url, got %d segments instead of %d", len(segments)-1, httpCommonSegments)
-		}
-		r.Host, r.Owner, r.Repository = segments[1], segments[2], segments[3]
-	default:
-		return nil, errors.Errorf("no matched http pattern %s", u)
+	r, err := parseCommon(u)
+	if r != nil {
+		r.Protocol = proto
 	}
+	return r, err
+}
+
+// http url with protocol prefix
+func parseCommon(u string) (*Repo, error) {
+	r := Repo{}
+
+	segments := httpCommonRegexp.FindStringSubmatch(u)
+	if len(segments)-1 != httpCommonSegments {
+		return nil, errors.Errorf("can't infer repo from url, got %d segments instead of %d", len(segments)-1, httpCommonSegments)
+	}
+	r.Host, r.Owner, r.Repository = segments[1], segments[2], segments[3]
+
 	return &r, nil
 }
 
