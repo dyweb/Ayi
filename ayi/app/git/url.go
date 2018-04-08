@@ -1,6 +1,7 @@
 package git
 
 import (
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -23,6 +24,24 @@ const (
 	ownerRepoSegments  = 2
 	repoSegments       = 1
 )
+
+// SshUrl is used for clone using ssh i.e. git@github.com:at15/go.ice.git
+func (r *Repo) SshUrl() string {
+	if r.Port != defaultSshPort && r.Port != 0 {
+		return fmt.Sprintf("ssh://git@%s:%d/%s/%s.git", r.Host, r.Port, r.Owner, r.Repository)
+	}
+	return fmt.Sprintf("git@%s:%s/%s.git", r.Host, r.Owner, r.Repository)
+}
+
+// HttpUrl is used for clone using http i.e. https://github.com/at15/go.ice.git
+func (r *Repo) HttpUrl() string {
+	// TODO: http can also have port, this need to be handled in url
+	proto := r.Protocol
+	if string(r.Protocol) == "" {
+		proto = Https
+	}
+	return fmt.Sprintf("%s://%s/%s/%s.git", proto, r.Host, r.Owner, r.Repository)
+}
 
 // UrlToRepo detect git repository from url
 // - http clone url: https://github.com/dyweb/Ayi.git

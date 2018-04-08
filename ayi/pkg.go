@@ -1,13 +1,13 @@
 package ayi
 
 import (
+	"sort"
 	"sync"
 
 	"github.com/spf13/cobra"
 
 	"github.com/dyweb/Ayi/ayi/util/logutil"
 	"github.com/dyweb/gommon/errors"
-	"sort"
 )
 
 var log = logutil.NewPackageLogger()

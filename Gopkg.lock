@@ -41,6 +41,12 @@
   version = "v1.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/kballard/go-shellquote"
+  packages = ["."]
+  revision = "cd60e84ee657ff3dc51de0b4f55dd299a3e136f2"
+
+[[projects]]
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
@@ -73,6 +79,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "af63997ad18922b8b18181229a3ff2bb969b8c7ff237b6085b567e59ecc83e07"
+  inputs-digest = "bbca5a0f3ea64e3d7a575695ecafae6aded4db10679ac8a6df113fe859661873"
   solver-name = "gps-cdcl"
   solver-version = 1

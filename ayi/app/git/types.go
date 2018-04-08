@@ -1,5 +1,9 @@
 package git
 
+import (
+	"time"
+)
+
 type Protocol string
 
 const (
@@ -23,4 +27,9 @@ type Repo struct {
 	Owner string
 	// Repository is name of the repo
 	Repository string
+}
+
+type CloneResult struct {
+	Path     string
+	Duration time.Duration
 }

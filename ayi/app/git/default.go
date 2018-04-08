@@ -1,10 +1,15 @@
 package git
 
-import "os/user"
+import (
+	"os"
+	"os/user"
+	"path/filepath"
+)
 
 const (
-	nonExistUser = "404"
-	defaultHost  = "github.com"
+	nonExistUser   = "404"
+	defaultHost    = "github.com"
+	defaultSshPort = 22
 )
 
 var (
@@ -25,4 +30,13 @@ func DefaultUser() string {
 		return u.Username // Username is the login name, Name is display name
 	}
 	return nonExistUser
+}
+
+func DefaultWorkspace() string {
+	gopath := os.Getenv("GOPATH")
+	if gopath != "" {
+		return filepath.Join(gopath, "src")
+	}
+	log.Warn("unable to find default workspace")
+	return ""
 }
