@@ -7,9 +7,9 @@ import (
 
 	icli "github.com/at15/go.ice/ice/cli"
 
-	"github.com/dyweb/Ayi/ayi"
-	_ "github.com/dyweb/Ayi/ayi/app/git"
-	"github.com/dyweb/Ayi/ayi/util/logutil"
+	"github.com/dyweb/Ayi"
+	_ "github.com/dyweb/Ayi/app/git"
+	"github.com/dyweb/Ayi/util/logutil"
 )
 
 const (
@@ -37,9 +37,9 @@ func main() {
 		icli.LogRegistry(log),
 	)
 	root := cli.Command()
-	apps := ayi.Apps()
+	apps := Ayi.Apps()
 	for _, name := range apps {
-		app, err := ayi.CreateApp(name)
+		app, err := Ayi.CreateApp(name)
 		if err != nil {
 			Err(err)
 		}

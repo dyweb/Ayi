@@ -1,6 +1,7 @@
 # Directory
 
-- [ayi](../ayi) all internal packages
+- [app](../app) applications, `git`, `web`
+- [util](../util) utility packages
 - [cmd](../cmd) command line tools, entry point for `ayi`
 - [doc](.) documents
   - [app](app) applications like `git`, `web`

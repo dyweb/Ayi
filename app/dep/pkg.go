@@ -1,7 +1,7 @@
 package dep
 
 import (
-	"github.com/dyweb/Ayi/ayi/util/logutil"
+	"github.com/dyweb/Ayi/util/logutil"
 )
 
 var log = logutil.NewPackageLogger()

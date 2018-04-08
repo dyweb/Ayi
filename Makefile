@@ -18,8 +18,8 @@ generate:
 
 .PHONY: fmt
 fmt:
-	gofmt -d -l -w ./cmd ./ayi
+	gofmt -d -l -w ./cmd ./app ./util
 
 .PHONY: test
 test:
-	go test -v -cover ./ayi/...
+	go test -v -cover ./app/... ./util/...

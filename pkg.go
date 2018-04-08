@@ -1,4 +1,4 @@
-package ayi
+package Ayi
 
 import (
 	"sort"
@@ -6,7 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/dyweb/Ayi/ayi/util/logutil"
+	"github.com/dyweb/Ayi/util/logutil"
 	"github.com/dyweb/gommon/errors"
 )
 
