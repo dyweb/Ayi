@@ -24,13 +24,6 @@
 #   go-tests = true
 #   unused-packages = true
 
-ignored = [
-    "github.com/dyweb/Ayi/app",
-    "github.com/dyweb/Ayi/app/*",
-    "github.com/dyweb/Ayi/util",
-    "github.com/dyweb/Ayi/util/*"
-]
-
 [prune]
   go-tests = true
   unused-packages = true
