@@ -1,7 +1,16 @@
 package git
 
 import (
-	"github.com/dyweb/Ayi/util"
+	"github.com/dyweb/Ayi"
+	"github.com/dyweb/Ayi/util/logutil"
 )
 
-var log = util.Logger.NewEntryWithPkg("a.a.git")
+const appName = "git"
+
+var log = logutil.NewPackageLogger()
+
+func init() {
+	Ayi.RegisterAppFactory(appName, func() (Ayi.App, error) {
+		return NewApp()
+	})
+}
