@@ -8,8 +8,11 @@ import (
 	icli "github.com/at15/go.ice/ice/cli"
 
 	"github.com/dyweb/Ayi"
-	_ "github.com/dyweb/Ayi/app/git"
 	"github.com/dyweb/Ayi/util/logutil"
+
+	// apps
+	_ "github.com/dyweb/Ayi/app/git"
+	_ "github.com/dyweb/Ayi/app/web"
 )
 
 const (

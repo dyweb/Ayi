@@ -26,6 +26,7 @@ generate:
 
 .PHONY: package
 package:
+	rm -f ayi-v$(VERSION)-linux-amd64.zip
 	go build -ldflags "$(FLAGS)" -o ayi-v$(VERSION)-linux-amd64 ./cmd/ayi
 	zip ayi-v$(VERSION)-linux-amd64.zip ayi-v$(VERSION)-linux-amd64
 	rm ayi-v$(VERSION)-linux-amd64

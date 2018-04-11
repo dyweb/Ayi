@@ -6,6 +6,8 @@
   name = "github.com/at15/go.ice"
   packages = [
     "ice/cli",
+    "ice/config",
+    "ice/transport/http",
     "ice/util/logutil"
   ]
   revision = "4b6c9eb5c27eb22fb8207289bd4ecd32f3207f39"
@@ -47,6 +49,16 @@
   revision = "cd60e84ee657ff3dc51de0b4f55dd299a3e136f2"
 
 [[projects]]
+  name = "github.com/opentracing/opentracing-go"
+  packages = [
+    ".",
+    "ext",
+    "log"
+  ]
+  revision = "1949ddbfd147afd4d964a9f00b24eb291e0e7c38"
+  version = "v1.0.2"
+
+[[projects]]
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
@@ -71,6 +83,12 @@
   version = "v1.2.1"
 
 [[projects]]
+  branch = "master"
+  name = "golang.org/x/net"
+  packages = ["context"]
+  revision = "61147c48b25b599e5b561d2e9c4f3e1ef489ca41"
+
+[[projects]]
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
@@ -79,6 +97,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "bbca5a0f3ea64e3d7a575695ecafae6aded4db10679ac8a6df113fe859661873"
+  inputs-digest = "3354a678f57eb938a1f680cb05de83c93fea8a643ba18f80d4633eff9c1d74df"
   solver-name = "gps-cdcl"
   solver-version = 1

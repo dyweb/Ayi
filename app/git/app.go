@@ -22,7 +22,7 @@ func NewApp() (*App, error) {
 	root := &cobra.Command{
 		Use:   "git",
 		Short: "git helper",
-		Long:  "git helper",
+		Long:  "git helper long",
 		Run: func(cmd *cobra.Command, args []string) {
 			cmd.Help()
 			os.Exit(1)

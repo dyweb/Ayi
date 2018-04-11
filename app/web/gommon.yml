@@ -1,0 +1,3 @@
+loggers:
+  - struct: "*App"
+    receiver: "a"
