@@ -34,7 +34,7 @@
     "util/logutil",
     "util/runtimeutil"
   ]
-  revision = "ae7701f9d583472626a924dd9ce761157fc7ee05"
+  revision = "809341f9eb1699a09fe8ca3c82bd5340dbe8dd3d"
 
 [[projects]]
   name = "github.com/inconshreveable/mousetrap"
@@ -73,8 +73,8 @@
 [[projects]]
   name = "github.com/spf13/pflag"
   packages = ["."]
-  revision = "e57e3eeb33f795204c1ca35f56c44f83227c6e66"
-  version = "v1.0.0"
+  revision = "583c0c0531f06d5278b7d917446061adc344b5cd"
+  version = "v1.0.1"
 
 [[projects]]
   name = "github.com/stretchr/testify"
@@ -86,7 +86,7 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "61147c48b25b599e5b561d2e9c4f3e1ef489ca41"
+  revision = "5f9ae10d9af5b1c89ae6904293b14b064d4ada23"
 
 [[projects]]
   name = "gopkg.in/yaml.v2"
@@ -97,6 +97,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "3354a678f57eb938a1f680cb05de83c93fea8a643ba18f80d4633eff9c1d74df"
+  inputs-digest = "48daef3de9cf56a9b3758d7331392f62fd50fcaba0746e38522f63037504da4f"
   solver-name = "gps-cdcl"
   solver-version = 1

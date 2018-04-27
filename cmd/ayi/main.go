@@ -12,6 +12,7 @@ import (
 
 	// apps
 	_ "github.com/dyweb/Ayi/app/git"
+	_ "github.com/dyweb/Ayi/app/github"
 	_ "github.com/dyweb/Ayi/app/web"
 )
 

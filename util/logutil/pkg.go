@@ -1,18 +1,21 @@
 package logutil
 
 import (
-	goicelog "github.com/at15/go.ice/ice/util/logutil"
+	ilog "github.com/at15/go.ice/ice/util/logutil"
 	"github.com/dyweb/gommon/log"
 )
 
+// Registry is the root logger of Ayi application
 var Registry = log.NewApplicationLogger()
 
+// NewPackageLogger create a new logger for the calling package using Registry as its parent
 func NewPackageLogger() *log.Logger {
 	l := log.NewPackageLoggerWithSkip(1)
 	Registry.AddChild(l)
 	return l
 }
 
+// add go.ice log registry as its child
 func init() {
-	Registry.AddChild(goicelog.Registry)
+	Registry.AddChild(ilog.Registry)
 }
