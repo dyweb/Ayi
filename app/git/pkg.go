@@ -10,7 +10,7 @@ const appName = "git"
 var log = logutil.NewPackageLogger()
 
 func init() {
-	Ayi.RegisterAppFactory(appName, func() (Ayi.App, error) {
-		return NewApp()
+	Ayi.RegisterAppFactory(appName, func(r Ayi.Registry) (Ayi.App, error) {
+		return NewApp(r)
 	})
 }

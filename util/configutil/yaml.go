@@ -6,9 +6,18 @@ import (
 	"io/ioutil"
 
 	"github.com/dyweb/gommon/errors"
+	"os"
 )
 
 // NOTE: not using gommon/config because it will change very soon
+func LoadYAMLFile(path string, cfg interface{}) error {
+	f, err := os.Open(path)
+	if err != nil {
+		return errors.Wrap(err, "can't open file")
+	}
+	return LoadYAML(f, cfg)
+}
+
 func LoadYAML(r io.Reader, cfg interface{}) error {
 	b, err := ioutil.ReadAll(r)
 	if err != nil {

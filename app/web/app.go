@@ -7,6 +7,7 @@ import (
 
 	iconfig "github.com/at15/go.ice/ice/config"
 	ihttp "github.com/at15/go.ice/ice/transport/http"
+	"github.com/dyweb/Ayi"
 	dlog "github.com/dyweb/gommon/log"
 	"github.com/spf13/cobra"
 )
@@ -17,7 +18,7 @@ type App struct {
 	log *dlog.Logger
 }
 
-func NewApp() (*App, error) {
+func NewApp(r Ayi.Registry) (*App, error) {
 	a := &App{}
 	dlog.NewStructLogger(log, a)
 	root := &cobra.Command{

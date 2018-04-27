@@ -30,9 +30,11 @@
     "structure",
     "util",
     "util/color",
+    "util/fsutil",
     "util/hashutil",
     "util/logutil",
-    "util/runtimeutil"
+    "util/runtimeutil",
+    "util/testutil"
   ]
   revision = "809341f9eb1699a09fe8ca3c82bd5340dbe8dd3d"
 
@@ -97,6 +99,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "48daef3de9cf56a9b3758d7331392f62fd50fcaba0746e38522f63037504da4f"
+  inputs-digest = "8b2cefa7425ffa75994430eb8f086480ac3952651892f7905b4f055bf62854cc"
   solver-name = "gps-cdcl"
   solver-version = 1

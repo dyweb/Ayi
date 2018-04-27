@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/dyweb/Ayi"
 	"github.com/dyweb/gommon/errors"
 	dlog "github.com/dyweb/gommon/log"
 	"github.com/spf13/cobra"
@@ -16,7 +17,7 @@ type App struct {
 	log *dlog.Logger
 }
 
-func NewApp() (*App, error) {
+func NewApp(r Ayi.Registry) (*App, error) {
 	a := &App{}
 	dlog.NewStructLogger(log, a)
 	root := &cobra.Command{
