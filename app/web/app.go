@@ -1,12 +1,8 @@
 package web
 
 import (
-	"fmt"
-	"net/http"
 	"os"
 
-	iconfig "github.com/at15/go.ice/ice/config"
-	ihttp "github.com/at15/go.ice/ice/transport/http"
 	"github.com/dyweb/Ayi"
 	dlog "github.com/dyweb/gommon/log"
 	"github.com/spf13/cobra"
@@ -14,6 +10,9 @@ import (
 
 type App struct {
 	root *cobra.Command
+
+	// config
+	port int
 
 	log *dlog.Logger
 }
@@ -30,31 +29,8 @@ func NewApp(r Ayi.Registry) (*App, error) {
 			os.Exit(1)
 		},
 	}
-	var port int
-	root.PersistentFlags().IntVar(&port, "port", 3000, "port listen to")
-	static := &cobra.Command{
-		Use:   "static",
-		Short: "serve static content",
-		Long:  "Serve static content",
-		Run: func(cmd *cobra.Command, args []string) {
-			// TODO: go.ice could have a static http server to be used out of box
-			cfg := iconfig.HttpServerConfig{
-				Addr:          fmt.Sprintf(":%d", port),
-				EnableTracing: false,
-			}
-			h := http.FileServer(http.Dir("."))
-			srv, err := ihttp.NewServer(cfg, h, nil)
-			if err != nil {
-				a.log.Fatal("failed to create http server")
-				return
-			}
-			if err := srv.Run(); err != nil {
-				a.log.Fatal(err)
-				return
-			}
-		},
-	}
-	root.AddCommand(static)
+	root.PersistentFlags().IntVar(&a.port, "port", 3000, "port listen to")
+	root.AddCommand(a.staticCommand())
 	a.root = root
 	return a, nil
 }

@@ -3,7 +3,7 @@
 [![GoDoc](https://godoc.org/github.com/dyweb/Ayi?status.svg)](https://godoc.org/github.com/dyweb/Ayi)
 [![Build Status](https://travis-ci.org/dyweb/Ayi.svg)](https://travis-ci.org/dyweb/Ayi)
 
-Ayi helps you organize workspace
+Ayi organizes your workspace
 
 ## Installation
 
@@ -12,10 +12,9 @@ Pre-built binary
 - Download from [releases](https://github.com/dyweb/Ayi/releases)
 - NOTE: Mac and Windows are no longer tested
 
-Build from source
+Build from source (recommended)
 
-- go 1.9+
-- dep
+- go 1.9+ & [dep](https://github.com/golang/dep)
 - `dep ensure`
 - `make install`
 

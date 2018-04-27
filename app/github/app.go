@@ -35,21 +35,7 @@ func NewApp(r Ayi.Registry) (*App, error) {
 			os.Exit(1)
 		},
 	}
-	label := &cobra.Command{
-		Use:   "label",
-		Short: "manage label",
-		Long:  "Manage GitHub issue labels",
-		Run: func(cmd *cobra.Command, args []string) {
-			a.createClient()
-			labels, _, err := a.c.Issues.ListLabels(context.Background(), "at15", "papers-i-read", nil)
-			if err != nil {
-				a.log.Fatal(err)
-				return
-			}
-			a.log.Infof("labels are %s", labels)
-		},
-	}
-	root.AddCommand(label)
+	root.AddCommand(a.labelCommand())
 	a.root = root
 	return a, nil
 }
