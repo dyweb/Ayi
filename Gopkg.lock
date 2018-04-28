@@ -45,10 +45,10 @@
   version = "v1.0.0"
 
 [[projects]]
+  branch = "master"
   name = "github.com/google/go-github"
   packages = ["github"]
-  revision = "e48060a28fac52d0f1cb758bc8b87c07bac4a87d"
-  version = "v15.0.0"
+  revision = "29336dbceeab3a9b7e075b90d8b6d991d1bb5da2"
 
 [[projects]]
   branch = "master"
@@ -143,6 +143,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6159e8694d78f586cbeac11cbae23bdbe35ab807bb4098989ebe10af5335271a"
+  inputs-digest = "59d2160378943a5771ae423161f60fe66db58bfcc429da9cc18133fa7f5c3d21"
   solver-name = "gps-cdcl"
   solver-version = 1
