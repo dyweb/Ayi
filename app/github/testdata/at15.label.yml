@@ -98,3 +98,9 @@
     - name: decrease
     - name: unclear
     - name: unnecessary
+- name: os
+  desc: "Operating System"
+  sub:
+    - name: windows
+    - name: mac
+    - name: linux

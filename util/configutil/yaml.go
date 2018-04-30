@@ -4,9 +4,10 @@ import (
 	"gopkg.in/yaml.v2"
 	"io"
 	"io/ioutil"
+	"os"
 
 	"github.com/dyweb/gommon/errors"
-	"os"
+	"github.com/dyweb/gommon/util/fsutil"
 )
 
 // NOTE: not using gommon/config because it will change very soon
@@ -27,4 +28,12 @@ func LoadYAML(r io.Reader, cfg interface{}) error {
 		return errors.Wrap(err, "can't parse yaml")
 	}
 	return nil
+}
+
+func SaveYAMLFile(path string, cfg interface{}) error {
+	b, err := yaml.Marshal(cfg)
+	if err != nil {
+		return errors.Wrap(err, "failed to marshal")
+	}
+	return fsutil.WriteFile(path, b)
 }

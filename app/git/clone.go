@@ -9,23 +9,26 @@ import (
 )
 
 func (a *App) cloneCommand() *cobra.Command {
-	var useSsh bool
+	var useSSH bool
 	root := &cobra.Command{
 		Use:   "clone",
 		Short: "auto deduct clone url",
 		Long:  "Detect repository from url and convert to a cloneable url",
+		Example: `
+ayi git clone dyweb/gommon
+`,
 		Run: func(cmd *cobra.Command, args []string) {
 			if len(args) < 1 {
 				a.log.Fatal("must provide at least one url")
 				return
 			}
-			err := a.clone(args, useSsh)
+			err := a.clone(args, useSSH)
 			if err != nil {
 				a.log.Fatal(err)
 			}
 		},
 	}
-	root.Flags().BoolVar(&useSsh, "ssh", true, "use ssh instead of http")
+	root.Flags().BoolVar(&useSSH, "ssh", true, "use ssh instead of http")
 	return root
 }
 

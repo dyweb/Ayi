@@ -41,30 +41,49 @@ func (a *App) labelCommand() *cobra.Command {
 		Short: "list labels",
 		Long:  "List labels of a repository",
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) < 1 {
-				a.log.Fatal("must pass at least one repository")
-				return
-			}
-			ownerRepo := args[0]
-			labels, err := a.listLabels(ownerRepo)
-			if err != nil {
-				a.log.Fatalf("failed to list labels for %s: %s", ownerRepo, err)
-				return
-			}
-			printLabels(labels)
+			printLabels(a.listLabels(args))
 		},
 	}
-	root.AddCommand(list)
+	var output string
+	save := &cobra.Command{
+		Use:   "save",
+		Short: "save labels",
+		Long:  "Save labels of a repository",
+		Run: func(cmd *cobra.Command, args []string) {
+			labels := a.listLabels(args)
+			if err := configutil.SaveYAMLFile(output, convertLabels(labels)); err != nil {
+				log.Fatal(err)
+				return
+			}
+		},
+	}
+	save.Flags().StringVar(&output, "output", "labels.yml", "saved file")
+	root.AddCommand(list, save)
 	return root
 }
 
-func (a *App) listLabels(ownerRepo string) ([]*github.Label, error) {
+func (a *App) listLabels(args []string) []*github.Label {
+	if len(args) < 1 {
+		a.log.Fatal("must pass at least one repository")
+		return nil
+	}
+	ownerRepo := args[0]
+	labels, err := ListLabels(a.c, ownerRepo)
+	if err != nil {
+		// FIXME: the logger registry seems to be incorrect, this fatal log does not have color
+		a.log.Fatalf("failed to list labels for %s: %s", ownerRepo, err)
+		return nil
+	}
+	return labels
+}
+
+func ListLabels(c *github.Client, ownerRepo string) ([]*github.Label, error) {
 	segments := strings.Split(ownerRepo, "/")
 	if len(segments) < 2 {
 		return nil, errors.Errorf("invalid repo %s only has %d segments", ownerRepo, len(segments))
 	}
 	owner, repo := segments[0], segments[1]
-	labels, _, err := a.c.Issues.ListLabels(context.Background(), owner, repo, nil)
+	labels, _, err := c.Issues.ListLabels(context.Background(), owner, repo, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -79,6 +98,22 @@ func printLabels(labels []*github.Label) {
 			fmt.Printf("%s color %s\n", *label.Name, *label.Color)
 		}
 	}
+}
+
+// TODO: keep the hierarchy
+func convertLabels(labels []*github.Label) []LabelConfig {
+	cfgs := make([]LabelConfig, 0, len(labels))
+	for _, label := range labels {
+		l := LabelConfig{
+			Name:  *label.Name,
+			Color: *label.Color,
+		}
+		if label.Description != nil {
+			l.Desc = *label.Description
+		}
+		cfgs = append(cfgs, l)
+	}
+	return cfgs
 }
 
 func ReadLabelConfig(file string) ([]LabelConfig, error) {

@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/user"
+	"path/filepath"
 	"runtime"
 
 	icli "github.com/at15/go.ice/ice/cli"
@@ -10,15 +12,13 @@ import (
 
 	"github.com/dyweb/Ayi"
 	"github.com/dyweb/Ayi/config"
+	"github.com/dyweb/Ayi/util/configutil"
 	"github.com/dyweb/Ayi/util/logutil"
 
 	// apps
 	_ "github.com/dyweb/Ayi/app/git"
 	_ "github.com/dyweb/Ayi/app/github"
 	_ "github.com/dyweb/Ayi/app/web"
-	"github.com/dyweb/Ayi/util/configutil"
-	"os/user"
-	"path/filepath"
 )
 
 const (
