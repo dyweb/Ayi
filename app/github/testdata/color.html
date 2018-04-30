@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>Color test</title>
+    <style>
+        .color-block {
+            width: 100px;
+            height: 50px;
+            line-height: 50px; /* line-height == height for vertical align of text in div */
+
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<h1>Test color</h1>
+<a href="https://github.com/dyweb/Ayi/issues/80" target="_blank">dyweb/Ayi#80</a>
+<h2>GitHub</h2>
+<div id="gh-first-row"></div>
+<div id="gh-second-row"></div>
+<script>
+    let ghFirstRow = [
+        '#b60205',
+        '#d93f0b',
+        '#fbca04',
+        '#0e8a16',
+        '#1d76db',
+        '#0052cc',
+        '#5319e7',
+    ];
+    let ghSecondRow = [
+        '#e99695',
+        '#f9d0c4',
+        '#fef2c0',
+        '#c2e0c6',
+        '#bfdadc',
+        '#c5def5',
+        '#bfd4f2',
+        '#d4c5f9'
+    ];
+    document.getElementById('gh-first-row').innerHTML = genColorBlocks(ghFirstRow);
+    document.getElementById('gh-second-row').innerHTML = genColorBlocks(ghSecondRow);
+
+    function genColorBlocks(colors) {
+        let html = '';
+        for (let i = 0; i < colors.length; i++) {
+            html += `<div style="background-color: ${colors[i]}" class="color-block">color: ${colors[i]}</div>`;
+        }
+        return html;
+    }
+</script>
+</body>
+</html>
