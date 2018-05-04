@@ -10,7 +10,7 @@
     "ice/transport/http",
     "ice/util/logutil"
   ]
-  revision = "4b6c9eb5c27eb22fb8207289bd4ecd32f3207f39"
+  revision = "39be34cb4d99e0ed74cab020775c7d563fddddc2"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
@@ -36,19 +36,19 @@
     "util/runtimeutil",
     "util/testutil"
   ]
-  revision = "809341f9eb1699a09fe8ca3c82bd5340dbe8dd3d"
+  revision = "9eab0b85c6115d5ec530fd39074a18153196ef09"
 
 [[projects]]
   name = "github.com/golang/protobuf"
   packages = ["proto"]
-  revision = "925541529c1fa6821df4e44ce2723319eb2be768"
-  version = "v1.0.0"
+  revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
+  version = "v1.1.0"
 
 [[projects]]
   branch = "master"
   name = "github.com/google/go-github"
   packages = ["github"]
-  revision = "29336dbceeab3a9b7e075b90d8b6d991d1bb5da2"
+  revision = "eafdb6578137f78fe186e486a4bc633e1434cc89"
 
 [[projects]]
   branch = "master"
@@ -66,7 +66,7 @@
   branch = "master"
   name = "github.com/kballard/go-shellquote"
   packages = ["."]
-  revision = "cd60e84ee657ff3dc51de0b4f55dd299a3e136f2"
+  revision = "95032a82bc518f77982ea72343cc1ade730072f0"
 
 [[projects]]
   name = "github.com/opentracing/opentracing-go"
@@ -109,7 +109,7 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "5f9ae10d9af5b1c89ae6904293b14b064d4ada23"
+  revision = "640f4622ab692b87c2f3a94265e6f579fe38263d"
 
 [[projects]]
   branch = "master"
@@ -118,7 +118,7 @@
     ".",
     "internal"
   ]
-  revision = "6881fee410a5daf86371371f9ad451b95e168b71"
+  revision = "cdc340f7c179dbbfa4afd43b7614e8fcadde4269"
 
 [[projects]]
   name = "google.golang.org/appengine"

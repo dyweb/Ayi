@@ -8,6 +8,7 @@ import (
 
 	"github.com/dyweb/Ayi/util/configutil"
 	"github.com/dyweb/gommon/errors"
+	"github.com/dyweb/gommon/util/fsutil"
 	"github.com/google/go-github/github"
 	"github.com/spf13/cobra"
 )
@@ -51,9 +52,20 @@ func (a *App) labelCommand() *cobra.Command {
 		Long:  "Save labels of a repository",
 		Run: func(cmd *cobra.Command, args []string) {
 			labels := a.listLabels(args)
-			if err := configutil.SaveYAMLFile(output, convertLabels(labels)); err != nil {
+			b, err := configutil.SaveYAML(convertLabels(labels))
+			if err != nil {
 				log.Fatal(err)
 				return
+			}
+			// FIXME: should store ownerRepo in App struct instead of using args[0] directly
+			// TODO: might add repo to labels config instead of just a comment
+			prefix := fmt.Sprintf("# saved from %s to %s\n", args[0], output)
+			b = append([]byte(prefix), b...)
+			if err := fsutil.WriteFile(output, b); err != nil {
+				log.Fatal(err)
+				return
+			} else {
+				fmt.Fprintln(os.Stdout, output)
 			}
 		},
 	}

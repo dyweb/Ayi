@@ -30,6 +30,14 @@ func LoadYAML(r io.Reader, cfg interface{}) error {
 	return nil
 }
 
+func SaveYAML(cfg interface{}) ([]byte, error) {
+	b, err := yaml.Marshal(cfg)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to marshal")
+	}
+	return b, nil
+}
+
 func SaveYAMLFile(path string, cfg interface{}) error {
 	b, err := yaml.Marshal(cfg)
 	if err != nil {
