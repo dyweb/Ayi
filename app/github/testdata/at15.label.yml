@@ -1,0 +1,106 @@
+# example labels used by @at15
+# https://github.com/at15/pub/issues/1
+
+# TODO: there are three types of projects, notes, courses and projects
+- name: lang
+  desc: "Programming language related to the issue/PR"
+  sub:
+    - name: c # lang/c
+    - name: cpp
+    - name: go
+    - name: java
+    - name: js
+    - name: rust
+    - name: python
+    - name: php
+- name: type # NOTE: called it type when design, renamed to action, the came back to type
+  desc: "Type of action"
+  sub:
+    - name: new
+      desc: "The first time for something new"
+      sub:
+        - name: feature # type/new/feature
+        - name: package
+        - name: component
+        - name: dependency
+        - name: bug # 新的 bug 已经出现，怎么能够停止不前
+    - name: survey
+      sub:
+        - name: landscape
+        - name: usage
+        - name: interface
+        - name: internal
+    - name: design
+      desc: "Design"
+      sub:
+        - name: init
+        - name: discuss
+        - name: enhance
+        - name: break-change
+        - name: revert
+        - name: deprecate
+    - name: impl
+      desc: "Implementation"
+      sub:
+        - name: init
+        - name: discuss
+        - name: enhance
+        - name: break-change
+        - name: revert
+        - name: deprecate
+    - name: bug
+      sub:
+        - name: fix
+        - name: introduce
+        - name: discuss
+- name: company
+  desc: "The company related to the survey, paper, library"
+  sub:
+    - name: alibaba
+    - name: baidu
+    - name: docker
+    - name: facebook
+    - name: google
+    - name: hashicorp
+    - name: paypal
+    - name: twitter
+    - name: tencent
+- name: lib
+  desc: "Library, framework used"
+  sub:
+    - name: angular
+    - name: antd
+    - name: antlr
+    - name: cobra
+    - name: echarts
+    - name: gommon
+    - name: go.ice
+    - name: vue
+    - name: vuepress
+- name: tool
+  desc: "Build and deploy tools"
+  sub:
+    - name: ayi
+    - name: cmake
+    - name: docker
+    - name: gommon
+    - name: make
+- name: integration
+  desc: "Continuous integration"
+  sub:
+    - name: travis
+    - name: coveralls
+    - name: codebeat
+- name: perf
+  desc: "Performance"
+  sub:
+    - name: increase
+    - name: decrease
+    - name: unclear
+    - name: unnecessary
+- name: os
+  desc: "Operating System"
+  sub:
+    - name: windows
+    - name: mac
+    - name: linux

@@ -24,6 +24,11 @@
 #   go-tests = true
 #   unused-packages = true
 
+# the latest release v15.0.0 was released on Jan 2018
+[[constraint]]
+  name = "github.com/google/go-github"
+  branch = "master"
+
 [prune]
   go-tests = true
   unused-packages = true

@@ -10,7 +10,7 @@
     "ice/transport/http",
     "ice/util/logutil"
   ]
-  revision = "4b6c9eb5c27eb22fb8207289bd4ecd32f3207f39"
+  revision = "39be34cb4d99e0ed74cab020775c7d563fddddc2"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
@@ -30,11 +30,31 @@
     "structure",
     "util",
     "util/color",
+    "util/fsutil",
     "util/hashutil",
     "util/logutil",
-    "util/runtimeutil"
+    "util/runtimeutil",
+    "util/testutil"
   ]
-  revision = "ae7701f9d583472626a924dd9ce761157fc7ee05"
+  revision = "9eab0b85c6115d5ec530fd39074a18153196ef09"
+
+[[projects]]
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
+  version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/google/go-github"
+  packages = ["github"]
+  revision = "eafdb6578137f78fe186e486a4bc633e1434cc89"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/google/go-querystring"
+  packages = ["query"]
+  revision = "53e6ce116135b80d037921a7fdd5138cf32d7a8a"
 
 [[projects]]
   name = "github.com/inconshreveable/mousetrap"
@@ -46,7 +66,7 @@
   branch = "master"
   name = "github.com/kballard/go-shellquote"
   packages = ["."]
-  revision = "cd60e84ee657ff3dc51de0b4f55dd299a3e136f2"
+  revision = "95032a82bc518f77982ea72343cc1ade730072f0"
 
 [[projects]]
   name = "github.com/opentracing/opentracing-go"
@@ -73,8 +93,8 @@
 [[projects]]
   name = "github.com/spf13/pflag"
   packages = ["."]
-  revision = "e57e3eeb33f795204c1ca35f56c44f83227c6e66"
-  version = "v1.0.0"
+  revision = "583c0c0531f06d5278b7d917446061adc344b5cd"
+  version = "v1.0.1"
 
 [[projects]]
   name = "github.com/stretchr/testify"
@@ -85,8 +105,34 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
-  packages = ["context"]
-  revision = "61147c48b25b599e5b561d2e9c4f3e1ef489ca41"
+  packages = [
+    "context",
+    "context/ctxhttp"
+  ]
+  revision = "640f4622ab692b87c2f3a94265e6f579fe38263d"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/oauth2"
+  packages = [
+    ".",
+    "internal"
+  ]
+  revision = "cdc340f7c179dbbfa4afd43b7614e8fcadde4269"
+
+[[projects]]
+  name = "google.golang.org/appengine"
+  packages = [
+    "internal",
+    "internal/base",
+    "internal/datastore",
+    "internal/log",
+    "internal/remote_api",
+    "internal/urlfetch",
+    "urlfetch"
+  ]
+  revision = "150dc57a1b433e64154302bdc40b6bb8aefa313a"
+  version = "v1.0.0"
 
 [[projects]]
   name = "gopkg.in/yaml.v2"
@@ -97,6 +143,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "3354a678f57eb938a1f680cb05de83c93fea8a643ba18f80d4633eff9c1d74df"
+  inputs-digest = "59d2160378943a5771ae423161f60fe66db58bfcc429da9cc18133fa7f5c3d21"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -1,3 +1,4 @@
+// Package Ayi defines interfaces
 package Ayi
 
 import (
@@ -8,6 +9,7 @@ import (
 
 	"github.com/dyweb/Ayi/util/logutil"
 	"github.com/dyweb/gommon/errors"
+	"github.com/dyweb/Ayi/config"
 )
 
 var log = logutil.NewPackageLogger()
@@ -17,7 +19,15 @@ var (
 	appFactories = make(map[string]AppFactory)
 )
 
-type AppFactory func() (App, error)
+// Registry is used to pass configuration and share states between apps
+type Registry interface {
+	// config
+	// ~/.ayi.yml
+	HasHomeConfig() bool
+	HomeConfig() config.AyiConfig
+}
+
+type AppFactory func(Registry) (App, error)
 
 type App interface {
 	CobraCommand() *cobra.Command
@@ -32,14 +42,13 @@ func RegisterAppFactory(name string, factory AppFactory) {
 	appFactories[name] = factory
 }
 
-func CreateApp(name string) (App, error) {
+func CreateApp(name string, r Registry) (App, error) {
 	appMu.Lock()
 	defer appMu.Unlock()
 	if f, ok := appFactories[name]; !ok {
 		return nil, errors.Errorf("factory %s is not registered", name)
 	} else {
-		// TODO: factory may require parameters in the future, i.e. global config instance
-		return f()
+		return f(r)
 	}
 }
 
