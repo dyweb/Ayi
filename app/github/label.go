@@ -13,6 +13,24 @@ import (
 	"github.com/spf13/cobra"
 )
 
+/*
+TODO:
+
+local (limit to this app)
+
+- refactor config struct, put repo etc. into config
+- allow diff configs
+  - used when updating existing repository (dry run, generate a plan like terraform)
+  - compare labels between different repositories
+- apply update (diff) to a repo
+
+global (apply to ayi entirely)
+
+- a consistent nameing for passing positional arguments and output (i.e. a global flag for specifying output)
+- ayi should provide a unified interface for app to store data (in plain text or database)
+- ayi should allow app to register their frontend code and http backends
+*/
+
 const (
 	labelDelimiter = "/"
 )
@@ -38,18 +56,20 @@ func (a *App) labelCommand() *cobra.Command {
 		},
 	}
 	list := &cobra.Command{
-		Use:   "list",
-		Short: "list labels",
-		Long:  "List labels of a repository",
+		Use:     "list <ownerRepo>",
+		Short:   "list labels",
+		Long:    "List labels of a repository",
+		Example: "ayi github label list dyweb/Ayi",
 		Run: func(cmd *cobra.Command, args []string) {
 			printLabels(a.listLabels(args))
 		},
 	}
 	var output string
 	save := &cobra.Command{
-		Use:   "save",
-		Short: "save labels",
-		Long:  "Save labels of a repository",
+		Use:     "save <ownerRepo>",
+		Short:   "save labels",
+		Long:    "Save labels of a repository",
+		Example: "ayi github label save dyweb/Ayi --output labels.saved.yml",
 		Run: func(cmd *cobra.Command, args []string) {
 			labels := a.listLabels(args)
 			b, err := configutil.SaveYAML(convertLabels(labels))
