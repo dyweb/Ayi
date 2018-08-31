@@ -6,6 +6,7 @@ git:
 go:
   - 1.9.x
   - "1.10"
+  - "1.11"
   - tip
 
 install:
@@ -15,5 +16,5 @@ install:
 script: 
   - make install
   - make test
-
+  - make build
 # TODO: code coverage

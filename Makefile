@@ -61,19 +61,19 @@ generate:
 build: build-linux build-mac build-windows
 
 build-linux:
-	rm -f ayi-v$(VERSION)-linux-amd64
+	rm -f ayi-v$(VERSION)-linux-amd64.zip
 	$(GO_LINUX_BUILD) go build -ldflags "$(FLAGS)" -o ayi-v$(VERSION)-linux-amd64 ./cmd/ayi
 	zip ayi-v$(VERSION)-linux-amd64.zip ayi-v$(VERSION)-linux-amd64
 #	rm ayi-v$(VERSION)-linux-amd64
 
 build-mac:
-	rm -f ayi-v$(VERSION)-darwin-amd64
+	rm -f ayi-v$(VERSION)-darwin-amd64.zip
 	$(GO_MAC_BUILD) go build -ldflags "$(FLAGS)" -o ayi-v$(VERSION)-darwin-amd64 ./cmd/ayi
 	zip ayi-v$(VERSION)-darwin-amd64.zip ayi-v$(VERSION)-darwin-amd64
 #	rm ayi-v$(VERSION)-darwin-amd64
 
 build-windows:
-	rm -f ayi-v$(VERSION)-windows-amd64
+	rm -f ayi-v$(VERSION)-windows-amd64.zip
 	$(GO_WINDOWS_BUILD) go build -ldflags "$(FLAGS)" -o ayi-v$(VERSION)-windows-amd64 ./cmd/ayi
 	zip ayi-v$(VERSION)-windows-amd64.zip ayi-v$(VERSION)-windows-amd64
 #	rm ayi-v$(VERSION)-windows-amd64
