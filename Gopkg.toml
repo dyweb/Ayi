@@ -29,6 +29,14 @@
   name = "github.com/google/go-github"
   branch = "master"
 
+[[constraint]]
+  name = "github.com/dyweb/gommon"
+  branch = "master"
+
+[[constraint]]
+  name = "github.com/dyweb/go.ice"
+  branch = "master"
+
 [prune]
   go-tests = true
   unused-packages = true

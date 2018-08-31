@@ -1,7 +1,7 @@
 package logutil
 
 import (
-	ilog "github.com/at15/go.ice/ice/util/logutil"
+	ilog "github.com/dyweb/go.ice/ice/util/logutil"
 	"github.com/dyweb/gommon/log"
 )
 

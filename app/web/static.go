@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	iconfig "github.com/at15/go.ice/ice/config"
-	ihttp "github.com/at15/go.ice/ice/transport/http"
+	iconfig "github.com/dyweb/go.ice/ice/config"
+	ihttp "github.com/dyweb/go.ice/ice/transport/http"
 	"github.com/spf13/cobra"
 )
 

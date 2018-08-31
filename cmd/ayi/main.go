@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	icli "github.com/at15/go.ice/ice/cli"
+	icli "github.com/dyweb/go.ice/ice/cli"
 	"github.com/dyweb/gommon/util/fsutil"
 
 	"github.com/dyweb/Ayi"
