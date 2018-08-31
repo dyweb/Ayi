@@ -17,7 +17,7 @@ func (a *App) staticCommand() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 			// TODO: go.ice should have a static http server to be used out of box
 			cfg := iconfig.HttpServerConfig{
-				Addr:          fmt.Sprintf(":%d", a.port),
+				Addr:          fmt.Sprintf("localhost:%d", a.port),
 				EnableTracing: false,
 			}
 			h := http.FileServer(http.Dir("."))
