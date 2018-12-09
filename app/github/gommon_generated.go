@@ -12,6 +12,6 @@ func (a *App) GetLogger() *dlog.Logger {
 	return a.log
 }
 
-func (a *App) LoggerIdentity(justCallMe func() *dlog.Identity) *dlog.Identity {
+func (a *App) LoggerIdentity(justCallMe func() dlog.Identity) dlog.Identity {
 	return justCallMe()
 }

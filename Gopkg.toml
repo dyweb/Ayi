@@ -29,6 +29,7 @@
   name = "github.com/google/go-github"
   branch = "master"
 
+# as a dywegb go project, testing out master branch of its dependencies is .. well integration test
 [[constraint]]
   name = "github.com/dyweb/gommon"
   branch = "master"

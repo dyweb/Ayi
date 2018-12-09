@@ -7,7 +7,7 @@ import (
 
 const appName = "github"
 
-var log = logutil.NewPackageLogger()
+var log, _ = logutil.NewPackageLoggerAndRegistry()
 
 func init() {
 	Ayi.RegisterAppFactory(appName, func(r Ayi.Registry) (Ayi.App, error) {

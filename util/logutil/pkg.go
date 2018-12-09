@@ -5,17 +5,25 @@ import (
 	"github.com/dyweb/gommon/log"
 )
 
-// Registry is the root logger of Ayi application
-var Registry = log.NewApplicationLogger()
+const Project = "github.com/dyweb/Ayi"
 
-// NewPackageLogger create a new logger for the calling package using Registry as its parent
-func NewPackageLogger() *log.Logger {
-	l := log.NewPackageLoggerWithSkip(1)
-	Registry.AddChild(l)
-	return l
+var logger, registry = log.NewApplicationLoggerAndRegistry(Project)
+
+func Registry() *log.Registry {
+	return registry
+}
+
+func Logger() *log.Logger {
+	return logger
+}
+
+func NewPackageLoggerAndRegistry() (*log.Logger, *log.Registry) {
+	logger, child := log.NewPackageLoggerAndRegistryWithSkip(Project, 1)
+	registry.AddRegistry(child)
+	return logger, child
 }
 
 // add go.ice log registry as its child
 func init() {
-	Registry.AddChild(ilog.Registry)
+	registry.AddRegistry(ilog.Registry())
 }

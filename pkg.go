@@ -7,12 +7,12 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/dyweb/Ayi/config"
 	"github.com/dyweb/Ayi/util/logutil"
 	"github.com/dyweb/gommon/errors"
-	"github.com/dyweb/Ayi/config"
 )
 
-var log = logutil.NewPackageLogger()
+var log, _ = logutil.NewPackageLoggerAndRegistry()
 
 var (
 	appMu        sync.Mutex

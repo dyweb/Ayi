@@ -27,7 +27,8 @@ const (
 	configFile = ".ayi.yml"
 )
 
-var log = logutil.Registry
+var logReg = logutil.Registry()
+var log = logutil.Logger()
 
 var (
 	version   string
@@ -52,7 +53,7 @@ func Main() error {
 		icli.Name(myname),
 		icli.Description(mydesc),
 		icli.Version(buildInfo),
-		icli.LogRegistry(log),
+		icli.LogRegistry(logReg),
 	)
 	root := cli.Command()
 	// TODO: go.ice need to disable built in config flag

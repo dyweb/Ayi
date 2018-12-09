@@ -11,7 +11,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:57758d11838bf7567915da95f2a062631a4f900cd6eb1659786a54f23ba6b876"
+  digest = "1:4797dcc9613a3ed09f5cf6417e6b080c2f1efc34da23f82a6715b9c2f065327a"
   name = "github.com/dyweb/go.ice"
   packages = [
     "ice/cli",
@@ -20,11 +20,11 @@
     "ice/util/logutil",
   ]
   pruneopts = "UT"
-  revision = "04de698e07e7ac11894bd0757f031acb0c4243f0"
+  revision = "b758648b2fb4bf058fec1cec1eef8bedeaaede4e"
 
 [[projects]]
   branch = "master"
-  digest = "1:b1f16f10970bb88ebbf9e91840d0da217b3ced1165ce49019adbc515a6202968"
+  digest = "1:72a1267149ffdc4101d604d8c4dfb2af11e1d68107c54382e3501705b4c9c9b5"
   name = "github.com/dyweb/gommon"
   packages = [
     "errors",
@@ -39,7 +39,7 @@
     "util/testutil",
   ]
   pruneopts = "UT"
-  revision = "ec45062387f8f21c1c39aba0205732801be745a7"
+  revision = "cf6229c1f9d2cda04dc792f4cb2bf0d3135f0561"
 
 [[projects]]
   digest = "1:97df918963298c287643883209a2c3f642e6593379f97ab400c2a2e219ab647d"
@@ -51,19 +51,19 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:cbfb674281949a56e1d6edf9d78714df1efe391964b574d33dd1c25954434f00"
+  digest = "1:3df35fa0446b2cf51b509c8f49963fc3b615834b74ee6188f151c5245d745170"
   name = "github.com/google/go-github"
   packages = ["github"]
   pruneopts = "UT"
-  revision = "c722fc7cbdbd07946fb97667dfe3c931a30cb9af"
+  revision = "4076fd7418e5e1b04d32ffba6adf5084891952d5"
 
 [[projects]]
-  branch = "master"
   digest = "1:a63cff6b5d8b95638bfe300385d93b2a6d9d687734b863da8e09dc834510a690"
   name = "github.com/google/go-querystring"
   packages = ["query"]
   pruneopts = "UT"
-  revision = "53e6ce116135b80d037921a7fdd5138cf32d7a8a"
+  revision = "44c6ddd0a2342c386950e880b658017258da92fc"
+  version = "v1.0.0"
 
 [[projects]]
   digest = "1:870d441fe217b8e689d7949fef6e43efbc787e50f200cb1e70dbca9204a1d6be"
@@ -110,12 +110,12 @@
   version = "v0.0.3"
 
 [[projects]]
-  digest = "1:dab83a1bbc7ad3d7a6ba1a1cc1760f25ac38cdf7d96a5cdd55cd915a4f5ceaf9"
+  digest = "1:c1b1102241e7f645bc8e0c22ae352e8f0dc6484b6cb4d132fa9f24174e0119e2"
   name = "github.com/spf13/pflag"
   packages = ["."]
   pruneopts = "UT"
-  revision = "9a97c102cda95a86cec2345a6f09f55a939babf5"
-  version = "v1.0.2"
+  revision = "298182f68c66c05229eb03ac171abe6e309ee79a"
+  version = "v1.0.3"
 
 [[projects]]
   digest = "1:18752d0b95816a1b777505a97f71c7467a8445b8ffb55631a7bf779f6ba4fa83"
@@ -127,28 +127,28 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:d6b719875cf8091fbab38527d81d34e71f4521b9ee9ccfbd4a32cff2ac5af96e"
+  digest = "1:f8b491a7c25030a895a0e579742d07136e6958e77ef2d46e769db8eec4e58fcd"
   name = "golang.org/x/net"
   packages = [
     "context",
     "context/ctxhttp",
   ]
   pruneopts = "UT"
-  revision = "8a410e7b638dca158bf9e766925842f6651ff828"
+  revision = "610586996380ceef02dd726cc09df7e00a3f8e56"
 
 [[projects]]
   branch = "master"
-  digest = "1:363b547c971a2b07474c598b6e9ebcb238d556d8a27f37b3895ad20cd50e7281"
+  digest = "1:5276e08fe6a1dfdb65b4f46a2e5d5c9e00be6e499105e441049c3c04a0c83b36"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
     "internal",
   ]
   pruneopts = "UT"
-  revision = "d2e6202438beef2727060aa7cabdd924d92ebfd9"
+  revision = "d668ce993890a79bda886613ee587a69dd5da7a6"
 
 [[projects]]
-  digest = "1:328b5e4f197d928c444a51a75385f4b978915c0e75521f0ad6a3db976c97a7d3"
+  digest = "1:08206298775e5b462e6c0333f4471b44e63f1a70e42952b6ede4ecc9572281eb"
   name = "google.golang.org/appengine"
   packages = [
     "internal",
@@ -160,16 +160,16 @@
     "urlfetch",
   ]
   pruneopts = "UT"
-  revision = "b1f26356af11148e710935ed1ac8a7f5702c7612"
-  version = "v1.1.0"
+  revision = "4a4468ece617fc8205e99368fa2200e9d1fad421"
+  version = "v1.3.0"
 
 [[projects]]
-  digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
+  digest = "1:4d2e5a73dc1500038e504a8d78b986630e3626dc027bc030ba5c75da257cdb96"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   pruneopts = "UT"
-  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
-  version = "v2.2.1"
+  revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
+  version = "v2.2.2"
 
 [solve-meta]
   analyzer-name = "dep"
