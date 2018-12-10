@@ -3,9 +3,10 @@ package git
 import (
 	"os/exec"
 
-	"github.com/dyweb/gommon/errors"
-	"github.com/kballard/go-shellquote"
 	"os"
+
+	"github.com/dyweb/gommon/errors"
+	shellquote "github.com/kballard/go-shellquote"
 )
 
 func Command(cmdWithoutGit string) (*exec.Cmd, error) {

@@ -35,7 +35,7 @@ GO_WINDOWS_BUILD = GOOS=windows GOARCH=amd64
 
 .PHONY: fmt
 fmt:
-	gofmt -d -l -w ./cmd ./app ./config ./util
+	goimports -d -l -w ./cmd ./app ./config ./util
 
 .PHONY: test
 test:
