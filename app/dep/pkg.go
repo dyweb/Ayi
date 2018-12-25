@@ -4,4 +4,4 @@ import (
 	"github.com/dyweb/Ayi/util/logutil"
 )
 
-var log = logutil.NewPackageLogger()
+var log, _ = logutil.NewPackageLoggerAndRegistry()
