@@ -1,10 +1,11 @@
 package configutil
 
 import (
-	"gopkg.in/yaml.v2"
 	"io"
 	"io/ioutil"
 	"os"
+
+	yaml "gopkg.in/yaml.v2"
 
 	"github.com/dyweb/gommon/errors"
 	"github.com/dyweb/gommon/util/fsutil"

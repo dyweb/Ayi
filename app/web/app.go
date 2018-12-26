@@ -29,8 +29,11 @@ func NewApp(r Ayi.Registry) (*App, error) {
 			os.Exit(1)
 		},
 	}
-	root.PersistentFlags().IntVar(&a.port, "port", 3000, "port listen to")
-	root.AddCommand(a.staticCommand())
+	root.PersistentFlags().IntVarP(&a.port, "port", "p", 3000, "port listen to")
+	root.AddCommand(
+		a.staticCommand(),
+		a.sshdCommand(),
+	)
 	a.root = root
 	return a, nil
 }
