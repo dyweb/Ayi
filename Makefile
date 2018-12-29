@@ -23,7 +23,7 @@ export AYI_HELP_MSG
 help:
 	@echo "$$AYI_HELP_MSG"
 
-VERSION = 0.2.1
+VERSION = 0.2.2
 BUILD_COMMIT = $(shell git rev-parse HEAD)
 BUILD_TIME = $(shell date +%Y-%m-%dT%H:%M:%S%z)
 CURRENT_USER = $(USER)
