@@ -4,14 +4,9 @@ git:
   depth: 3
 
 go:
-  - 1.9.x
-  - "1.10"
-  - "1.11"
+  - "1.12"
+  - "1.13"
   - tip
-
-install:
-  - go get -u github.com/golang/dep/cmd/dep
-  - dep ensure
 
 script: 
   - make install
