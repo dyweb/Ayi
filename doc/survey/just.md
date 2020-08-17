@@ -2,6 +2,10 @@
 
 - [Github](https://github.com/casey/just)
 
+## Take Away
+
+- `Makefile` alike syntax
+
 ## Overview
 
 Syntax is very similar to `make`

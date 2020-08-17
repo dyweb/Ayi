@@ -14,6 +14,16 @@
 
 `make` is a good build tool, but not an easy to use command runner. I want a config file format that allows defining commands easily.
 
+## Motivation
+
+- build a simple cli using config file instead of programming language
+  - arg and flag handling, bash is a bit complex w/ getopt, make does not support flag and args
+  - show help message without manually updating a large chunk of text (like in `make`)
+- runs on windows w/o using external shell, i.e. consistent behaviour regardless of shell, cmd, ps, windows terminal, mysys32 etc.
+  - bundle cross platform (core)util (written in go) like `sed`, `rm` etc.
+- reuse across projects
+  - e.g. most of my go projects have a similar layout (`cmd`, `pkg` etc.) and set of rules (`install`, `fmt`) etc. it would be good if I can `import lang/go.*`
+ 
 ## Features
 
 ### v0.2.3 Update dependencies
