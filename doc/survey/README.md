@@ -12,4 +12,6 @@
 ## TODO
 
 - [ ] clap yaml config?
+- [ ] rake
+- [ ] html, xml? (ant)
 - [ ] [crush](https://github.com/liljencrantz/crush) a shell but also a pl (in Rust)

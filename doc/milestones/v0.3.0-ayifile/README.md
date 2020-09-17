@@ -46,6 +46,11 @@ Description
 We need to figure out the specification for `Ayifile`. There are many command runner and build tools.
 If possible, similar or even same syntax (DSL) can be used in RCL and BenchHub.
 
+Some features I have in mind
+
+- dependencies, like `install: test` in make file
+- tag, allow running a subset of commands, similar to tag in bazel target
+
 ### v0.2.5 Ayifile parser
 
 Description
